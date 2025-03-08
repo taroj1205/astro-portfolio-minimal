@@ -12,6 +12,12 @@ a {
   align-items: center
 }
 
+header a {
+  display: flex;
+  flex-direction: row;
+  gap: 0.2rem;
+}
+
 header p,
 a {
   padding-block: 0.4rem
