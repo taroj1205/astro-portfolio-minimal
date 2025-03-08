@@ -1,0 +1,120 @@
+.experiences {
+  margin: 4rem 0;
+}
+
+.experiences__container {
+  margin: 0 auto;
+}
+
+.experiences__header {
+  margin-bottom: 2.5rem;
+}
+
+.experiences__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.experiences__description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.experiences__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.5rem;
+}
+
+.experiences__card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--base-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.experiences__card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.experiences__card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.experiences__card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.experiences__card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.experiences__card-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--text-secondary);
+}
+
+.experiences__card-company {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.experiences__card-tags {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.experiences__card-tag {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid var(--background-tertiary);
+  color: var(--text-secondary);
+}
+
+.experiences__card-tag--primary {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.experiences__card-date {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+}
+
+.experiences__card-location {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+}
+
+.experiences__card-description {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .experiences__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .experiences__title {
+    font-size: 1.75rem;
+  }
+}

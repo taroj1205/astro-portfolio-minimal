@@ -1,0 +1,11 @@
+header {
+  place-content: flex-start;
+  width: 100svw;
+  max-width: 1200px;
+  padding-inline: 1.5rem;
+  padding-block: 1.2rem
+}
+
+header a svg {
+  place-self: flex-start
+}

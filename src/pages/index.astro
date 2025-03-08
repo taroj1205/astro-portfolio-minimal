@@ -1,0 +1,59 @@
+---
+import LeafIcon from "../icons/leaf-icon.astro";
+import ArrowRight from "../icons/arrow-right-icon.astro";
+import Layout from "../layouts/layout.astro";
+import Experiences from "../components/experiences/index.astro";
+
+import GithubIcon from "../icons/github-icon.astro";
+import XIcon from "../icons/x-icon.astro";
+import LinkedinIcon from "../icons/linkedin-icon.astro";
+
+import "../styles/index.css";
+
+const socials = [
+  {
+    name: "github",
+    url: "https://github.com/taroj1205",
+    icon: GithubIcon,
+  },
+  {
+    name: "x",
+    url: "https://x.com/taroj1205",
+    icon: XIcon,
+  },
+  {
+    name: "linkedin",
+    url: "https://www.linkedin.com/in/taroj/",
+    icon: LinkedinIcon,
+  },
+];
+---
+
+<Layout>
+  <header>
+    <h1 style="view-transition-name: name;">
+      <a href="/">
+        <span>taroj1205</span>
+        <LeafIcon />
+      </a>
+    </h1>
+    <div>
+      <p>I'm a developer and a student at University of Auckland.</p>
+      <p>I'm studying Computer Science and IT Management.</p>
+      <a href="/about"><span>Read more</span><ArrowRight /></a>
+    </div>
+    <div class="socials">
+      {
+        socials.map(({ name, url, icon: Icon }) => (
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            <span class="sr-only">{name}</span>
+            <Icon />
+          </a>
+        ))
+      }
+    </div>
+  </header>
+  <main>
+    <Experiences />
+  </main>
+</Layout>

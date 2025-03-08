@@ -1,0 +1,247 @@
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  margin: 0;
+  padding: 0
+}
+
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  box-sizing: border-box;
+  border: 0 solid
+}
+
+html {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  line-height: 1.15;
+  tab-size: 4;
+  color-scheme: light dark;
+  scroll-behavior: smooth;
+  font-size: 1.05rem
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background-color: var(--base-bg);
+  color: var(--base-color);
+  display: grid;
+  justify-content: center
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit
+}
+
+ol,
+ul,
+menu {
+  list-style: none
+}
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  vertical-align: middle
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto
+}
+
+b,
+strong {
+  font-weight: bolder
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 1em
+}
+
+small {
+  font-size: 80%
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline
+}
+
+sub {
+  bottom: -.25em
+}
+
+sup {
+  top: -.5em
+}
+
+table {
+  border-color: currentcolor
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0
+}
+
+[type=button],
+[type=reset],
+[type=submit],
+button {
+  -webkit-appearance: button
+}
+
+legend {
+  padding: 0
+}
+
+progress {
+  vertical-align: baseline
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto
+}
+
+[type=search] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px
+}
+
+::-webkit-search-decoration {
+  -webkit-appearance: none
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit
+}
+
+summary {
+  display: list-item
+}
+
+:root {
+  font-family: "Inter", system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  --base-bg: #fff;
+  --base-color: #0f1420;
+  --emerald-color: #10b981;
+  --muted-color: #6e6e6e;
+
+  --text-primary: var(--base-color);
+  --text-secondary: var(--muted-color);
+  --text-tertiary: #8f8f8f;
+  --text-on-accent: #ffffff;
+  --background-secondary: #f8f9fa;
+  --background-tertiary: #edf2f7;
+  --accent-primary: var(--emerald-color);
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: "InterVariable", system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      "Open Sans",
+      "Helvetica Neue",
+      sans-serif;
+    font-optical-sizing: auto
+  }
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+main {
+  max-width: 700px;
+  width: 100%;
+  padding-inline: 1.5rem
+}
+
+h1 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  display: flex;
+  gap: 0.2rem
+}
+
+h1 svg {
+  color: var(--emerald-color);
+  margin-top: -0.35rem;
+  place-self: flex-start;
+  height: 1rem;
+  width: 1rem
+}
+
+
+a {
+  display: flex;
+  gap: 0.2rem;
+  color: var(--muted-color);
+  text-decoration: none
+}
+
+a[href="/"] {
+  color: var(--base-color)
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0
+}

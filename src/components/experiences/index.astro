@@ -1,0 +1,97 @@
+---
+import BriefcaseIcon from "../../icons/briefcase-icon.astro";
+import CodeIcon from "../../icons/code-icon.astro";
+import GraduationCapIcon from "../../icons/graduation-cap-icon.astro";
+import "./experiences.css";
+
+const experiencesArray = [
+  {
+    title: "Teacher",
+    company: "YAGO - classmall Kids",
+    type: "Contract",
+    date: "Jul 2024 - Present",
+    location: "Remote",
+    description:
+      "Teaching programming on Minecraft Education remotely on Zoom for classmall Kids.",
+    icon: BriefcaseIcon,
+  },
+  {
+    title: "Open Source Contributor",
+    company: "Yamada UI",
+    type: "Volunteer",
+    date: "March 2024 - Present",
+    location: "Remote",
+    description:
+      "Contributing to Yamada UI, a React component library with hooks and utils.",
+    icon: CodeIcon,
+  },
+  {
+    title: "Open Source Contributor",
+    company: "Zen Browser",
+    type: "Volunteer",
+    date: "October 2024 - Present",
+    location: "Remote",
+    description:
+      "Contributing to Zen Browser's website, a browser based on Firefox with a focus on privacy and security.",
+    icon: CodeIcon,
+  },
+  {
+    title: "Teacher Aid for International Students",
+    company: "Westlake Boys High School",
+    type: "Part-time",
+    date: "Jan 2024 - Feb 2024",
+    location: "North Shore, Auckland, New Zealand",
+    description: "Worked as a teacher aid for international students.",
+    icon: GraduationCapIcon,
+  },
+];
+
+const { class: className, ...props } = Astro.props;
+---
+
+<section class={`experiences ${className}`} {...props}>
+  <div class={"experiences__container"}>
+    <div class={"experiences__header"}>
+      <h2 class={"experiences__title"}>Experiences</h2>
+      <p class={"experiences__description"}>
+        I am part of the Yamada UI maintainer team, and I have been teaching
+        programming.
+      </p>
+    </div>
+    <div class={"experiences__grid"}>
+      {
+        experiencesArray.map(
+          ({
+            title,
+            company,
+            type,
+            date,
+            location,
+            description,
+            icon: Icon,
+          }) => (
+            <div class={"experiences__card"}>
+              <div class={"experiences__card-content"}>
+                <div class={"experiences__card-header"}>
+                  <h3 class={"experiences__card-title"}>{title}</h3>
+                  {Icon && <Icon class={"experiences__card-icon"} />}
+                </div>
+                <p class={"experiences__card-company"}>{company}</p>
+                <div class={"experiences__card-tags"}>
+                  <span
+                    class={`${"experiences__card-tag"} ${"experiences__card-tag--primary"}`}
+                  >
+                    {type}
+                  </span>
+                  <span class="experiences__card-date">{date}</span>
+                </div>
+                <p class="experiences__card-location">{location}</p>
+                <p class="experiences__card-description">{description}</p>
+              </div>
+            </div>
+          )
+        )
+      }
+    </div>
+  </div>
+</section>
