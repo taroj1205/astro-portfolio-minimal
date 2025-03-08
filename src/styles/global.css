@@ -18,7 +18,7 @@
 
 html {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-  line-height: 1.15;
+  line-height: 1.5;
   tab-size: 4;
   color-scheme: light dark;
   scroll-behavior: smooth;
@@ -178,6 +178,7 @@ summary {
   --background-secondary: #f8f9fa;
   --background-tertiary: #edf2f7;
   --accent-primary: var(--emerald-color);
+  --border-color: #e6edf0;
 }
 
 @supports (font-variation-settings: normal) {
@@ -224,8 +225,7 @@ h1 svg {
 
 
 a {
-  display: flex;
-  gap: 0.2rem;
+  display: inline;
   color: var(--muted-color);
   text-decoration: none
 }
@@ -253,8 +253,9 @@ footer {
   color: var(--muted-color)
 }
 
-footer p {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem
+main a,
+footer a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--border-color);
 }
