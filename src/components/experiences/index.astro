@@ -49,7 +49,7 @@ const experiencesArray = [
 const { class: className, ...props } = Astro.props;
 ---
 
-<section class={`experiences ${className}`} {...props}>
+<section class:list={["experiences", className]} {...props}>
   <div class={"experiences__container"}>
     <div class={"experiences__header"}>
       <h2 class={"experiences__title"}>Experiences</h2>

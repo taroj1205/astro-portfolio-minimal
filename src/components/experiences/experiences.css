@@ -1,13 +1,7 @@
-.experiences {
-  margin: 4rem 0;
-}
-
 .experiences__container {
   margin: 0 auto;
-}
-
-.experiences__header {
-  margin-bottom: 2.5rem;
+  display: grid;
+  gap: 2.5rem
 }
 
 .experiences__title {
