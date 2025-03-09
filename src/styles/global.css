@@ -4,7 +4,7 @@
 ::backdrop,
 ::file-selector-button {
   margin: 0;
-  padding: 0
+  padding: 0;
 }
 
 *,
@@ -13,16 +13,17 @@
 ::backdrop,
 ::file-selector-button {
   box-sizing: border-box;
-  border: 0 solid
+  border: 0 solid;
 }
 
 html {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
   line-height: 1.5;
   tab-size: 4;
   color-scheme: light dark;
   scroll-behavior: smooth;
-  font-size: 1.05rem
+  font-size: 1.05rem;
 }
 
 body {
@@ -31,7 +32,7 @@ body {
   background-color: var(--base-bg);
   color: var(--base-color);
   display: grid;
-  justify-content: center
+  justify-content: center;
 }
 
 h1,
@@ -41,13 +42,13 @@ h4,
 h5,
 h6 {
   font-size: inherit;
-  font-weight: inherit
+  font-weight: inherit;
 }
 
 ol,
 ul,
 menu {
-  list-style: none
+  list-style: none;
 }
 
 img,
@@ -59,30 +60,31 @@ iframe,
 embed,
 object {
   display: block;
-  vertical-align: middle
+  vertical-align: middle;
 }
 
 img,
 video {
   max-width: 100%;
-  height: auto
+  height: auto;
 }
 
 b,
 strong {
-  font-weight: bolder
+  font-weight: bolder;
 }
 
 code,
 kbd,
 pre,
 samp {
-  font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
-  font-size: 1em
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo,
+    monospace;
+  font-size: 1em;
 }
 
 small {
-  font-size: 80%
+  font-size: 80%;
 }
 
 sub,
@@ -90,19 +92,19 @@ sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
-  vertical-align: baseline
+  vertical-align: baseline;
 }
 
 sub {
-  bottom: -.25em
+  bottom: -0.25em;
 }
 
 sup {
-  top: -.5em
+  top: -0.5em;
 }
 
 table {
-  border-color: currentcolor
+  border-color: currentcolor;
 }
 
 button,
@@ -113,59 +115,50 @@ textarea {
   font-family: inherit;
   font-size: 100%;
   line-height: 1.15;
-  margin: 0
+  margin: 0;
 }
 
-[type=button],
-[type=reset],
-[type=submit],
+[type="button"],
+[type="reset"],
+[type="submit"],
 button {
-  -webkit-appearance: button
+  -webkit-appearance: button;
 }
 
 legend {
-  padding: 0
+  padding: 0;
 }
 
 progress {
-  vertical-align: baseline
+  vertical-align: baseline;
 }
 
 ::-webkit-inner-spin-button,
 ::-webkit-outer-spin-button {
-  height: auto
+  height: auto;
 }
 
-[type=search] {
+[type="search"] {
   -webkit-appearance: textfield;
-  outline-offset: -2px
+  outline-offset: -2px;
 }
 
 ::-webkit-search-decoration {
-  -webkit-appearance: none
+  -webkit-appearance: none;
 }
 
 ::-webkit-file-upload-button {
   -webkit-appearance: button;
-  font: inherit
+  font: inherit;
 }
 
 summary {
-  display: list-item
+  display: list-item;
 }
 
 :root {
-  font-family: "Inter", system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    "Open Sans",
-    "Helvetica Neue",
-    sans-serif;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   --base-bg: #fff;
   --base-color: #0f1420;
   --emerald-color: #10b981;
@@ -183,36 +176,28 @@ summary {
 
 @supports (font-variation-settings: normal) {
   :root {
-    font-family: "Inter var", system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      Oxygen,
-      Ubuntu,
-      Cantarell,
-      "Open Sans",
-      "Helvetica Neue",
-      sans-serif;
-    font-optical-sizing: auto
+    font-family: "InterVariable", system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+      "Helvetica Neue", sans-serif;
+    font-optical-sizing: auto;
   }
 }
 
 @view-transition {
-  navigation: auto
+  navigation: auto;
 }
 
 main {
   max-width: 650px;
   width: 100%;
-  padding-inline: 1.5rem
+  padding-inline: 1.5rem;
 }
 
 h1 {
   font-size: 1.2rem;
   font-weight: 500;
   display: flex;
-  gap: 0.2rem
+  gap: 0.2rem;
 }
 
 h1 svg {
@@ -220,18 +205,17 @@ h1 svg {
   margin-top: -0.35rem;
   place-self: flex-start;
   height: 1rem;
-  width: 1rem
+  width: 1rem;
 }
-
 
 a {
   display: inline;
   color: var(--muted-color);
-  text-decoration: none
+  text-decoration: none;
 }
 
 a[href="/"] {
-  color: var(--base-color)
+  color: var(--base-color);
 }
 
 .sr-only {
@@ -243,14 +227,14 @@ a[href="/"] {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
-  border-width: 0
+  border-width: 0;
 }
 
 footer {
   padding-top: 7rem;
   padding-bottom: 3rem;
   text-align: center;
-  color: var(--muted-color)
+  color: var(--muted-color);
 }
 
 main a,
