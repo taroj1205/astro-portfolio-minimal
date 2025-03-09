@@ -1,10 +1,8 @@
 header {
   place-content: flex-start;
-  width: 100svw;
+  place-self: flex-start;
   max-width: 1200px;
-
-  padding-inline: 1.5rem;
-  padding-block: 1.2rem
+  padding: 1.2rem 1.5rem;
 }
 
 header a {
@@ -14,14 +12,15 @@ header a {
 }
 
 header a svg {
-  place-self: flex-start
+  place-self: flex-start;
 }
 
 main {
   display: flex;
   flex-direction: column;
   place-self: center;
-  gap: 2.5rem;
+  margin-top: 3.5rem;
+  gap: 2rem;
 }
 
 section {
@@ -40,5 +39,6 @@ h2 {
 
 h3 {
   font-size: 1.2rem;
+  margin-top: 2rem;
   font-weight: 500;
 }
