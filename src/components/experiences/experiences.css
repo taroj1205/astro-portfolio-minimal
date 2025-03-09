@@ -84,7 +84,9 @@
 
 .experiences__card-tag--primary {
   border-color: var(--accent-primary);
-  color: var(--accent-primary);
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #057a55;
+  font-weight: 500;
 }
 
 .experiences__card-date {
