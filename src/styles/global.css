@@ -240,6 +240,14 @@ footer {
 main a,
 footer a {
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: 0.2rem;
+  text-decoration-thickness: 0.1rem;
   text-decoration-color: var(--border-color);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+main a:hover,
+footer a:hover {
+  text-decoration-color: color-mix(in srgb, var(--base-color) 30%, transparent);
+  color: var(--base-color);
 }
