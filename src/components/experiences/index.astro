@@ -52,7 +52,9 @@ const { class: className, ...props } = Astro.props;
 <section class:list={["experiences", className]} {...props}>
   <div class={"experiences__container"}>
     <div class={"experiences__header"}>
-      <h2 class={"experiences__title"}>Experiences</h2>
+      <h2 class={"experiences__title"} style="view-transition-name: title;">
+        Experiences
+      </h2>
       <p class={"experiences__description"}>
         I am part of the Yamada UI maintainer team, and I have been teaching
         programming.

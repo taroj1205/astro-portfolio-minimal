@@ -37,12 +37,12 @@ const socials = [
         <LeafIcon />
       </a>
     </h1>
-    <div>
+    <section>
       <p>I'm a developer and a student at University of Auckland.</p>
       <p>I'm studying Computer Science and IT Management.</p>
       <a href="/about"><span>Read more</span><ArrowRight /></a>
-    </div>
-    <div class="socials">
+    </section>
+    <section class="socials">
       {
         socials.map(({ name, url, icon: Icon }) => (
           <a href={url} target="_blank" rel="noopener noreferrer">
@@ -51,7 +51,7 @@ const socials = [
           </a>
         ))
       }
-    </div>
+    </section>
   </header>
   <main>
     <Experiences />
