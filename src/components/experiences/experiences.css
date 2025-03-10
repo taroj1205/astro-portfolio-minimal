@@ -1,7 +1,7 @@
 .experiences__container {
   margin: 0 auto;
   display: grid;
-  gap: 2.5rem
+  gap: 2.5rem;
 }
 
 .experiences__title {
@@ -62,9 +62,17 @@
   color: var(--text-secondary);
 }
 
-.experiences__card-company {
+.experiences__card-company a {
   font-weight: 500;
   color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.experiences__card-company a svg {
+  height: 1rem;
+  width: 1rem;
 }
 
 .experiences__card-tags {
