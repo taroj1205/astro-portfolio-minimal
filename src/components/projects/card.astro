@@ -1,0 +1,63 @@
+---
+import ExternalLinkIcon from "../../icons/external-link-icon.astro";
+import GithubIcon from "../../icons/github-icon.astro";
+import "./project-card.css";
+
+interface Props {
+  title: string;
+  description: string;
+  lang: string[];
+  framework: string[];
+  link?: string;
+  github: string;
+}
+
+const { title, description, lang, framework, link, github } = Astro.props;
+---
+
+<div class="project-card">
+  <div class="project-card__content">
+    <h3 class="project-card__title">{title}</h3>
+    <p class="project-card__description">{description}</p>
+
+    <div class="project-card__tags">
+      {
+        lang.map((item) => (
+          <span class="project-card__tag project-card__tag--lang">{item}</span>
+        ))
+      }
+      {
+        framework.map((item) => (
+          <span class="project-card__tag project-card__tag--framework">
+            {item}
+          </span>
+        ))
+      }
+    </div>
+
+    <div class="project-card__links">
+      {
+        link && (
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-card__link"
+          >
+            <span>Live Demo</span>
+            <ExternalLinkIcon />
+          </a>
+        )
+      }
+      <a
+        href={github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="project-card__link"
+      >
+        <span>Source</span>
+        <GithubIcon />
+      </a>
+    </div>
+  </div>
+</div>
