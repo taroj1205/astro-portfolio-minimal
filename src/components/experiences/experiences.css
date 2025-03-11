@@ -4,16 +4,14 @@
   gap: 2rem;
 }
 
-.experiences__title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
+.experiences__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .experiences__description {
-  color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
 .experiences__grid {
@@ -52,7 +50,7 @@
 
 .experiences__card-title {
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: bolder;
   color: var(--text-primary);
 }
 
@@ -63,7 +61,7 @@
 }
 
 .experiences__card-company a {
-  font-weight: 500;
+  font-weight: bolder;
   color: var(--text-primary);
   display: inline-flex;
   align-items: center;
@@ -94,7 +92,6 @@
   border-color: var(--accent-primary);
   background-color: rgba(16, 185, 129, 0.1);
   color: #057a55;
-  font-weight: 500;
 }
 
 .experiences__card-date {

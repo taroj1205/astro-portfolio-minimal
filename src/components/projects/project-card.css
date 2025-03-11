@@ -21,7 +21,7 @@
 
 .project-card__title {
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: bolder;
   color: var(--text-primary);
 }
 
@@ -41,7 +41,6 @@
   font-size: 0.75rem;
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
-  font-weight: 500;
 }
 
 .project-card__tag--lang {
