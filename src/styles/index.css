@@ -37,18 +37,6 @@ a {
   color: #0e76a8;
 }
 
-section a.button {
-  background-color: var(--base-color);
-  color: var(--base-bg);
-  padding: 0.4rem 0.8rem;
-  border-radius: 0.4rem;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
-  text-decoration: none;
-  display: inline-block;
-  width: fit-content;
-}
-
 section a.button:hover {
   border-color: var(--accent-primary);
   background-color: var(--accent-primary);
