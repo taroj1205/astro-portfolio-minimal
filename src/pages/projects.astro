@@ -3,6 +3,7 @@ import Header from "../components/header.astro";
 import Layout from "../layouts/layout.astro";
 import { projects } from "../lib/projects.astro";
 import ProjectCard from "../components/projects/card.astro";
+import "../styles/projects.css";
 ---
 
 <Layout title="Projects">
@@ -10,7 +11,7 @@ import ProjectCard from "../components/projects/card.astro";
   <main>
     <h2 style="view-transition-name: title;">Projects</h2>
     <section class="projects">
-      <p class="projects__description">Here are some of my projects I've worked on.</p>
+      <p class="projects__description">Here are some of my recent projects.</p>
 
       <div class="projects__grid">
         {projects.map((project) => <ProjectCard {...project} />)}
@@ -18,34 +19,3 @@ import ProjectCard from "../components/projects/card.astro";
     </section>
   </main>
 </Layout>
-
-<style>
-  .projects {
-    padding-top: 2rem;
-    display: grid;
-    gap: 2rem;
-  }
-
-  .projects__description {
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
-
-  .projects__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--text-primary);
-  }
-
-  @media (max-width: 768px) {
-    .projects__grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
