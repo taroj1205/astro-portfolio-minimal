@@ -1,7 +1,7 @@
 .experiences__container {
   margin: 0 auto;
   display: grid;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
 .experiences__title {

@@ -1,0 +1,31 @@
+---
+import LeafIcon from "../icons/leaf-icon.astro";
+---
+
+<header>
+  <h1 style="view-transition-name: name;">
+    <a href="/">
+      <span>taroj1205</span>
+      <LeafIcon />
+    </a>
+  </h1>
+</header>
+
+<style>
+  header {
+    place-content: flex-start;
+    place-self: flex-start;
+    max-width: 1200px;
+    padding: 1.2rem 1.5rem;
+  }
+
+  header a {
+    display: flex;
+    flex-direction: row;
+    gap: 0.2rem;
+  }
+
+  header a svg {
+    place-self: flex-start;
+  }
+</style>

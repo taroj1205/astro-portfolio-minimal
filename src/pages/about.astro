@@ -1,18 +1,11 @@
 ---
-import LeafIcon from "../icons/leaf-icon.astro"
-import Layout from "../layouts/layout.astro"
-import "../styles/about.css"
+import Layout from "../layouts/layout.astro";
+import Header from "../components/header.astro";
+import "../styles/about.css";
 ---
 
-<Layout>
-  <header>
-    <h1 style="view-transition-name: name;">
-      <a href="/">
-        <span>taroj1205</span>
-        <LeafIcon />
-      </a>
-    </h1>
-  </header>
+<Layout title="About">
+  <Header />
   <main>
     <h2 style="view-transition-name: title;">About</h2>
     <section>

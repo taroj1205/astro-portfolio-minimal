@@ -252,3 +252,13 @@ footer a:hover {
   text-decoration-color: color-mix(in srgb, var(--base-color) 30%, transparent);
   color: var(--base-color);
 }
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
