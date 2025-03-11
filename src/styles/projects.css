@@ -1,0 +1,29 @@
+.projects {
+  display: grid;
+  gap: 2rem;
+}
+
+.projects__description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  place-self: center;
+  margin-top: 3.5rem;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .projects__grid {
+    grid-template-columns: 1fr;
+  }
+}
