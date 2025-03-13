@@ -1,0 +1,152 @@
+<script>
+  class CustomCursor {
+    cursor: HTMLElement | null;
+    dot: HTMLElement | null;
+    position: { x: number; y: number };
+    clicked: boolean;
+    linkHovered: boolean;
+
+    constructor() {
+      this.cursor = document.querySelector(".custom-cursor");
+      this.dot = document.querySelector(".cursor-dot");
+      this.position = { x: 0, y: 0 };
+      this.clicked = false;
+      this.linkHovered = false;
+
+      const mq = window.matchMedia("(min-width: 768px)");
+      if (!mq.matches) {
+        this.cursor?.remove();
+        this.dot?.remove();
+        return;
+      }
+
+      // Get initial cursor position
+      const initialMouseMove = (e: MouseEvent) => {
+        this.position = { x: e.clientX, y: e.clientY };
+        this.updatePosition(e);
+        window.removeEventListener("mousemove", initialMouseMove);
+      };
+      window.addEventListener("mousemove", initialMouseMove, { once: true });
+
+      this.initEventListeners();
+    }
+
+    initEventListeners() {
+      window.addEventListener("mousemove", (e) => this.updatePosition(e));
+      window.addEventListener("mousedown", () => this.handleMouseDown());
+      window.addEventListener("mouseup", () => this.handleMouseUp());
+      document.addEventListener("mouseover", (e) =>
+        this.handleLinkHoverStart(e)
+      );
+      document.addEventListener("mouseout", () => this.handleLinkHoverEnd());
+    }
+
+    updatePosition(e: MouseEvent) {
+      if (this.cursor) this.cursor.style.opacity = "1";
+      if (this.dot) this.dot.style.opacity = "1";
+      this.position = { x: e.clientX, y: e.clientY };
+      if (this.cursor) {
+        this.cursor.style.transform = `translate(${this.position.x - 16}px, ${this.position.y - 16}px) scale(${this.clicked ? 0.5 : this.linkHovered ? 2.5 : 1})`;
+      }
+      if (this.dot) {
+        this.dot.style.transform = `translate(${this.position.x - 4}px, ${this.position.y - 4}px)`;
+        this.dot.style.opacity = this.clicked || this.linkHovered ? "0" : "1";
+      }
+    }
+
+    handleMouseDown() {
+      this.clicked = true;
+      if (this.cursor) {
+        this.cursor.classList.add("cursor-clicked");
+        this.cursor.style.transform = `translate(${this.position.x - 16}px, ${this.position.y - 16}px) scale(0.5)`;
+      }
+      if (this.dot) {
+        this.dot.style.opacity = "0";
+      }
+    }
+
+    handleMouseUp() {
+      this.clicked = false;
+      if (this.cursor) {
+        this.cursor.classList.remove("cursor-clicked");
+        this.cursor.style.transform = `translate(${this.position.x - 16}px, ${this.position.y - 16}px) scale(1)`;
+      }
+      if (this.dot) {
+        this.dot.style.opacity = this.linkHovered ? "0" : "1";
+      }
+    }
+
+    handleLinkHoverStart(e: MouseEvent) {
+      const target = e.target as HTMLElement;
+      if (
+        target.tagName === "A" ||
+        target.tagName === "BUTTON" ||
+        target.closest("a") ||
+        target.closest("button") ||
+        target.classList.contains("cursor-pointer") ||
+        target.getAttribute("role") === "button"
+      ) {
+        this.linkHovered = true;
+        this.cursor?.classList.add("cursor-hover");
+      }
+    }
+
+    handleLinkHoverEnd() {
+      this.linkHovered = false;
+      this.cursor?.classList.remove("cursor-hover");
+    }
+  }
+
+  new CustomCursor();
+</script>
+
+<div class="custom-cursor"></div>
+<div class="cursor-dot"></div>
+
+<style>
+  .custom-cursor {
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border: 2px solid white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: transform 0.15s ease-out;
+  }
+
+  .cursor-dot {
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: opacity 0.15s ease-out;
+  }
+
+  .cursor-clicked {
+    transform: scale(0.75);
+    opacity: 0.7;
+  }
+
+  .cursor-hover {
+    transform: scale(2.5);
+  }
+
+  @media (max-width: 768px) {
+    .custom-cursor,
+    .cursor-dot {
+      display: none;
+    }
+  }
+</style>

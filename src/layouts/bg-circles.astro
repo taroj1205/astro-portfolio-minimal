@@ -1,0 +1,80 @@
+---
+// BackgroundCircles.astro - Decorative background circles with parallax effect
+interface Props {
+  primaryColor?: string;
+  secondaryColor?: string;
+  enableParallax?: boolean;
+}
+
+const { primaryColor = "#8B5CF6", secondaryColor = "#7DD3FC" } = Astro.props;
+---
+
+<div class="background-circles">
+  <div class="circle circle-1"></div>
+  <div class="circle circle-2"></div>
+</div>
+
+<style define:vars={{ primaryColor, secondaryColor }}>
+  .background-circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    transition: all 0.5s ease-out;
+    animation: pulse 8s ease-in-out infinite;
+  }
+
+  .circle-1 {
+    top: 5rem;
+    left: 2.5rem;
+    width: 18rem;
+    height: 18rem;
+    background-color: var(--primaryColor);
+  }
+
+  .circle-2 {
+    bottom: 5rem;
+    right: 2.5rem;
+    width: 20rem;
+    height: 20rem;
+    background-color: var(--secondaryColor);
+    animation-delay: -4s;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .circle-1 {
+      width: 14rem;
+      height: 14rem;
+      top: 3rem;
+      left: 1rem;
+    }
+
+    .circle-2 {
+      width: 16rem;
+      height: 16rem;
+      bottom: 3rem;
+      right: 1rem;
+    }
+  }
+</style>
