@@ -1,8 +1,10 @@
 ---
 import "../styles/global.css";
+import BgCircles from "./bg-circles.astro";
 
 const { title = "Portfolio", description = "taroj1205's portfolio" } =
   Astro.props;
+import Cursor from "./cursor.astro";
 ---
 
 <!doctype html>
@@ -15,6 +17,7 @@ const { title = "Portfolio", description = "taroj1205's portfolio" } =
     <title>taroj1205 - {title}</title>
   </head>
   <body>
+    <BgCircles />
     <slot />
     <footer>
       <p>
@@ -28,5 +31,6 @@ const { title = "Portfolio", description = "taroj1205's portfolio" } =
         >
       </p>
     </footer>
+    <Cursor />
   </body>
 </html>
