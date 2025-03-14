@@ -21,7 +21,7 @@
 }
 
 .experiences__card {
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 1.5rem;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -91,7 +91,7 @@
 .experiences__card-tag--primary {
   border-color: var(--accent-primary);
   background-color: rgba(16, 185, 129, 0.1);
-  color: #057a55;
+  color: var(--accent-primary);
 }
 
 .experiences__card-date {
