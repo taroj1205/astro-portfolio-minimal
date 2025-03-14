@@ -91,7 +91,7 @@
 .experiences__card-tag--primary {
   border-color: var(--accent-primary);
   background-color: rgba(16, 185, 129, 0.1);
-  color: #057a55;
+  color: var(--accent-primary);
 }
 
 .experiences__card-date {

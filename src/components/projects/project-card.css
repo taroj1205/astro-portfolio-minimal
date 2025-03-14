@@ -50,7 +50,7 @@
 
 .project-card__tag--framework {
   background-color: rgba(16, 185, 129, 0.1);
-  color: #057a55;
+  color: var(--accent-primary);
 }
 
 .project-card__links {

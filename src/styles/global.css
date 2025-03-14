@@ -181,6 +181,18 @@ summary {
   --border-color: #e6edf0;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --base-bg: #0f1420;
+    --base-color: #fff;
+    --muted-color: #a0aec0;
+    --text-tertiary: #a0aec0;
+    --border-color: #2d3748;
+    --emerald-color: #2dd4bf;
+    --background-secondary: #1a202c;
+  }
+}
+
 @view-transition {
   navigation: auto;
 }
