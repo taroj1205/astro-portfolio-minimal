@@ -6,7 +6,7 @@ interface Props {
   enableParallax?: boolean;
 }
 
-const { primaryColor = "#8B5CF6", secondaryColor = "#7DD3FC" } = Astro.props;
+const { primaryColor = "#8B5CF6" } = Astro.props;
 ---
 
 <div class="background-circles">
@@ -14,14 +14,13 @@ const { primaryColor = "#8B5CF6", secondaryColor = "#7DD3FC" } = Astro.props;
   <div class="circle circle-2"></div>
 </div>
 
-<style define:vars={{ primaryColor, secondaryColor }}>
+<style define:vars={{ primaryColor }} is:global>
   .background-circles {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    height: 130%;
     z-index: -1;
     pointer-events: none;
   }
@@ -48,7 +47,7 @@ const { primaryColor = "#8B5CF6", secondaryColor = "#7DD3FC" } = Astro.props;
     right: 2.5rem;
     width: 20rem;
     height: 20rem;
-    background-color: var(--secondaryColor);
+    background-color: var(--accent-primary);
     animation-delay: -4s;
   }
 
@@ -56,9 +55,11 @@ const { primaryColor = "#8B5CF6", secondaryColor = "#7DD3FC" } = Astro.props;
     0%,
     100% {
       transform: scale(1);
+      opacity: 0.15;
     }
     50% {
       transform: scale(1.1);
+      opacity: 0.2;
     }
   }
 
