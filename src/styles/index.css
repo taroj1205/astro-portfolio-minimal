@@ -36,9 +36,3 @@ a {
 .linkedin-icon {
   color: #0e76a8;
 }
-
-section a.button:hover {
-  border-color: var(--accent-primary);
-  background-color: var(--accent-primary);
-  color: var(--base-bg);
-}

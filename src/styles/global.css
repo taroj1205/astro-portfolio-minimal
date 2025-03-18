@@ -30,7 +30,7 @@ html {
 body {
   margin: 0;
   min-height: 100svh;
-  background-color: var(--base-bg);
+  background-color: rgb(var(--base-bg));
   background-size: 40px 40px;
   background-image: linear-gradient(
       to right,
@@ -166,7 +166,7 @@ summary {
 }
 
 :root {
-  --base-bg: #fff;
+  --base-bg: 255, 255, 255;
   --base-color: #0f1420;
   --emerald-color: #10b981;
   --muted-color: #667681;
@@ -183,7 +183,7 @@ summary {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --base-bg: #0f1420;
+    --base-bg: 15, 20, 32;
     --base-color: #fff;
     --muted-color: #a0aec0;
     --text-tertiary: #a0aec0;
@@ -222,6 +222,7 @@ a {
   display: inline-flex;
   color: var(--muted-color);
   text-decoration: none;
+  width: fit-content;
 }
 
 a[href="/"] {

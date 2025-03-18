@@ -11,9 +11,6 @@ importers:
       astro:
         specifier: ^5.4.2
         version: 5.4.2(rollup@4.34.9)(typescript@5.8.2)
-      lucide-astro:
-        specifier: ^0.479.0
-        version: 0.479.0(astro@5.4.2(rollup@4.34.9)(typescript@5.8.2))
     devDependencies:
       '@biomejs/biome':
         specifier: 1.9.4
@@ -892,11 +889,6 @@ packages:
 
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
-
-  lucide-astro@0.479.0:
-    resolution: {integrity: sha512-IPRUnnBcwQe/rQSlMR1QDB1Od/o2fXFwZfChc0Yz5pPvTj8Rn3YybVo/ymRUP95Yj5LJkC1R2EKKLZKcV15Aeg==}
-    peerDependencies:
-      astro: '>=2.7.1'
 
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
@@ -2362,10 +2354,6 @@ snapshots:
   longest-streak@3.1.0: {}
 
   lru-cache@10.4.3: {}
-
-  lucide-astro@0.479.0(astro@5.4.2(rollup@4.34.9)(typescript@5.8.2)):
-    dependencies:
-      astro: 5.4.2(rollup@4.34.9)(typescript@5.8.2)
 
   magic-string@0.30.17:
     dependencies:

@@ -9,8 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.4.2",
-    "lucide-astro": "^0.479.0"
+    "astro": "^5.4.2"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4"
