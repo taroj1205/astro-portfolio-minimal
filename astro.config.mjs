@@ -6,9 +6,6 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
-  prefetch: {
-    prefetchAll: true,
-  },
   scopedStyleStrategy: "class",
   build: {
     inlineStylesheets: "always",
