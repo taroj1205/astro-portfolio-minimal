@@ -1,48 +1,32 @@
-# Astro Starter Kit: Basics
+# Minimal Astro Portfolio
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+This is a minimal portfolio template built with Astro. It includes a simple landing page with a list of experiences and link to about page, and projects.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+### Features
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- Simple landing page with a list of projects
+- About page with more details about me
+- Projects page with a list of projects
+- Easy to customize with your own content and style
+- Respects the user's color scheme preference
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+### Getting Started
 
-## 🚀 Project Structure
+1. Clone the repository
+2. Install the dependencies with `pnpm install`
+3. Start the development server with `pnpm run dev`
+4. Open the website in your browser at <http://localhost:3000>
 
-Inside of your Astro project, you'll see the following folders and files:
+### Customizing
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+You can customize the website by modifying the files in the `src` directory. The `src/pages` directory contains the pages for the website, and the `src/components` directory contains the components used in the pages.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+You can also customize the styles by modifying the `src/styles/global.css` file.
 
-## 🧞 Commands
+### Deploying
 
-All commands are run from the root of the project, from a terminal:
+You can deploy the website to a hosting platform like Netlify or Vercel. You can also deploy it to a static site generator like GitHub Pages.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+### Credits
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Thanks to <a href="https://catnose.me">catnose.me</a> for giving me this idea.
