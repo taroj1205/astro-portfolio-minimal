@@ -49,6 +49,11 @@ main {
   font-size: 1.5rem;
 }
 
+.blog__description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
 .blog__title-link {
   color: var(--text-primary);
   text-decoration: none;
