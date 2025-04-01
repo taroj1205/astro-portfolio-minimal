@@ -23,7 +23,13 @@ const { frontmatter } = Astro.props;
   <main class="post">
     <article>
       <header class="post__header">
-        <h1 class="post__title">{frontmatter.title}</h1>
+        <h1 class="post__title">
+          <span
+            style={`view-transition-name: blog-title-${Astro.url.pathname.split("/").pop()}`}
+          >
+            {frontmatter.title}
+          </span>
+        </h1>
         <div class="post__meta">
           <time datetime={frontmatter.date}>
             {
