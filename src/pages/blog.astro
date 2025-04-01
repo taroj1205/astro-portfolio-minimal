@@ -39,6 +39,7 @@ posts.sort(
                   <a
                     href={`/blog/${post.file?.split("/").pop()?.split(".").shift() ?? ""}`}
                     class="blog__title-link"
+                    style={`view-transition-name: blog-title-${post.file?.split("/").pop()?.split(".").shift() ?? ""}`}
                   >
                     {post.frontmatter.title}
                   </a>
