@@ -11,13 +11,14 @@ interface Props {
     tags?: string[];
     categories?: string[];
     coverImage?: string;
+    excerpt?: string;
   };
 }
 
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} description={frontmatter.excerpt}>
   <Header />
   <main class="post">
     <article>
