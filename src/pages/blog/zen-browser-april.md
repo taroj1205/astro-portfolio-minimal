@@ -14,8 +14,6 @@ layout: "../../layouts/blog-post.astro"
 
 Zen Browser is _thrilled_ to announce... a switch to Chromium! We're promising faster speeds, better compatibility, and features galore!
 
-<Toc />
-
 ## Why Chromium?
 
 Chromium = performance, compatibility, and _innovation_. It's a _no-brainer_!
