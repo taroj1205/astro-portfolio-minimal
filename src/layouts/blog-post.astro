@@ -1,0 +1,63 @@
+---
+import Layout from "./layout.astro";
+import Header from "../components/header.astro";
+import "../styles/blog-post.css";
+import { Image } from "astro:assets";
+
+interface Props {
+  frontmatter: {
+    title: string;
+    date: string;
+    tags?: string[];
+    categories?: string[];
+    coverImage?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout title={frontmatter.title}>
+  <Header />
+  <main class="post">
+    <article>
+      <header class="post__header">
+        <h1 class="post__title">{frontmatter.title}</h1>
+        <div class="post__meta">
+          <time datetime={frontmatter.date}>
+            {
+              new Date(frontmatter.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </time>
+          {
+            frontmatter.tags && (
+              <div class="post__tags">
+                {frontmatter.tags.map((tag) => (
+                  <span class="post__tag">{tag}</span>
+                ))}
+              </div>
+            )
+          }
+        </div>
+      </header>
+      {
+        frontmatter.coverImage && (
+          <Image
+            src={frontmatter.coverImage}
+            alt={frontmatter.title}
+            width={400}
+            height={200}
+            class="post__cover"
+          />
+        )
+      }
+      <div class="post__content">
+        <slot />
+      </div>
+    </article>
+  </main>
+</Layout>

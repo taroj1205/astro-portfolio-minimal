@@ -1,0 +1,117 @@
+main {
+  display: flex;
+  flex-direction: column;
+  place-self: center;
+  margin-top: 3.5rem;
+  gap: 2rem;
+}
+
+.blog__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.blog__card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background-color: rgba(var(--base-bg), 0.35);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blog__card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.blog__cover {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+.blog__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.blog__title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.blog__title-link {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.blog__title-link:hover {
+  text-decoration: underline;
+}
+
+.blog__meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.blog__tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.blog__tag {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  background-color: var(--background-secondary);
+  color: var(--text-secondary);
+}
+
+.blog__excerpt {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.blog__card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.blog__card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background-color: rgba(var(--base-bg), 0.35);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blog__card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.blog__card-link:focus {
+  outline: none;
+}
