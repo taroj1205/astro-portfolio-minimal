@@ -41,7 +41,7 @@ posts.sort(
                   </a>
                 </h3>
                 <div class="blog__meta">
-                  <time datetime={post.data.date}>
+                  <time datetime={post.data.date} style={`view-transition-name: blog-date-${post.data.date}`}>
                     {new Date(post.data.date).toLocaleDateString(
                       "en-US",
                       {
@@ -54,7 +54,7 @@ posts.sort(
                   {post.data.tags && (
                     <div class="blog__tags">
                       {post.data.tags.map((tag: string) => (
-                        <span class="blog__tag">{tag}</span>
+                        <span class="blog__tag" style={`view-transition-name: blog-tag-${tag.toLowerCase().replace(/\s+/g, "-")}`}>{tag}</span>
                       ))}
                     </div>
                   )}

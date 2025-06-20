@@ -33,7 +33,7 @@ const { frontmatter } = Astro.props
           </span>
         </h1>
         <div class="post__meta">
-          <time datetime={frontmatter.date}>
+          <time datetime={frontmatter.date} style={`view-transition-name: blog-date-${frontmatter.date}`}>
             {
               new Date(frontmatter.date).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -46,7 +46,7 @@ const { frontmatter } = Astro.props
             frontmatter.tags && (
               <div class="post__tags">
                 {frontmatter.tags.map((tag) => (
-                  <span class="post__tag">{tag}</span>
+                  <span class="post__tag" style={`view-transition-name: blog-tag-${tag.toLowerCase().replace(/\s+/g, "-")}`}>{tag}</span>
                 ))}
               </div>
             )
