@@ -6,6 +6,7 @@
     "dev": "astro dev --port 3000",
     "build": "astro build",
     "preview": "astro preview --port 3000",
+    "start": "astro preview --port 3000",
     "astro": "astro"
   },
   "dependencies": {

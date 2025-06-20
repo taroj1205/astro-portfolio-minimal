@@ -1,8 +1,7 @@
 ---
 import { getCollection } from "astro:content"
 
-const pathname = Astro.url.pathname
-const path = pathname.split("/").slice(-1)[0]
+const path = Astro.params.slug
 
 const allPosts = await getCollection("blog")
 
@@ -14,7 +13,7 @@ function generateToc(content: string) {
   const headingRegex = /^(#{1,6})\s+(.+)$/
   const headings: Array<{ level: number; text: string; id: string }> = []
 
-  const lines = content.split("\n").map(line => line.trim())
+  const lines = content.split("\n").map((line) => line.trim())
   for (const line of lines) {
     const match = headingRegex.exec(line)
     if (match) {
