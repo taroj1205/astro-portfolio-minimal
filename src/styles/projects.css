@@ -17,7 +17,6 @@
 main {
   display: flex;
   flex-direction: column;
-  place-self: center;
   margin-top: 3.5rem;
   gap: 2rem;
 }
