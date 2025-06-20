@@ -10,6 +10,13 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  CI_IGNORE: |
+    *.md
+    .gitignore
+    .gitattributes
+    .vscode/**
+
 jobs:
   check_changes:
     name: Check Changes
@@ -20,55 +27,30 @@ jobs:
       exists: ${{ steps.filter.outputs.exists }}
     steps:
       - uses: actions/checkout@v4
-
-      - name: Filter changes
-        uses: yumemi-inc/path-filter@v2
-        id: filter
         with:
-          patterns: |
-            **
-            !**.md
-            !.gitignore
-            !.gitattributes
-            !.vscode/**
-            !.env.example
+          fetch-depth: 2
 
-  # setup:
-  #   name: Setup Dependencies
-  #   needs: check_changes
-  #   if: ${{ needs.check_changes.outputs.exists == 'true' }}
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-
-  # - name: Check if node_modules cache exists
-  #   id: check-node-modules-cache
-  #   uses: actions/cache@v4
-  #   with:
-  #     path: |
-  #       node_modules
-  #       */node_modules
-  #     key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lock') }}
-  #     lookup-only: true
-
-  # - name: Setup Bun
-  # if: steps.check-node-modules-cache.outputs.cache-hit != 'true'
-  # uses: oven-sh/setup-bun@v2
-  # with:
-  #   bun-version: latest
-
-  # - name: Install dependencies
-  # if: steps.check-node-modules-cache.outputs.cache-hit != 'true'
-  # run: bun install --frozen-lockfile
-
-  # - name: Save node_modules cache
-  #   if: steps.check-node-modules-cache.outputs.cache-hit != 'true'
-  #   uses: actions/cache/save@v4
-  #   with:
-  #     path: |
-  #       node_modules
-  #       */node_modules
-  #     key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lock') }}
+      - id: filter
+        shell: bash
+        run: |
+          # Determine the commit to diff against (push vs PR)
+          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE_SHA="${{ github.event.before }}"
+          fi
+          # List changed files between BASE_SHA and current HEAD
+          CHANGED=$(git diff --name-only "$BASE_SHA" "$GITHUB_SHA")
+          # Identify ignored files based on CI_IGNORE patterns
+          IGNORED=$(echo "$CHANGED" | git check-ignore --stdin --exclude-from=<(printf '%s\n' "$CI_IGNORE") || true)
+          # Remove ignored files from the changed list
+          FILTERED=$(comm -23 <(echo "$CHANGED" | sort) <(echo "$IGNORED" | sort))
+          # Output result for downstream jobs
+          if [[ -z "$FILTERED" ]]; then
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          fi
 
   quality_checks:
     name: ${{ matrix.name }}
@@ -88,16 +70,6 @@ jobs:
             name: Build
     steps:
       - uses: actions/checkout@v4
-
-      # - name: Restore node_modules cache
-      #   id: cache
-      #   uses: actions/cache/restore@v4
-      #   with:
-      #     path: |
-      #       node_modules
-      #       */node_modules
-      #     key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lock') }}
-      #     restore-keys: ${{ runner.os }}-node-modules-
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
