@@ -4,6 +4,7 @@ import Header from "../components/header.astro"
 import ArrowRightIcon from "../icons/arrow-right-icon.astro"
 import "../styles/blog-post.css"
 import { Image } from "astro:assets"
+import type { ImageMetadata } from "astro"
 
 interface Props {
   frontmatter: {
@@ -11,7 +12,7 @@ interface Props {
     date: string
     tags?: string[]
     categories?: string[]
-    coverImage?: string
+    coverImage?: ImageMetadata
     excerpt?: string
   }
 }
@@ -26,7 +27,7 @@ const { frontmatter } = Astro.props
       <header class="post__header">
         <h1 class="post__title">
           <span
-            style={`view-transition-name: blog-title-${Astro.url.pathname.split("/").pop()}`}
+            style={`view-transition-name: blog-title-${Astro.params.slug}`}
           >
             {frontmatter.title}
           </span>
@@ -57,9 +58,8 @@ const { frontmatter } = Astro.props
           <Image
             src={frontmatter.coverImage}
             alt={frontmatter.title}
-            width={400}
-            height={200}
             class="post__cover"
+            style={`view-transition-name: blog-cover-${Astro.params.slug}`}
           />
         )
       }

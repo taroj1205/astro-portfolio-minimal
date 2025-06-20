@@ -36,9 +36,9 @@
 }
 
 .post__cover {
-  width: 100%;
   border-radius: 1rem;
   margin-bottom: 2rem;
+  height: fit-content;
 }
 
 .post__content {

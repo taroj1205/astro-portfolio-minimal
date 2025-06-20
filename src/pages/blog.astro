@@ -27,6 +27,7 @@ posts.sort(
                   width={400}
                   height={200}
                   class="blog__cover"
+                  style={`view-transition-name: blog-cover-${post.filePath?.split("/").pop()?.split(".").shift()}`}
                 />
               )}
               <div class="blog__content">
