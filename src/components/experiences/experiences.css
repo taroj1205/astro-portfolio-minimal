@@ -110,6 +110,12 @@
   font-size: 0.95rem;
 }
 
+.experiences__nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
 @media (max-width: 768px) {
   .experiences__grid {
     grid-template-columns: 1fr;
