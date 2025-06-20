@@ -17,8 +17,14 @@
 }
 
 html {
-  font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji,
-    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol,
+    Noto Color Emoji;
   line-height: 1.5;
   tab-size: 4;
   color-scheme: light dark;
@@ -32,11 +38,8 @@ body {
   min-height: max(100svh, 64rem);
   background-color: rgb(var(--base-bg));
   background-size: 40px 40px;
-  background-image: linear-gradient(
-      to right,
-      rgba(128, 128, 128, 0.08) 1px,
-      transparent 1px
-    ),
+  background-image:
+    linear-gradient(to right, rgba(128, 128, 128, 0.08) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(128, 128, 128, 0.08) 1px, transparent 1px);
   color: var(--base-color);
   display: grid;
@@ -87,8 +90,8 @@ code,
 kbd,
 pre,
 samp {
-  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo,
-    monospace;
+  font-family:
+    ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: 1em;
 }
 
@@ -127,9 +130,9 @@ textarea {
   margin: 0;
 }
 
-[type="button"],
-[type="reset"],
-[type="submit"],
+[type='button'],
+[type='reset'],
+[type='submit'],
 button {
   -webkit-appearance: button;
 }
@@ -147,7 +150,7 @@ progress {
   height: auto;
 }
 
-[type="search"] {
+[type='search'] {
   -webkit-appearance: textfield;
   outline-offset: -2px;
 }
@@ -231,7 +234,7 @@ a {
   width: fit-content;
 }
 
-a[href="/"] {
+a[href='/'] {
   color: var(--base-color);
 }
 
@@ -260,7 +263,9 @@ footer a {
   text-underline-offset: 0.2rem;
   text-decoration-thickness: 0.1rem;
   text-decoration-color: var(--border-color);
-  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
 }
 
 main a:hover,

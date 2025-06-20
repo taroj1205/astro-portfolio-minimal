@@ -1,0 +1,11 @@
+node_modules
+dist
+build
+.astro
+public
+*.min.js
+*.bundle.js
+package-lock.json
+yarn.lock
+bun.lock
+CHANGELOG.md 

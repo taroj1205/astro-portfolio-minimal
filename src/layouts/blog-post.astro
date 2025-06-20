@@ -1,10 +1,10 @@
 ---
-import Layout from "./layout.astro"
-import Header from "../components/header.astro"
-import ArrowRightIcon from "../icons/arrow-right-icon.astro"
-import "../styles/blog-post.css"
-import { Image } from "astro:assets"
-import type { ImageMetadata } from "astro"
+import Layout from './layout.astro'
+import Header from '../components/header.astro'
+import ArrowRightIcon from '../icons/arrow-right-icon.astro'
+import '../styles/blog-post.css'
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
 
 interface Props {
   frontmatter: {
@@ -26,27 +26,33 @@ const { frontmatter } = Astro.props
     <article>
       <section class="post__header">
         <h1 class="post__title">
-          <span
-            style={`view-transition-name: blog-title-${Astro.params.slug}`}
-          >
+          <span style={`view-transition-name: blog-title-${Astro.params.slug}`}>
             {frontmatter.title}
           </span>
         </h1>
         <div class="post__meta">
-          <time datetime={frontmatter.date} style={`view-transition-name: blog-date-${frontmatter.date}`}>
+          <time
+            datetime={frontmatter.date}
+            style={`view-transition-name: blog-date-${frontmatter.date}`}
+          >
             {
-              new Date(frontmatter.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
+              new Date(frontmatter.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
               })
             }
           </time>
           {
             frontmatter.tags && (
               <div class="post__tags">
-                {frontmatter.tags.map((tag) => (
-                  <span class="post__tag" style={`view-transition-name: blog-tag-${tag.toLowerCase().replace(/\s+/g, "-")}`}>{tag}</span>
+                {frontmatter.tags.map(tag => (
+                  <span
+                    class="post__tag"
+                    style={`view-transition-name: blog-tag-${tag.toLowerCase().replace(/\s+/g, '-')}`}
+                  >
+                    {tag}
+                  </span>
                 ))}
               </div>
             )

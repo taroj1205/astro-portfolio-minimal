@@ -1,13 +1,13 @@
 ---
-import { getCollection } from "astro:content"
-import Layout from "../../layouts/blog-post.astro"
-import { render } from "astro:content"
-import Toc from "../../components/toc.astro"
+import { getCollection } from 'astro:content'
+import Layout from '../../layouts/blog-post.astro'
+import { render } from 'astro:content'
+import Toc from '../../components/toc.astro'
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog")
-  return posts.map((post) => ({
-    params: { slug: post.filePath?.split("/").pop()?.split(".").shift() },
+  const posts = await getCollection('blog')
+  return posts.map(post => ({
+    params: { slug: post.filePath?.split('/').pop()?.split('.').shift() },
     props: { post },
   }))
 }
@@ -17,7 +17,9 @@ const { Content } = await render(post)
 ---
 
 <Layout frontmatter={post.data}>
-  <Content components={{
-    Toc: Toc,
-  }} />
-</Layout> 
+  <Content
+    components={{
+      Toc: Toc,
+    }}
+  />
+</Layout>

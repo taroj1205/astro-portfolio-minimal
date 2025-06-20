@@ -1,0 +1,136 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check_changes:
+    name: Check Changes
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      exists: ${{ steps.filter.outputs.exists }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Filter changes
+        uses: yumemi-inc/path-filter@v2
+        id: filter
+        with:
+          patterns: |
+            **
+            !**.md
+            !.gitignore
+            !.gitattributes
+            !.vscode/**
+            !.env.example
+
+  # setup:
+  #   name: Setup Dependencies
+  #   needs: check_changes
+  #   if: ${{ needs.check_changes.outputs.exists == 'true' }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+
+  # - name: Check if node_modules cache exists
+  #   id: check-node-modules-cache
+  #   uses: actions/cache@v4
+  #   with:
+  #     path: |
+  #       node_modules
+  #       */node_modules
+  #     key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lock') }}
+  #     lookup-only: true
+
+  # - name: Setup Bun
+  # if: steps.check-node-modules-cache.outputs.cache-hit != 'true'
+  # uses: oven-sh/setup-bun@v2
+  # with:
+  #   bun-version: latest
+
+  # - name: Install dependencies
+  # if: steps.check-node-modules-cache.outputs.cache-hit != 'true'
+  # run: bun install --frozen-lockfile
+
+  # - name: Save node_modules cache
+  #   if: steps.check-node-modules-cache.outputs.cache-hit != 'true'
+  #   uses: actions/cache/save@v4
+  #   with:
+  #     path: |
+  #       node_modules
+  #       */node_modules
+  #     key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lock') }}
+
+  quality_checks:
+    name: ${{ matrix.name }}
+    needs: [check_changes]
+    if: ${{ needs.check_changes.outputs.exists == 'true' }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - check: lint
+            name: Lint
+          - check: format
+            name: Format
+          - check: spell
+            name: Spell Check
+          - check: build
+            name: Build
+    steps:
+      - uses: actions/checkout@v4
+
+      # - name: Restore node_modules cache
+      #   id: cache
+      #   uses: actions/cache/restore@v4
+      #   with:
+      #     path: |
+      #       node_modules
+      #       */node_modules
+      #     key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lock') }}
+      #     restore-keys: ${{ runner.os }}-node-modules-
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        # if: steps.cache.outputs.cache-hit != 'true'
+        run: bun install --frozen-lockfile
+
+      - name: Run ${{ matrix.name }}
+        run: bun run ${{ matrix.check }}
+
+  verify:
+    name: Verify
+    needs: [check_changes, quality_checks]
+    runs-on: ubuntu-latest
+    if: always()
+    outputs:
+      success: ${{ steps.set-result.outputs.success }}
+    steps:
+      - name: Set Result
+        id: set-result
+        run: |
+          # Check if changes exist but no jobs ran, or if any job failed or was cancelled
+          if [[ "${{ needs.check_changes.outputs.exists }}" != "true" ]]; then
+            echo "success=true" >> $GITHUB_OUTPUT
+            echo "No relevant changes detected - pipeline passed"
+          elif [[ "${{ contains(needs.*.result, 'failure') }}" == "true" || "${{ contains(needs.*.result, 'cancelled') }}" == "true" ]]; then
+            echo "success=false" >> $GITHUB_OUTPUT
+            echo "Pipeline failed - some jobs failed or were cancelled"
+            exit 1
+          else
+            echo "success=true" >> $GITHUB_OUTPUT
+            echo "All jobs completed successfully"
+          fi
