@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.3.0",
     "astro": "^5.4.2"
   },
   "devDependencies": {

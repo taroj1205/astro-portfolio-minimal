@@ -1,21 +1,22 @@
 ---
-import Layout from "./layout.astro";
-import Header from "../components/header.astro";
-import "../styles/blog-post.css";
-import { Image } from "astro:assets";
+import Layout from "./layout.astro"
+import Header from "../components/header.astro"
+import ArrowRightIcon from "../icons/arrow-right-icon.astro"
+import "../styles/blog-post.css"
+import { Image } from "astro:assets"
 
 interface Props {
   frontmatter: {
-    title: string;
-    date: string;
-    tags?: string[];
-    categories?: string[];
-    coverImage?: string;
-    excerpt?: string;
-  };
+    title: string
+    date: string
+    tags?: string[]
+    categories?: string[]
+    coverImage?: string
+    excerpt?: string
+  }
 }
 
-const { frontmatter } = Astro.props;
+const { frontmatter } = Astro.props
 ---
 
 <Layout title={frontmatter.title} description={frontmatter.excerpt}>
@@ -66,5 +67,11 @@ const { frontmatter } = Astro.props;
         <slot />
       </div>
     </article>
+    <div class="back-link">
+      <a href="/blog" class="back-link__button">
+        <ArrowRightIcon />
+        <span>Back to Blog</span>
+      </a>
+    </div>
   </main>
 </Layout>

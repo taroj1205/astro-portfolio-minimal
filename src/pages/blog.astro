@@ -1,15 +1,14 @@
 ---
-import Layout from "../layouts/layout.astro";
-import Header from "../components/header.astro";
-import "../styles/blog.css";
-import { Image } from "astro:assets";
+import Layout from "../layouts/layout.astro"
+import Header from "../components/header.astro"
+import "../styles/blog.css"
+import { Image } from "astro:assets"
+import { getCollection } from "astro:content"
 
-const posts = await Astro.glob("./blog/*.md");
+const posts = await getCollection("blog")
 posts.sort(
-  (a, b) =>
-    new Date(b.frontmatter.date).getTime() -
-    new Date(a.frontmatter.date).getTime()
-);
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+)
 ---
 
 <Layout title="Blog">
@@ -21,14 +20,10 @@ posts.sort(
       {
         posts.map((post) => (
           <article class="blog__card">
-            <a
-              href={`/blog/${post.file?.split("/").pop()?.split(".").shift() ?? ""}`}
-              class="blog__card-link"
-            >
-              {post.frontmatter.coverImage && (
+              {post.data.coverImage && (
                 <Image
-                  src={post.frontmatter.coverImage}
-                  alt={post.frontmatter.title}
+                  src={post.data.coverImage}
+                  alt={post.data.title}
                   width={400}
                   height={200}
                   class="blog__cover"
@@ -37,16 +32,16 @@ posts.sort(
               <div class="blog__content">
                 <h3 class="blog__title">
                   <a
-                    href={`/blog/${post.file?.split("/").pop()?.split(".").shift() ?? ""}`}
+                    href={`/blog/${post.filePath?.split("/").pop()?.split(".").shift()}`}
                     class="blog__title-link"
-                    style={`view-transition-name: blog-title-${post.file?.split("/").pop()?.split(".").shift() ?? ""}`}
+                    style={`view-transition-name: blog-title-${post.filePath?.split("/").pop()?.split(".").shift()}`}
                   >
-                    {post.frontmatter.title}
+                    {post.data.title}
                   </a>
                 </h3>
                 <div class="blog__meta">
-                  <time datetime={post.frontmatter.date}>
-                    {new Date(post.frontmatter.date).toLocaleDateString(
+                  <time datetime={post.data.date}>
+                    {new Date(post.data.date).toLocaleDateString(
                       "en-US",
                       {
                         year: "numeric",
@@ -55,17 +50,16 @@ posts.sort(
                       }
                     )}
                   </time>
-                  {post.frontmatter.tags && (
+                  {post.data.tags && (
                     <div class="blog__tags">
-                      {post.frontmatter.tags.map((tag: string) => (
+                      {post.data.tags.map((tag: string) => (
                         <span class="blog__tag">{tag}</span>
                       ))}
                     </div>
                   )}
                 </div>
-                <p class="blog__excerpt">{post.frontmatter.excerpt}</p>
+                <p class="blog__excerpt">{post.data.excerpt}</p>
               </div>
-            </a>
           </article>
         ))
       }

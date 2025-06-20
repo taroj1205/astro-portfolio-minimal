@@ -37,7 +37,6 @@
 
 .post__cover {
   width: 100%;
-  height: auto;
   border-radius: 1rem;
   margin-bottom: 2rem;
 }
@@ -67,6 +66,10 @@
   list-style: disc;
 }
 
+#toc ul {
+  margin: 0;
+}
+
 .post__content ol {
   list-style: decimal;
 }
@@ -84,13 +87,9 @@
   font-weight: 600;
 }
 
-.post__content a {
-  color: var(--accent-primary);
-  text-decoration: none;
-}
-
+.post__content a,
 .post__content a:hover {
-  text-decoration: underline;
+  color: var(--accent-primary);
 }
 
 .post__content blockquote {
@@ -118,4 +117,32 @@
 .post__content pre code {
   background: none;
   padding: 0;
+}
+
+.back-link {
+  place-self: center;
+  margin-top: 2rem;
+}
+
+.back-link__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.back-link__button:hover {
+  color: var(--accent-primary);
+  background-color: var(--background-secondary);
+}
+
+.back-link__button svg {
+  transform: rotate(180deg);
+  width: 16px;
+  height: 16px;
 }
