@@ -1,19 +1,19 @@
 ---
-import { getCollection } from "astro:content"
+import { getCollection } from 'astro:content'
 
 const path = Astro.params.slug
 
-const allPosts = await getCollection("blog")
+const allPosts = await getCollection('blog')
 
 const currentPost = allPosts.find(
-  (post) => post.filePath?.split("/").pop()?.split(".").shift() === path,
+  post => post.filePath?.split('/').pop()?.split('.').shift() === path
 )
 
 function generateToc(content: string) {
   const headingRegex = /^(#{1,6})\s+(.+)$/
-  const headings: Array<{ level: number; text: string; id: string }> = []
+  const headings: { level: number; text: string; id: string }[] = []
 
-  const lines = content.split("\n").map((line) => line.trim())
+  const lines = content.split('\n').map(line => line.trim())
   for (const line of lines) {
     const match = headingRegex.exec(line)
     if (match) {
@@ -21,8 +21,8 @@ function generateToc(content: string) {
       const text = match[2].trim()
       const id = text
         .toLowerCase()
-        .replace(/[^a-z0-9\s]/g, "")
-        .replace(/\s+/g, "-")
+        .replace(/[^a-z0-9\s]/g, '')
+        .replace(/\s+/g, '-')
 
       headings.push({ level, text, id })
     }
@@ -32,9 +32,9 @@ function generateToc(content: string) {
 }
 
 function generateTocHTML(
-  headings: Array<{ level: number; text: string; id: string }>,
+  headings: { level: number; text: string; id: string }[]
 ) {
-  if (headings.length === 0) return ""
+  if (headings.length === 0) return ''
 
   let html = '<nav class="toc"><ul>'
   let currentLevel = headings[0].level
@@ -42,11 +42,11 @@ function generateTocHTML(
   for (const heading of headings) {
     if (heading.level > currentLevel) {
       for (let i = currentLevel; i < heading.level; i++) {
-        html += "<ul>"
+        html += '<ul>'
       }
     } else if (heading.level < currentLevel) {
       for (let i = heading.level; i < currentLevel; i++) {
-        html += "</ul>"
+        html += '</ul>'
       }
     }
 
@@ -54,17 +54,15 @@ function generateTocHTML(
     currentLevel = heading.level
   }
 
-  html += "</ul></nav>"
+  html += '</ul></nav>'
   return html
 }
 
-let tocHTML = ""
+let tocHTML = ''
 if (currentPost?.body) {
   const headings = generateToc(currentPost.body)
   tocHTML = generateTocHTML(headings)
 }
 ---
 
-{tocHTML && (
-  <div id="toc" set:html={tocHTML} />
-)}
+{tocHTML && <div id="toc" set:html={tocHTML} />}

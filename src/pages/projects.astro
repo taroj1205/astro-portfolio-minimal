@@ -1,9 +1,9 @@
 ---
-import Header from "../components/header.astro";
-import Layout from "../layouts/layout.astro";
-import { projects } from "../lib/projects.astro";
-import ProjectCard from "../components/projects/card.astro";
-import "../styles/projects.css";
+import Header from '../components/header.astro'
+import Layout from '../layouts/layout.astro'
+import { projects } from '../lib/projects.astro'
+import ProjectCard from '../components/projects/card.astro'
+import '../styles/projects.css'
 ---
 
 <Layout title="Projects">
@@ -14,7 +14,7 @@ import "../styles/projects.css";
       <p class="projects__description">Here are some of my recent projects.</p>
 
       <div class="projects__grid">
-        {projects.map((project) => <ProjectCard {...project} />)}
+        {projects.map(project => <ProjectCard {...project} />)}
       </div>
     </section>
   </main>

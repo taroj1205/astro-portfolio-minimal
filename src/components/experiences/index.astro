@@ -1,58 +1,58 @@
 ---
-import ExternalLinkIcon from "../../icons/external-link-icon.astro"
-import BriefcaseIcon from "../../icons/briefcase-icon.astro"
-import CodeIcon from "../../icons/code-icon.astro"
-import GraduationCapIcon from "../../icons/graduation-cap-icon.astro"
+import ExternalLinkIcon from '../../icons/external-link-icon.astro'
+import BriefcaseIcon from '../../icons/briefcase-icon.astro'
+import CodeIcon from '../../icons/code-icon.astro'
+import GraduationCapIcon from '../../icons/graduation-cap-icon.astro'
 
-import "./experiences.css"
-import ArrowRightIcon from "../../icons/arrow-right-icon.astro"
+import './experiences.css'
+import ArrowRightIcon from '../../icons/arrow-right-icon.astro'
 
 const experiencesArray = [
   {
-    title: "Teacher",
-    company: "YAGO - classmall Kids",
-    type: "Contract",
-    startDate: "July 2024",
-    endDate: "Present",
-    location: "Remote",
+    title: 'Teacher',
+    company: 'YAGO - classmall Kids',
+    type: 'Contract',
+    startDate: 'July 2024',
+    endDate: 'Present',
+    location: 'Remote',
     description:
-      "Teaching programming on Minecraft Education remotely on Zoom for classmall Kids.",
-    link: "https://kids.classmall.jp/",
+      'Teaching programming on Minecraft Education remotely on Zoom for classmall Kids.',
+    link: 'https://kids.classmall.jp/',
     icon: BriefcaseIcon,
   },
   {
-    title: "Open Source Contributor",
-    company: "Yamada UI",
-    type: "Volunteer",
-    startDate: "March 2024",
-    endDate: "Present",
-    location: "Remote",
+    title: 'Open Source Contributor',
+    company: 'Yamada UI',
+    type: 'Volunteer',
+    startDate: 'March 2024',
+    endDate: 'Present',
+    location: 'Remote',
     description:
-      "Contributing to Yamada UI, a React component library with hooks and utils.",
-    link: "https://github.com/yamada-ui",
+      'Contributing to Yamada UI, a React component library with hooks and utils.',
+    link: 'https://github.com/yamada-ui',
     icon: CodeIcon,
   },
   {
-    title: "Open Source Contributor",
-    company: "Zen Browser",
-    type: "Volunteer",
-    startDate: "October 2024",
-    endDate: "Present",
-    location: "Remote",
+    title: 'Open Source Contributor',
+    company: 'Zen Browser',
+    type: 'Volunteer',
+    startDate: 'October 2024',
+    endDate: 'Present',
+    location: 'Remote',
     description:
       "Contributing to Zen Browser's website, a browser based on Firefox with a focus on privacy and security.",
-    link: "https://zen-browser.app/",
+    link: 'https://zen-browser.app/',
     icon: CodeIcon,
   },
   {
-    title: "Teacher Aid for International Students",
-    company: "Westlake Boys High School",
-    type: "Part-time",
-    startDate: "January 2024",
-    endDate: "February 2024",
-    location: "North Shore, Auckland, New Zealand",
-    description: "Worked as a teacher aid for international students.",
-    link: "https://westlake.school.nz/",
+    title: 'Teacher Aid for International Students',
+    company: 'Westlake Boys High School',
+    type: 'Part-time',
+    startDate: 'January 2024',
+    endDate: 'February 2024',
+    location: 'North Shore, Auckland, New Zealand',
+    description: 'Worked as a teacher aid for international students.',
+    link: 'https://westlake.school.nz/',
     icon: GraduationCapIcon,
   },
 ]
@@ -60,21 +60,23 @@ const experiencesArray = [
 const { class: className, ...props } = Astro.props
 ---
 
-<section class:list={["experiences", className]} {...props}>
-  <div class={"experiences__container"}>
-    <div class={"experiences__header"}>
-      <h2 class={"experiences__title"}>
+<section class:list={['experiences', className]} {...props}>
+  <div class={'experiences__container'}>
+    <div class={'experiences__header'}>
+      <h2 class={'experiences__title'}>
         <span style="view-transition-name: title;">Experiences </span>
       </h2>
-      <p class={"experiences__description"}>
+      <p class={'experiences__description'}>
         I am part of the Yamada UI maintainer team, and I have been teaching
         programming.
       </p>
-      <a href="/projects" title="My projects" class="no-hover experiences__nav-link"
-        >My Projects <ArrowRightIcon /></a
+      <a
+        href="/projects"
+        title="My projects"
+        class="no-hover experiences__nav-link">My Projects <ArrowRightIcon /></a
       >
     </div>
-    <div class={"experiences__grid"}>
+    <div class={'experiences__grid'}>
       {
         experiencesArray
           .sort((a, b) => {
@@ -82,11 +84,9 @@ const { class: className, ...props } = Astro.props
               return (
                 new Date(b.startDate).getTime() -
                 new Date(a.startDate).getTime()
-              );
+              )
             }
-            return (
-              new Date(b.endDate).getTime() - new Date(a.endDate).getTime()
-            );
+            return new Date(b.endDate).getTime() - new Date(a.endDate).getTime()
           })
           .map(
             ({
@@ -100,21 +100,21 @@ const { class: className, ...props } = Astro.props
               link,
               icon: Icon,
             }) => (
-              <div class={"experiences__card"}>
-                <div class={"experiences__card-content"}>
-                  <div class={"experiences__card-header"}>
-                    <h3 class={"experiences__card-title"}>{title}</h3>
-                    {Icon && <Icon class={"experiences__card-icon"} />}
+              <div class={'experiences__card'}>
+                <div class={'experiences__card-content'}>
+                  <div class={'experiences__card-header'}>
+                    <h3 class={'experiences__card-title'}>{title}</h3>
+                    {Icon && <Icon class={'experiences__card-icon'} />}
                   </div>
-                  <p class={"experiences__card-company"}>
+                  <p class={'experiences__card-company'}>
                     <a href={link} target="_blank" rel="noopener noreferrer">
                       {company}
                       <ExternalLinkIcon />
                     </a>
                   </p>
-                  <div class={"experiences__card-tags"}>
+                  <div class={'experiences__card-tags'}>
                     <span
-                      class={`${"experiences__card-tag"} ${"experiences__card-tag--primary"}`}
+                      class={`${'experiences__card-tag'} ${'experiences__card-tag--primary'}`}
                     >
                       {type}
                     </span>

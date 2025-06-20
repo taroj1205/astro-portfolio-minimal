@@ -13,8 +13,8 @@ This is a minimal portfolio template built with Astro. It includes a simple land
 ### Getting Started
 
 1. Clone the repository
-2. Install the dependencies with `pnpm install`
-3. Start the development server with `pnpm run dev`
+2. Install the dependencies with `bun install`
+3. Start the development server with `bun run dev`
 4. Open the website in your browser at <http://localhost:3000>
 
 ### Customizing

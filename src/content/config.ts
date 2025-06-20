@@ -1,7 +1,7 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection, z } from 'astro:content'
 
 const blog = defineCollection({
-  type: "content",
+  type: 'content',
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -12,18 +12,18 @@ const blog = defineCollection({
       coverImage: z
         .string()
         .optional()
-        .transform((val) => {
-          if (!val) return undefined;
+        .transform(val => {
+          if (!val) return undefined
           // If it's just a filename (no path separators), prepend the assets path
-          if (!val.includes("/") && !val.includes("\\")) {
-            return `../../assets/${val}`;
+          if (!val.includes('/') && !val.includes('\\')) {
+            return `../../assets/${val}`
           }
-          return val;
+          return val
         })
         .pipe(image().optional()),
     }),
-});
+})
 
 export const collections = {
   blog,
-};
+}

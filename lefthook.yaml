@@ -1,0 +1,65 @@
+pre-commit:
+  piped: true
+  commands:
+    prettier:
+      priority: 1
+      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
+      run: |
+        bunx prettier {staged_files} --write --list-different
+      stage_fixed: true
+
+    eslint:
+      priority: 2
+      run: |
+        bun lefthook run eslint
+
+    cspell:
+      priority: 3
+      run: |
+        bun lefthook run cspell
+
+eslint:
+  commands:
+    base:
+      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,astro}'
+      exclude:
+        - public/**
+        - dist/**
+      run: |
+        bunx eslint {staged_files} --max-warnings=0 --fix --cache --no-warn-ignored
+      stage_fixed: true
+
+cspell:
+  commands:
+    base:
+      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,astro,json,yaml,yml,md,mdx}'
+      run: |
+        bunx cspell {staged_files}
+      stage_fixed: true
+
+commit-msg:
+  commands:
+    commitlint:
+      run: |
+        bunx commitlint --edit {1}
+
+post-merge:
+  commands:
+    bun:
+      glob: '{package.json,bun.lock}'
+      run: bun install
+
+post-checkout:
+  commands:
+    branch-validation:
+      run: |
+        node scripts/validate-branch-name.js
+    bun:
+      glob: '{package.json,bun.lock}'
+      run: bun install
+
+pre-push:
+  commands:
+    branch-validation:
+      run: |
+        bun run validate-branch
