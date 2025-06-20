@@ -11,20 +11,22 @@ const currentPost = allPosts.find(
 )
 
 function generateToc(content: string) {
-  const headingRegex = /^(#{1,6})\s+(.+)$/gm
+  const headingRegex = /^(#{1,6})\s+(.+)$/
   const headings: Array<{ level: number; text: string; id: string }> = []
 
-  let match: RegExpExecArray | null = headingRegex.exec(content)
-  while (match !== null) {
-    const level = match[1].length
-    const text = match[2].trim()
-    const id = text
-      .toLowerCase()
-      .replace(/[^a-z0-9\s]/g, "")
-      .replace(/\s+/g, "-")
+  const lines = content.split("\n").map(line => line.trim())
+  for (const line of lines) {
+    const match = headingRegex.exec(line)
+    if (match) {
+      const level = match[1].length
+      const text = match[2].trim()
+      const id = text
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, "")
+        .replace(/\s+/g, "-")
 
-    headings.push({ level, text, id })
-    match = headingRegex.exec(content)
+      headings.push({ level, text, id })
+    }
   }
 
   return headings
