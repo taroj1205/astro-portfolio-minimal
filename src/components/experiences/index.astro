@@ -1,11 +1,11 @@
 ---
-import ExternalLinkIcon from "../../icons/external-link-icon.astro";
-import BriefcaseIcon from "../../icons/briefcase-icon.astro";
-import CodeIcon from "../../icons/code-icon.astro";
-import GraduationCapIcon from "../../icons/graduation-cap-icon.astro";
+import ExternalLinkIcon from "../../icons/external-link-icon.astro"
+import BriefcaseIcon from "../../icons/briefcase-icon.astro"
+import CodeIcon from "../../icons/code-icon.astro"
+import GraduationCapIcon from "../../icons/graduation-cap-icon.astro"
 
-import "./experiences.css";
-import ArrowRightIcon from "../../icons/arrow-right-icon.astro";
+import "./experiences.css"
+import ArrowRightIcon from "../../icons/arrow-right-icon.astro"
 
 const experiencesArray = [
   {
@@ -55,9 +55,9 @@ const experiencesArray = [
     link: "https://westlake.school.nz/",
     icon: GraduationCapIcon,
   },
-];
+]
 
-const { class: className, ...props } = Astro.props;
+const { class: className, ...props } = Astro.props
 ---
 
 <section class:list={["experiences", className]} {...props}>
@@ -70,7 +70,7 @@ const { class: className, ...props } = Astro.props;
         I am part of the Yamada UI maintainer team, and I have been teaching
         programming.
       </p>
-      <a href="/projects" title="My projects" class="no-hover"
+      <a href="/projects" title="My projects" class="no-hover experiences__nav-link"
         >My Projects <ArrowRightIcon /></a
       >
     </div>
