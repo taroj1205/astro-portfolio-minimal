@@ -21,10 +21,10 @@ const { frontmatter } = Astro.props
 ---
 
 <Layout title={frontmatter.title} description={frontmatter.excerpt}>
-  <Header />
+  <Header isBlog />
   <main class="post">
     <article>
-      <header class="post__header">
+      <section class="post__header">
         <h1 class="post__title">
           <span
             style={`view-transition-name: blog-title-${Astro.params.slug}`}
@@ -52,7 +52,7 @@ const { frontmatter } = Astro.props
             )
           }
         </div>
-      </header>
+      </section>
       {
         frontmatter.coverImage && (
           <Image

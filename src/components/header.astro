@@ -1,14 +1,25 @@
 ---
-import LeafIcon from "../icons/leaf-icon.astro";
+import LeafIcon from "../icons/leaf-icon.astro"
+
+const { isBlog } = Astro.props
 ---
 
 <header>
-  <h1>
-    <a href="/">
-      <span style="view-transition-name: name;">taroj1205</span>
-      <LeafIcon style="view-transition-name: leaf;" />
-    </a>
-  </h1>
+  {isBlog ? (
+    <h2>
+      <a href="/">
+        <span style="view-transition-name: name;">taroj1205</span>
+        <LeafIcon style="view-transition-name: leaf;" />
+      </a>
+    </h2>
+  ) : (
+    <h1>
+      <a href="/">
+        <span style="view-transition-name: name;">taroj1205</span>
+        <LeafIcon style="view-transition-name: leaf;" />
+      </a>
+    </h1>
+  )}
 </header>
 
 <style>
