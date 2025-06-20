@@ -12,6 +12,9 @@
     "@astrojs/mdx": "^4.3.0",
     "astro": "^5.4.2"
   },
+  "engines": {
+    "node": ">=18.20.8"
+  },
   "devDependencies": {
     "@biomejs/biome": "1.9.4"
   }
