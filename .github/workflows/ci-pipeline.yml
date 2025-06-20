@@ -33,46 +33,46 @@ jobs:
             !.vscode/**
             !.env.example
 
-  setup:
-    name: Setup Dependencies
-    needs: check_changes
-    if: ${{ needs.check_changes.outputs.exists == 'true' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+  # setup:
+  #   name: Setup Dependencies
+  #   needs: check_changes
+  #   if: ${{ needs.check_changes.outputs.exists == 'true' }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Check if node_modules cache exists
-        id: check-node-modules-cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            node_modules
-            */node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lock') }}
-          lookup-only: true
+  # - name: Check if node_modules cache exists
+  #   id: check-node-modules-cache
+  #   uses: actions/cache@v4
+  #   with:
+  #     path: |
+  #       node_modules
+  #       */node_modules
+  #     key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lock') }}
+  #     lookup-only: true
 
-      - name: Setup Bun
-        if: steps.check-node-modules-cache.outputs.cache-hit != 'true'
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
+  # - name: Setup Bun
+  # if: steps.check-node-modules-cache.outputs.cache-hit != 'true'
+  # uses: oven-sh/setup-bun@v2
+  # with:
+  #   bun-version: latest
 
-      - name: Install dependencies
-        if: steps.check-node-modules-cache.outputs.cache-hit != 'true'
-        run: bun install --frozen-lockfile
+  # - name: Install dependencies
+  # if: steps.check-node-modules-cache.outputs.cache-hit != 'true'
+  # run: bun install --frozen-lockfile
 
-      - name: Save node_modules cache
-        if: steps.check-node-modules-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            node_modules
-            */node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lock') }}
+  # - name: Save node_modules cache
+  #   if: steps.check-node-modules-cache.outputs.cache-hit != 'true'
+  #   uses: actions/cache/save@v4
+  #   with:
+  #     path: |
+  #       node_modules
+  #       */node_modules
+  #     key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lock') }}
 
   quality_checks:
     name: ${{ matrix.name }}
-    needs: [check_changes, setup]
+    needs: [check_changes]
     if: ${{ needs.check_changes.outputs.exists == 'true' }}
     runs-on: ubuntu-latest
     strategy:
@@ -89,15 +89,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Restore node_modules cache
-        id: cache
-        uses: actions/cache/restore@v4
-        with:
-          path: |
-            node_modules
-            */node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lock') }}
-          restore-keys: ${{ runner.os }}-node-modules-
+      # - name: Restore node_modules cache
+      #   id: cache
+      #   uses: actions/cache/restore@v4
+      #   with:
+      #     path: |
+      #       node_modules
+      #       */node_modules
+      #     key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lock') }}
+      #     restore-keys: ${{ runner.os }}-node-modules-
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -105,7 +105,7 @@ jobs:
           bun-version: latest
 
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
+        # if: steps.cache.outputs.cache-hit != 'true'
         run: bun install --frozen-lockfile
 
       - name: Run ${{ matrix.name }}
