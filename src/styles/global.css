@@ -210,12 +210,13 @@ h1 {
   font-weight: bolder;
 }
 
-header > * {
+header > h1,
+header > h2 {
   font-size: 1.2rem !important;
   gap: 0.2rem;
 }
 
-header > * svg {
+header > * .lucide-leaf {
   color: var(--emerald-color);
   margin-top: -0.35rem;
   place-self: flex-start;
