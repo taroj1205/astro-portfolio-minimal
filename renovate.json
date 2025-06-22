@@ -1,0 +1,127 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "config:js-app"],
+  "timezone": "Pacific/Auckland",
+  "schedule": ["before 6am on saturday"],
+  "prConcurrentLimit": 3,
+  "branchConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 6am on saturday"]
+  },
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "schedule": ["at any time"]
+  },
+  "rebaseWhen": "behind-base-branch",
+  "semanticCommits": "enabled",
+  "separateMultipleMajor": true,
+  "packageRules": [
+    {
+      "description": "Group Astro ecosystem updates",
+      "groupName": "Astro ecosystem",
+      "matchPackagePatterns": ["^@astrojs/", "^astro$"],
+      "schedule": ["before 6am on saturday"],
+      "automerge": false,
+      "semanticCommitScope": "astro"
+    },
+    {
+      "description": "Group ESLint ecosystem updates",
+      "groupName": "ESLint ecosystem",
+      "matchPackagePatterns": [
+        "^@eslint/",
+        "^eslint",
+        "^@typescript-eslint/",
+        "^eslint-"
+      ],
+      "schedule": ["before 6am on saturday"],
+      "automerge": false,
+      "semanticCommitScope": "eslint"
+    },
+    {
+      "description": "Group TypeScript ecosystem updates",
+      "groupName": "TypeScript ecosystem",
+      "matchPackagePatterns": ["^typescript", "^@types/"],
+      "schedule": ["before 6am on saturday"],
+      "automerge": false,
+      "semanticCommitScope": "typescript"
+    },
+    {
+      "description": "Group code quality tools",
+      "groupName": "Code quality tools",
+      "matchPackageNames": [
+        "@biomejs/biome",
+        "prettier",
+        "prettier-plugin-astro",
+        "prettier-eslint",
+        "lefthook"
+      ],
+      "schedule": ["before 6am on saturday"],
+      "automerge": false,
+      "semanticCommitScope": "tools"
+    },
+    {
+      "description": "Group commitlint packages",
+      "groupName": "Commitlint",
+      "matchPackagePatterns": ["^@commitlint/"],
+      "schedule": ["before 6am on saturday"],
+      "automerge": false,
+      "semanticCommitScope": "commitlint"
+    },
+    {
+      "description": "Group cspell packages",
+      "groupName": "CSpell",
+      "matchPackagePatterns": ["^@cspell/", "^cspell$"],
+      "schedule": ["before 6am on saturday"],
+      "automerge": false,
+      "semanticCommitScope": "cspell"
+    },
+    {
+      "description": "Auto-merge patch updates for dev dependencies",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Auto-merge minor updates for dev dependencies (non-breaking)",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor"],
+      "matchPackagePatterns": ["^@cspell/", "^cspell$", "^prettier"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Hold back major updates for manual review",
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "schedule": ["before 6am on saturday"],
+      "labels": ["major-update"]
+    },
+    {
+      "description": "Production dependencies - no auto-merge",
+      "matchDepTypes": ["dependencies"],
+      "automerge": false,
+      "schedule": ["before 6am on saturday"],
+      "labels": ["production-dependency"]
+    },
+    {
+      "description": "Security updates - high priority",
+      "matchPackageRules": [
+        {
+          "matchDatasources": ["npm"],
+          "vulnerabilityAlerts": true
+        }
+      ],
+      "schedule": ["at any time"],
+      "prPriority": 10,
+      "labels": ["security"]
+    }
+  ],
+  "labels": ["dependencies", "renovate"],
+  "assignees": ["taroj1205"],
+  "reviewers": ["taroj1205"],
+  "rangeStrategy": "bump",
+  "bumpVersion": "patch"
+}
