@@ -18,28 +18,19 @@ jobs:
       contents: read
     outputs:
       exists: ${{ steps.filter.outputs.exists }}
-    env:
-      CI_IGNORE: |
-        *.md
-        .gitignore
-        .gitattributes
-        .vscode/**
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
 
       - name: Filter Changed Files
         id: filter
-        shell: bash
-        run: |
-          OUTPUT=$(./scripts/check-changes.sh \
-            --event-name "${{ github.event_name }}" \
-            --pr-base-sha "${{ github.event.pull_request.base.sha }}" \
-            --push-before "${{ github.event.before }}" \
-            --head-sha "${{ github.sha }}" \
-            --output github)
-          echo "$OUTPUT" >> "$GITHUB_OUTPUT"
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            exists:
+              - '!*.md'
+              - '!.gitignore'
+              - '!.gitattributes'
+              - '!.vscode/**'
 
   quality_checks:
     name: ${{ matrix.name }}
