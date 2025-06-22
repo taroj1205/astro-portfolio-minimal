@@ -201,7 +201,7 @@ git add README.md && git commit -m "docs(readme): update readme"
 git reset --hard HEAD~1  # Restore original state
 
 # Scenario 2: Code changes (should run CI)
-echo "console.log('hello')" > src/main.js
+echo "console.error('hello')" > src/main.js
 git add src/main.js && git commit -m "feat(logging): add logging"
 ./scripts/check-changes.sh --base-sha HEAD~1
 # Expected: exit code 0, "Changes detected"
