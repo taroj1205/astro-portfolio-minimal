@@ -201,7 +201,7 @@ git add README.md && git commit -m "docs(readme): update readme"
 git reset --hard HEAD~1  # Restore original state
 
 # Scenario 2: Code changes (should run CI)
-echo "console.error('hello')" > src/main.js
+echo "// this is a test" > src/main.js
 git add src/main.js && git commit -m "feat(logging): add logging"
 ./scripts/check-changes.sh --base-sha HEAD~1
 # Expected: exit code 0, "Changes detected"
@@ -209,7 +209,7 @@ git reset --hard HEAD~1  # Restore original state
 
 # Scenario 3: Mixed changes (should run CI if any non-ignored files changed)
 echo "Updated docs" > README.md
-echo "new code" > src/app.js
+echo "// this is a test" > src/app.js
 git add . && git commit -m "feat(app): update app and docs"
 ./scripts/check-changes.sh --base-sha HEAD~1
 # Expected: exit code 0, "Changes detected" (due to src/app.js)
