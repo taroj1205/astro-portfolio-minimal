@@ -137,7 +137,14 @@ Run the automated test suite to verify the script works correctly:
 ./scripts/test-check-changes.sh
 ```
 
-This creates a temporary git repository, makes various types of changes, and tests all output formats.
+This creates a temporary git repository in `/tmp`, makes various types of changes, tests all output formats, and automatically cleans up the temporary repository afterwards.
+
+The test validates that:
+
+- Glob patterns like `*.md` correctly filter out markdown files
+- Recursive patterns like `.vscode/**` correctly filter out VS Code configuration files
+- Mixed changes correctly identify relevant files
+- Only-ignored-files scenarios properly return "no changes" status
 
 ### Manual Testing
 

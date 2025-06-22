@@ -2,6 +2,9 @@
 
 set -e
 
+# Enable globstar for ** patterns
+shopt -s globstar
+
 # Default CI_IGNORE patterns
 CI_IGNORE_DEFAULT="*.md
 .gitignore
@@ -105,7 +108,7 @@ while IFS= read -r file; do
     IGNORED=false
     while IFS= read -r pattern; do
         [[ -n "$pattern" ]] || continue
-        if [[ "$file" == $pattern ]]; then
+        if [[ $file == $pattern ]]; then
             IGNORED=true
             break
         fi
@@ -129,8 +132,23 @@ case "$OUTPUT_FORMAT" in
         if [[ -z "$FILTERED" ]]; then
             echo '{"exists": false, "changed_files": [], "filtered_files": []}'
         else
-            CHANGED_JSON=$(echo "$CHANGED" | jq -R -s 'split("\n") | map(select(length > 0))')
-            FILTERED_JSON=$(echo "$FILTERED" | jq -R -s 'split("\n") | map(select(length > 0))')
+            # Convert to JSON arrays using bash (no jq dependency)
+            CHANGED_JSON="["
+            while IFS= read -r file; do
+                [[ -n "$file" ]] || continue
+                [[ "$CHANGED_JSON" != "[" ]] && CHANGED_JSON+=", "
+                CHANGED_JSON+="\"$(echo "$file" | sed 's/\\/\\\\/g; s/"/\\"/g')\""
+            done <<< "$CHANGED"
+            CHANGED_JSON+="]"
+            
+            FILTERED_JSON="["
+            while IFS= read -r file; do
+                [[ -n "$file" ]] || continue
+                [[ "$FILTERED_JSON" != "[" ]] && FILTERED_JSON+=", "
+                FILTERED_JSON+="\"$(echo "$file" | sed 's/\\/\\\\/g; s/"/\\"/g')\""
+            done <<< "$FILTERED"
+            FILTERED_JSON+="]"
+            
             echo "{\"exists\": true, \"changed_files\": $CHANGED_JSON, \"filtered_files\": $FILTERED_JSON}"
         fi
         ;;

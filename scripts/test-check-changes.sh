@@ -15,6 +15,7 @@ git config user.name "Test User"
 
 # Create initial commit
 echo "Initial content" > README.md
+mkdir -p src
 echo "Some code" > src/main.js
 mkdir -p .vscode
 echo '{"setting": true}' > .vscode/settings.json
@@ -55,8 +56,9 @@ echo "Running: $SCRIPT_PATH --base-sha $INITIAL_SHA --head-sha $CURRENT_SHA --ou
 echo ""
 
 # Test with only ignored files
-git reset --soft HEAD~1
-echo "Only README updated" > README.md
+git reset --hard HEAD~1  # Reset completely to initial state
+echo "Only README updated" > README.md         # Should be ignored (*.md)
+echo '{"ignored": true}' > .vscode/launch.json # Should be ignored (.vscode/**)
 git add .
 git commit -m "Only ignored changes"
 ONLY_IGNORED_SHA=$(git rev-parse HEAD)
