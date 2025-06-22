@@ -39,7 +39,7 @@ jobs:
           # Filter out ignored patterns using grep
           FILTERED="$CHANGED"
           while IFS= read -r pattern; do
-            [[ -n "$pattern" ]] && FILTERED=$(echo "$FILTERED" | grep -v "$pattern" || true)
+            [[ -n "$pattern" ]] && FILTERED=$(echo "$FILTERED" | grep -F -v "$pattern" || true)
           done <<< "$CI_IGNORE"
 
           if [[ -z "$FILTERED" ]]; then
