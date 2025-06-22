@@ -27,7 +27,6 @@
     "bun": ">=1.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "@cspell/dict-bash": "4.2.0",
