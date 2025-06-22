@@ -33,20 +33,13 @@ jobs:
         id: filter
         shell: bash
         run: |
-          BASE_SHA="${{ github.event.pull_request.base.sha }}"
-          CHANGED=$(git diff --name-only "$BASE_SHA" "$GITHUB_SHA")
-
-          # Filter out ignored patterns using grep
-          FILTERED="$CHANGED"
-          while IFS= read -r pattern; do
-            [[ -n "$pattern" ]] && FILTERED=$(echo "$FILTERED" | grep -F -v "$pattern" || true)
-          done <<< "$CI_IGNORE"
-
-          if [[ -z "$FILTERED" ]]; then
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-          fi
+          OUTPUT=$(./scripts/check-changes.sh \
+            --event-name "${{ github.event_name }}" \
+            --pr-base-sha "${{ github.event.pull_request.base.sha }}" \
+            --push-before "${{ github.event.before }}" \
+            --head-sha "${{ github.sha }}" \
+            --output github)
+          echo "$OUTPUT" >> "$GITHUB_OUTPUT"
 
   quality_checks:
     name: ${{ matrix.name }}
