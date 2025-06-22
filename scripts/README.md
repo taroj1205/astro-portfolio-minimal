@@ -197,23 +197,23 @@ Returns structured JSON with changed files and filtering results.
 echo "Updated docs" > README.md
 git add README.md && git commit -m "docs(readme): update readme"
 ./scripts/check-changes.sh --base-sha HEAD~1
-git reset --soft HEAD~1
 # Expected: exit code 1, "No relevant changes"
+git reset --hard HEAD~1  # Restore original state
 
 # Scenario 2: Code changes (should run CI)
 echo "console.log('hello')" > src/main.js
 git add src/main.js && git commit -m "feat(logging): add logging"
 ./scripts/check-changes.sh --base-sha HEAD~1
-git reset --soft HEAD~1
 # Expected: exit code 0, "Changes detected"
+git reset --hard HEAD~1  # Restore original state
 
 # Scenario 3: Mixed changes (should run CI if any non-ignored files changed)
 echo "Updated docs" > README.md
 echo "new code" > src/app.js
 git add . && git commit -m "feat(app): update app and docs"
 ./scripts/check-changes.sh --base-sha HEAD~1
-git reset --soft HEAD~1
 # Expected: exit code 0, "Changes detected" (due to src/app.js)
+git reset --hard HEAD~1  # Restore original state
 ```
 
 ### Custom Ignore Patterns
