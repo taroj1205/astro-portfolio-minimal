@@ -97,7 +97,6 @@
       "matchUpdateTypes": ["major"],
       "automerge": false,
       "schedule": ["before 6am on saturday"],
-      "reviewers": ["taroj1205"],
       "labels": ["major-update"]
     },
     {
