@@ -17,25 +17,32 @@ jobs:
     permissions:
       contents: read
     outputs:
-      exists: ${{ steps.filter.outputs.exists }}
+      changed: ${{ steps.filter.outputs.changed }}
     steps:
       - uses: actions/checkout@v4
 
       - name: Filter Changed Files
         id: filter
-        uses: dorny/paths-filter@v3
+        uses: taroj1205/check-changes@v1
         with:
-          filters: |
-            exists:
-              - '!*.md'
-              - '!.gitignore'
-              - '!.gitattributes'
-              - '!.vscode/**'
+          include: '**/*'
+          exclude: |
+            **/*.md
+            .gitignore
+            .gitattributes
+            .vscode/**/*
+          summary: true
+
+      - name: Debug Changed Files
+        run: |
+          echo "Changed File Count: ${{ steps.filter.outputs.changes_count }}"
+          echo "Changed: ${{ steps.filter.outputs.changed }}"
+          echo "Changed Files: ${{ steps.filter.outputs.changed_files }}"
 
   quality_checks:
     name: ${{ matrix.name }}
     needs: [check_changes]
-    if: ${{ needs.check_changes.outputs.exists == 'true' }}
+    if: ${{ needs.check_changes.outputs.changed == 'true' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -74,7 +81,7 @@ jobs:
         id: set-result
         run: |
           # Check if changes exist but no jobs ran, or if any job failed or was cancelled
-          if [[ "${{ needs.check_changes.outputs.exists }}" != "true" ]]; then
+          if [[ "${{ needs.check_changes.outputs.changed }}" != "true" ]]; then
             echo "success=true" >> $GITHUB_OUTPUT
             echo "No relevant changes detected - pipeline passed"
           elif [[ "${{ contains(needs.*.result, 'failure') }}" == "true" || "${{ contains(needs.*.result, 'cancelled') }}" == "true" ]]; then
