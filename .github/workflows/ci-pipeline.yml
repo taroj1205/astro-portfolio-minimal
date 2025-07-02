@@ -23,7 +23,7 @@ jobs:
 
       - name: Filter Changed Files
         id: filter
-        uses: taroj1205/check-changes@v1
+        uses: taroj1205/check-changes@v1.1.0
         with:
           include: '**/*'
           exclude: |
