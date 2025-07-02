@@ -31,7 +31,6 @@ jobs:
             .gitignore
             .gitattributes
             .vscode/**/*
-          list-files: shell
 
   quality_checks:
     name: ${{ matrix.name }}
