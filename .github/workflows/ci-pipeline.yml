@@ -23,7 +23,7 @@ jobs:
 
       - name: Filter Changed Files
         id: filter
-        uses: taroj1205/check-changes@v1.0.1
+        uses: taroj1205/check-changes@v1
         with:
           include: '**/*'
           exclude: |
@@ -31,6 +31,7 @@ jobs:
             .gitignore
             .gitattributes
             .vscode/**/*
+          summary: true
 
       - name: Debug Changed Files
         run: |
