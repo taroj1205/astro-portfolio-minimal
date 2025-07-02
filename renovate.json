@@ -3,7 +3,6 @@
   "extends": ["config:recommended", "config:js-app"],
   "timezone": "Pacific/Auckland",
   "schedule": ["before 6am on saturday"],
-
   "semanticCommits": "enabled",
   "semanticCommitType": "chore",
   "dependencyDashboard": true,
@@ -12,7 +11,6 @@
     "schedule": ["before 6am on saturday"],
     "semanticCommitScope": "deps,lock"
   },
-
   "packageRules": [
     {
       "matchUpdateTypes": ["major"],
@@ -24,19 +22,19 @@
     {
       "groupName": "dev tooling",
       "semanticCommitScope": "deps,tooling",
-      "matchPackagePatterns": [
-        "^eslint",
-        "^@eslint",
-        "^@typescript-eslint",
-        "^prettier",
-        "^commitlint",
-        "^cspell"
-      ],
       "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "labels": ["dependencies", "tooling"],
       "automerge": true,
-      "automergeType": "pr"
+      "automergeType": "pr",
+      "matchPackageNames": [
+        "/^eslint/",
+        "/^@eslint/",
+        "/^@typescript-eslint/",
+        "/^prettier/",
+        "/^commitlint/",
+        "/^cspell/"
+      ]
     },
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
