@@ -32,9 +32,6 @@ jobs:
             .gitattributes
             .vscode/**/*
 
-      - name: Debug changed output
-        run: echo "changed=${{ steps.filter.outputs.changed }}"
-
   quality_checks:
     name: ${{ matrix.name }}
     needs: [check_changes]
