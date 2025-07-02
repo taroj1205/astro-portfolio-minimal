@@ -32,6 +32,12 @@ jobs:
             .gitattributes
             .vscode/**/*
 
+      - name: Debug Changed Files
+        run: |
+          echo "Changed File Count: ${{ steps.filter.outputs.changes_count }}"
+          echo "Changed: ${{ steps.filter.outputs.changed }}"
+          echo "Changed Files: ${{ steps.filter.outputs.changed_files }}"
+
   quality_checks:
     name: ${{ matrix.name }}
     needs: [check_changes]
