@@ -35,7 +35,7 @@ jobs:
   quality_checks:
     name: ${{ matrix.name }}
     needs: [check_changes]
-    if: ${{ needs.check_changes.outputs.changed == 'true' }}
+    if: ${{ needs.check_changes.outputs.changed != 'true' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
