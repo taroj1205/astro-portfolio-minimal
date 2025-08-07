@@ -1,0 +1,44 @@
+---
+import type { ImageMetadata } from 'astro'
+import partlyCert from '../assets/hackathon/partly/IMG_20250727_213900.jpg'
+import partlyHolding from '../assets/hackathon/partly/IMG_7138.jpeg'
+import sesaHolding from '../assets/hackathon/sesa-wdcc/1754274555615.jpg'
+import sesaCert from '../assets/hackathon/sesa-wdcc/IMG_20250803_222749.jpg'
+
+export interface Hackathon {
+  title: string
+  event: string
+  date?: string
+  placement?: string
+  description?: string
+  images: {
+    certificate: ImageMetadata
+    award: ImageMetadata
+  }
+}
+
+export const hackathons: Hackathon[] = [
+  {
+    title: 'Partly x WDCC',
+    event: 'Partly x WDCC',
+    date: '2025-07-27',
+    placement: 'most production ready',
+    description: 'Certificate and award photos.',
+    images: {
+      certificate: partlyCert,
+      award: partlyHolding,
+    },
+  },
+  {
+    title: 'SESA × WDCC',
+    event: 'SESA × WDCC',
+    date: '2025-08-03',
+    placement: 'most overengineered',
+    description: 'Snapshots from the award and certificate.',
+    images: {
+      certificate: sesaCert,
+      award: sesaHolding,
+    },
+  },
+]
+---

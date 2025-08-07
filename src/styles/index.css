@@ -36,3 +36,9 @@ a {
 .linkedin-icon {
   color: #0e76a8;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

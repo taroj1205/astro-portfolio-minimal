@@ -1,13 +1,14 @@
 ---
-import LeafIcon from '../icons/leaf-icon.astro'
-import ArrowRight from '../icons/arrow-right-icon.astro'
-import Layout from '../layouts/layout.astro'
 import Experiences from '../components/experiences/index.astro'
+import ArrowRight from '../icons/arrow-right-icon.astro'
+import LeafIcon from '../icons/leaf-icon.astro'
+import Layout from '../layouts/layout.astro'
 
 import GithubIcon from '../icons/github-icon.astro'
-import XIcon from '../icons/x-icon.astro'
 import LinkedinIcon from '../icons/linkedin-icon.astro'
+import XIcon from '../icons/x-icon.astro'
 
+import Hackathons from '../components/hackathons/index.astro'
 import '../styles/index.css'
 
 const socials = [
@@ -59,5 +60,7 @@ const socials = [
   </header>
   <main>
     <Experiences />
+
+    <Hackathons />
   </main>
 </Layout>
