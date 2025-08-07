@@ -1,0 +1,24 @@
+---
+import { hackathons } from '../../lib/hackathons.astro'
+import HackathonCard from './card.astro'
+import './hackathons.css'
+
+const { class: className, ...props } = Astro.props
+---
+
+<section class:list={['hackathons', className]} {...props}>
+  <div class="hackathons__container">
+    <div class="hackathons__header">
+      <h2 class="hackathons__title">
+        <span style="view-transition-name: title;">Hackathons</span>
+      </h2>
+      <p class="hackathons__description">
+        Recent wins with snapshots from each event.
+      </p>
+    </div>
+
+    <div class="hackathons__grid">
+      {hackathons.map(item => <HackathonCard {...item} />)}
+    </div>
+  </div>
+</section>

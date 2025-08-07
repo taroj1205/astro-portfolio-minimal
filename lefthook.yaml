@@ -1,17 +1,16 @@
 pre-commit:
   piped: true
   commands:
-    prettier:
+    eslint:
       priority: 1
+      run: |
+        bun lefthook run eslint
+    prettier:
+      priority: 2
       glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
       run: |
         bun run prettier {staged_files} --write --list-different
       stage_fixed: true
-
-    eslint:
-      priority: 2
-      run: |
-        bun lefthook run eslint
 
     cspell:
       priority: 3

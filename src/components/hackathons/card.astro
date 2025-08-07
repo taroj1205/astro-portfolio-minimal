@@ -1,0 +1,36 @@
+---
+import type { ImageMetadata } from 'astro'
+import Image from '../ui/Image.astro'
+import './hackathon-card.css'
+
+interface Props {
+  title: string
+  event: string
+  date?: string
+  placement?: string
+  description?: string
+  images: {
+    certificate: ImageMetadata
+    award: ImageMetadata
+  }
+}
+
+const { title, event, date, placement, description, images } =
+  Astro.props as Props
+---
+
+<article class="hackathon-card">
+  <header class="hackathon-card__header">
+    <h3 class="hackathon-card__title">{title}</h3>
+    {placement && <span class="hackathon-card__badge">{placement}</span>}
+  </header>
+
+  {date && <p class="hackathon-card__meta">{date}</p>}
+
+  {description && <p class="hackathon-card__description">{description}</p>}
+
+  <div class="hackathon-card__images">
+    <Image src={images.certificate} alt={`${event} certificate`} />
+    <Image src={images.award} alt={`Holding the ${event} award`} />
+  </div>
+</article>
