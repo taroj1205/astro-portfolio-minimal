@@ -177,7 +177,6 @@ summary {
   --text-primary: var(--base-color);
   --text-secondary: var(--muted-color);
   --text-tertiary: #6b7280;
-  --text-on-accent: #ffffff;
   --background-secondary: #f8f9fa;
   --background-tertiary: #edf2f7;
   --accent-primary: var(--emerald-color);
