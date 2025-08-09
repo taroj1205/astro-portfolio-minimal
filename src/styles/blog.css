@@ -114,27 +114,6 @@ main {
   width: 100%;
 }
 
-.blog__card {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1.5rem;
-  border-radius: var(--card-radius);
-  border: 1px solid var(--border-color);
-  background-color: rgba(var(--base-bg), 0.35);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.blog__card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent-primary);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
 .blog__card-link:focus {
   outline: none;
 }
