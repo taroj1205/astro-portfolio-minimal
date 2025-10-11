@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "4.3.4",
-    "astro": "5.13.2",
+    "astro": "5.14.3",
     "sharp": "0.34.3"
   },
   "engines": {
