@@ -27,8 +27,8 @@
     "bun": ">=1.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.8.1",
-    "@commitlint/config-conventional": "19.8.1",
+    "@commitlint/cli": "20.1.0",
+    "@commitlint/config-conventional": "20.0.0",
     "@cspell/dict-bash": "4.2.2",
     "@cspell/dict-css": "4.0.18",
     "@cspell/dict-html": "4.0.12",
@@ -48,7 +48,7 @@
     "eslint-plugin-astro": "1.4.0",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
-    "lefthook": "1.13.6",
+    "lefthook": "2.0.2",
     "prettier": "3.6.2",
     "prettier-eslint": "16.4.2",
     "prettier-plugin-astro": "0.14.1",
