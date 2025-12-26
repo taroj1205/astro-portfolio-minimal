@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI
 
 on:
   pull_request:
@@ -51,8 +51,6 @@ jobs:
             name: Lint
           - check: format
             name: Format
-          - check: spell
-            name: Spell Check
           - check: build
             name: Build
     steps:
@@ -69,9 +67,22 @@ jobs:
       - name: Run ${{ matrix.name }}
         run: bun run ${{ matrix.check }}
 
+  spell_check:
+    name: Spell Check
+    needs: [check_changes]
+    if: ${{ needs.check_changes.outputs.changed == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Spell Check
+        uses: streetsidesoftware/cspell-action@v6
+        with:
+          config: cspell.json
+
   verify:
     name: Verify
-    needs: [check_changes, quality_checks]
+    needs: [check_changes, quality_checks, spell_check]
     runs-on: ubuntu-latest
     if: always()
     outputs:
