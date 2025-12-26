@@ -36,7 +36,7 @@
     "@cspell/dict-npm": "5.2.20",
     "@cspell/dict-typescript": "3.2.3",
     "@cspell/eslint-plugin": "9.2.2",
-    "@eslint/compat": "1.4.1",
+    "@eslint/compat": "2.0.0",
     "@eslint/js": "9.39.1",
     "@typescript-eslint/eslint-plugin": "8.46.3",
     "@typescript-eslint/parser": "8.46.3",
