@@ -19,7 +19,7 @@ jobs:
     outputs:
       changed: ${{ steps.filter.outputs.changed }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Filter Changed Files
         id: filter
@@ -54,7 +54,7 @@ jobs:
           - check: build
             name: Build
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -73,10 +73,10 @@ jobs:
     if: ${{ needs.check_changes.outputs.changed == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Spell Check
-        uses: streetsidesoftware/cspell-action@v6
+        uses: streetsidesoftware/cspell-action@v8
         with:
           config: cspell.json
 
