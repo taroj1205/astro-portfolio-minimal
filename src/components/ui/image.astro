@@ -7,6 +7,7 @@ import type { ImageMetadata } from 'astro'
 import { encode } from 'blurhash'
 
 const blurhashCache = new Map<string, string>()
+const fileDataCache = new Map<string, Buffer>()
 const kebabCase = (value: string): string =>
   value.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`)
 
@@ -51,7 +52,11 @@ async function resolveBlurhashStyle(image: ImageMetadata): Promise<string> {
   }
 
   try {
-    const fileData = await fs.readFile(fsPath)
+    let fileData = fileDataCache.get(fsPath)
+    if (!fileData) {
+      fileData = await fs.readFile(fsPath)
+      fileDataCache.set(fsPath, fileData)
+    }
     const { width, height, data } = await getPixels(fileData)
     const pixelData =
       data instanceof Uint8ClampedArray ? data : Uint8ClampedArray.from(data)
@@ -62,7 +67,6 @@ async function resolveBlurhashStyle(image: ImageMetadata): Promise<string> {
       .map(([key, value]) => `${kebabCase(key)}: ${value};`)
       .join(' ')
     blurhashCache.set(fsPath, css)
-    console.log(css)
     return css
   } catch {
     return ''
