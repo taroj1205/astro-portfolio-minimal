@@ -45,6 +45,7 @@ commit-msg:
 post-merge:
   commands:
     bun:
+      files: git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD
       glob: '{package.json,bun.lock}'
       run: bun install
 
@@ -54,6 +55,7 @@ post-checkout:
       run: |
         node scripts/validate-branch-name.js
     bun:
+      files: git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD
       glob: '{package.json,bun.lock}'
       run: bun install
 
