@@ -1,39 +1,34 @@
 pre-commit:
+  parallel: true
+  exclude:
+    - public/**
+    - dist/**
+    - bun.lock
+  commands:
+    quality:
+      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
+      run: |
+        bun lefthook run quality
+      stage_fixed: true
+    cspell:
+      run: |
+        bun cspell --gitignore {staged_files} .git/COMMIT_EDITMSG --no-must-find-files --no-progress --no-summary --cache
+
+quality:
   piped: true
   commands:
-    eslint:
+    oxlint:
       priority: 1
+      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
       run: |
-        bun lefthook run eslint
+        bun run lint {staged_files} --fix
+      stage_fixed: true
+
     prettier:
       priority: 2
       glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
       run: |
         bun run prettier {staged_files} --write --list-different
-      stage_fixed: true
-
-    cspell:
-      priority: 3
-      run: |
-        bun lefthook run cspell
-
-eslint:
-  commands:
-    base:
-      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,astro}'
-      exclude:
-        - public/**
-        - dist/**
-      run: |
-        bun run eslint {staged_files} --max-warnings=0 --fix --cache --no-warn-ignored
-      stage_fixed: true
-
-cspell:
-  commands:
-    base:
-      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,astro,json,yaml,yml,md,mdx}'
-      run: |
-        bun run cspell {staged_files}
       stage_fixed: true
 
 commit-msg:

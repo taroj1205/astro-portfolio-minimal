@@ -33,7 +33,12 @@
     "Hackathons",
     "hackathons",
     "sesa",
-    "Hazumi"
+    "Hazumi",
+    "oxlint",
+    "oxlintrc",
+    "elif",
+    "tsgolint",
+    "lucide"
   ],
   "flagWords": [],
   "ignorePaths": [
@@ -51,14 +56,5 @@
     "yarn.lock",
     "bun.lock"
   ],
-  "allowCompoundWords": true,
-  "dictionaries": ["typescript", "node", "html", "css", "bash", "npm"],
-  "import": [
-    "@cspell/dict-typescript/cspell-ext.json",
-    "@cspell/dict-node/cspell-ext.json",
-    "@cspell/dict-html/cspell-ext.json",
-    "@cspell/dict-css/cspell-ext.json",
-    "@cspell/dict-bash/cspell-ext.json",
-    "@cspell/dict-npm/cspell-ext.json"
-  ]
+  "allowCompoundWords": true
 }
