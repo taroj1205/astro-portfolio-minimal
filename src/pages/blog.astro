@@ -27,8 +27,6 @@ posts.sort(
                   <Image
                     src={post.data.coverImage}
                     alt={post.data.title}
-                    width={400}
-                    height={200}
                     class="blog__cover"
                     style={`view-transition-name: blog-cover-${post.filePath?.split('/').pop()?.split('.').shift()}`}
                   />
