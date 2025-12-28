@@ -1,14 +1,26 @@
 pre-commit:
-  piped: true
+  parallel: true
   exclude:
     - public/**
     - dist/**
+  commands:
+    quality:
+      run: |
+        bun lefthook run quality
+      stage_fixed: true
+    cspell:
+      run: |
+        bun cspell --gitignore {staged_files} .git/COMMIT_EDITMSG --no-must-find-files --no-progress --no-summary
+
+quality:
+  piped: true
   commands:
     oxlint:
       priority: 1
       glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
       run: |
         bunx oxlint --type-aware {staged_files} --fix
+      stage_fixed: true
 
     prettier:
       priority: 2
@@ -16,11 +28,6 @@ pre-commit:
       run: |
         bun run prettier {staged_files} --write --list-different
       stage_fixed: true
-
-    cspell:
-      priority: 3
-      run: |
-        bun cspell --gitignore {staged_files} .git/COMMIT_EDITMSG --no-must-find-files --no-progress --no-summary
 
 commit-msg:
   commands:
