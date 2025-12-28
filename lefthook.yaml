@@ -5,6 +5,7 @@ pre-commit:
     - dist/**
   commands:
     quality:
+      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
       run: |
         bun lefthook run quality
       stage_fixed: true
@@ -17,14 +18,12 @@ quality:
   commands:
     oxlint:
       priority: 1
-      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
       run: |
         bunx oxlint --type-aware {staged_files} --fix
       stage_fixed: true
 
     prettier:
       priority: 2
-      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
       run: |
         bun run prettier {staged_files} --write --list-different
       stage_fixed: true
