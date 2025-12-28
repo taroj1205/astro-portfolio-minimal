@@ -1,21 +1,27 @@
 ---
 import Header from '../components/header.astro'
+import ProjectCard from '../components/projects/card.astro'
 import Layout from '../layouts/layout.astro'
 import { projects } from '../lib/projects.astro'
-import ProjectCard from '../components/projects/card.astro'
 import '../styles/projects.css'
 ---
 
 <Layout title="Projects">
   <Header />
-  <main>
+  <main id="main-content">
     <h2><span style="view-transition-name: title;">Projects</span></h2>
     <section class="projects">
       <p class="projects__description">Here are some of my recent projects.</p>
 
-      <div class="projects__grid">
-        {projects.map(project => <ProjectCard {...project} />)}
-      </div>
+      <ul class="projects__grid">
+        {
+          projects.map(project => (
+            <li>
+              <ProjectCard {...project} />
+            </li>
+          ))
+        }
+      </ul>
     </section>
   </main>
 </Layout>

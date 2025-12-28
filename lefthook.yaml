@@ -12,7 +12,7 @@ pre-commit:
       stage_fixed: true
     cspell:
       run: |
-        bun cspell --gitignore {staged_files} .git/COMMIT_EDITMSG --no-must-find-files --no-progress --no-summary --cache
+        bun cspell --gitignore {staged_files} .git/COMMIT_EDITMSG --no-must-find-files --no-progress --cache
 
 quality:
   piped: true

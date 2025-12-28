@@ -9,4 +9,7 @@ export default defineConfig({
     enabled: false,
   },
   scopedStyleStrategy: 'class',
+  build: {
+    inlineStylesheets: 'always',
+  },
 })

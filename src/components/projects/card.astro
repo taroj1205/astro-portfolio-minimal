@@ -20,20 +20,18 @@ const { title, description, lang, framework, link, github } = Astro.props
     <h3 class="project-card__title">{title}</h3>
     <p class="project-card__description">{description}</p>
 
-    <div class="project-card__tags">
+    <ul class="project-card__tags">
       {
         lang.map(item => (
-          <span class="project-card__tag project-card__tag--lang">{item}</span>
+          <li class="project-card__tag project-card__tag--lang">{item}</li>
         ))
       }
       {
         framework.map(item => (
-          <span class="project-card__tag project-card__tag--framework">
-            {item}
-          </span>
+          <li class="project-card__tag project-card__tag--framework">{item}</li>
         ))
       }
-    </div>
+    </ul>
 
     <div class="project-card__links">
       {
