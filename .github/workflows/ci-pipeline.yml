@@ -47,8 +47,6 @@ jobs:
     strategy:
       matrix:
         include:
-          - check: lint
-            name: Lint
           - check: format
             name: Format
           - check: build
@@ -66,6 +64,19 @@ jobs:
 
       - name: Run ${{ matrix.name }}
         run: bun run ${{ matrix.check }}
+
+  lint:
+    name: Lint check
+    needs: [check_changes]
+    if: ${{ needs.check_changes.outputs.changed == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Oxlint Check
+        uses: oxc-project/oxlint-action@v2.0.1
+        with:
+          config: .oxlintrc.json
 
   spell_check:
     name: Spell Check
