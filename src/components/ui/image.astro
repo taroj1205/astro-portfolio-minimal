@@ -37,6 +37,9 @@ const {
 } = Astro.props as Props
 
 async function resolveBlurhashStyle(image: ImageMetadata): Promise<string> {
+  if (import.meta.env.DEV) {
+    return ''
+  }
   const fsPath = (image as ImageMetadata & { fsPath?: string }).fsPath
   if (!fsPath) {
     return ''
