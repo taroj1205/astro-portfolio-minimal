@@ -15,8 +15,14 @@ const { class: className, ...props } = Astro.props
       </p>
     </div>
 
-    <div class="hackathons__grid">
-      {hackathons.map(item => <HackathonCard {...item} />)}
-    </div>
+    <ul class="hackathons__grid">
+      {
+        hackathons.map(item => (
+          <li>
+            <HackathonCard {...item} />
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>

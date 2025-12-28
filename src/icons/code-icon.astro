@@ -13,6 +13,8 @@ const { class: className, ...props } = Astro.props
   fill="none"
   viewBox="0 0 24 24"
   class:list={['lucide lucide-code experiences__card-icon', className]}
+  aria-hidden="true"
+  focusable="false"
   {...props}
 >
   <polyline points="16 18 22 12 16 6"></polyline>

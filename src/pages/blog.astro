@@ -1,6 +1,6 @@
 ---
-import Layout from '../layouts/layout.astro'
 import Header from '../components/header.astro'
+import Layout from '../layouts/layout.astro'
 import '../styles/blog.css'
 import { Image } from 'astro:assets'
 import { getCollection } from 'astro:content'
@@ -13,62 +13,67 @@ posts.sort(
 
 <Layout title="Blog">
   <Header />
-  <main>
+  <main id="main-content">
     <h2><span style="view-transition-name: title;">Blog</span></h2>
-    <section class="blog__list">
+    <section class="blog__list" aria-labelledby="blog-list-heading">
+      <h3 id="blog-list-heading" class="sr-only">Blog posts</h3>
       <p class="blog__description">Here are some of my recent blog posts.</p>
-      {
-        posts.map(post => (
-          <article class="blog__card">
-            {post.data.coverImage && (
-              <Image
-                src={post.data.coverImage}
-                alt={post.data.title}
-                width={400}
-                height={200}
-                class="blog__cover"
-                style={`view-transition-name: blog-cover-${post.filePath?.split('/').pop()?.split('.').shift()}`}
-              />
-            )}
-            <div class="blog__content">
-              <h3 class="blog__title">
-                <a
-                  href={`/blog/${post.filePath?.split('/').pop()?.split('.').shift()}`}
-                  class="blog__title-link"
-                  style={`view-transition-name: blog-title-${post.filePath?.split('/').pop()?.split('.').shift()}`}
-                >
-                  {post.data.title}
-                </a>
-              </h3>
-              <div class="blog__meta">
-                <time
-                  datetime={post.data.date}
-                  style={`view-transition-name: blog-date-${post.data.date}`}
-                >
-                  {new Date(post.data.date).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </time>
-                {post.data.tags && (
-                  <div class="blog__tags">
-                    {post.data.tags.map((tag: string) => (
-                      <span
-                        class="blog__tag"
-                        style={`view-transition-name: blog-tag-${tag.toLowerCase().replace(/\s+/g, '-')}`}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+      <ul class="blog__cards">
+        {
+          posts.map(post => (
+            <li>
+              <article class="blog__card">
+                {post.data.coverImage && (
+                  <Image
+                    src={post.data.coverImage}
+                    alt={post.data.title}
+                    width={400}
+                    height={200}
+                    class="blog__cover"
+                    style={`view-transition-name: blog-cover-${post.filePath?.split('/').pop()?.split('.').shift()}`}
+                  />
                 )}
-              </div>
-              <p class="blog__excerpt">{post.data.excerpt}</p>
-            </div>
-          </article>
-        ))
-      }
+                <div class="blog__content">
+                  <h3 class="blog__title">
+                    <a
+                      href={`/blog/${post.filePath?.split('/').pop()?.split('.').shift()}`}
+                      class="blog__title-link"
+                      style={`view-transition-name: blog-title-${post.filePath?.split('/').pop()?.split('.').shift()}`}
+                    >
+                      {post.data.title}
+                    </a>
+                  </h3>
+                  <div class="blog__meta">
+                    <time
+                      datetime={post.data.date}
+                      style={`view-transition-name: blog-date-${post.data.date}`}
+                    >
+                      {new Date(post.data.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </time>
+                    {post.data.tags && (
+                      <ul class="blog__tags">
+                        {post.data.tags.map((tag: string) => (
+                          <li
+                            class="blog__tag"
+                            style={`view-transition-name: blog-tag-${tag.toLowerCase().replace(/\s+/g, '-')}`}
+                          >
+                            {tag}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                  <p class="blog__excerpt">{post.data.excerpt}</p>
+                </div>
+              </article>
+            </li>
+          ))
+        }
+      </ul>
     </section>
   </main>
 </Layout>

@@ -1,57 +1,32 @@
 ---
 import type { ImageMetadata } from 'astro'
-import { Image as AstroImage } from 'astro:assets'
-import {
-  buildSizes,
-  computeResponsiveWidths,
-  DEFAULT_WIDTHS,
-  type SizesPreset,
-} from '../../utils/image'
+import type { HTMLAttributes } from 'astro/types'
+import { Image as UnpicImage } from '@unpic/astro'
+import type { UnpicImageProps } from '@unpic/core'
 
-interface Props {
+interface Props
+  extends Omit<UnpicImageProps<HTMLAttributes<'img'>>, 'src' | 'alt'> {
   src: ImageMetadata
   alt: string
-  sizes?: string
-  sizesPreset?: SizesPreset
-  widths?: number[]
-  class?: string
-  loading?: 'lazy' | 'eager'
-  decoding?: 'async' | 'auto' | 'sync'
-  fetchpriority?: 'high' | 'low' | 'auto'
 }
 
 const {
   src,
   alt,
   sizes,
-  sizesPreset = 'content',
-  widths,
   class: className,
-  loading = 'lazy',
-  decoding = 'async',
-  fetchpriority,
+  layout,
+  priority,
   ...rest
 } = Astro.props as Props
-
-const intrinsicWidth = src.width
-const computedWidths = computeResponsiveWidths(
-  intrinsicWidth,
-  widths ?? DEFAULT_WIDTHS
-)
-const computedSizes =
-  sizes ?? buildSizes(sizesPreset, Math.min(1200, intrinsicWidth))
-const computedFetchPriority =
-  fetchpriority ?? (loading === 'eager' ? 'high' : 'auto')
 ---
 
-<AstroImage
+<UnpicImage
   src={src}
   alt={alt}
-  widths={computedWidths}
-  sizes={computedSizes}
+  sizes={sizes}
   class={className}
-  loading={loading}
-  decoding={decoding}
-  fetchpriority={computedFetchPriority}
+  layout={layout}
+  priority={priority}
   {...rest}
 />

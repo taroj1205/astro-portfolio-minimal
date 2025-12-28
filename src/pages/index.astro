@@ -37,6 +37,7 @@ const socials = [
       </a>
     </h1>
     <section>
+      <h2 class="sr-only">Introduction</h2>
       <p>
         I'm a developer based in New Zealand, and a student at University of
         Auckland.
@@ -60,6 +61,7 @@ const socials = [
       >
     </section>
     <section class="socials">
+      <h2 class="sr-only">Social links</h2>
       {
         socials.map(({ name, url, icon: Icon }) => (
           <a href={url} target="_blank" rel="noopener noreferrer">
@@ -70,7 +72,7 @@ const socials = [
       }
     </section>
   </header>
-  <main>
+  <main id="main-content">
     <Experiences />
 
     <Hackathons />

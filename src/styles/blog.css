@@ -11,6 +11,15 @@ main {
   gap: 2rem;
 }
 
+.blog__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .blog__card {
   --card-radius: 12px;
   display: flex;
@@ -90,6 +99,9 @@ main {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .blog__tag {

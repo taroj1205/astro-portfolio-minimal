@@ -3,7 +3,7 @@ import Layout from '../layouts/layout.astro'
 ---
 
 <Layout title="404 - Page Not Found">
-  <main class="not-found">
+  <main class="not-found" id="main-content">
     <div class="not-found__container">
       <div class="not-found__content">
         <h1 class="not-found__title">404</h1>
@@ -26,6 +26,8 @@ import Layout from '../layouts/layout.astro'
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
           >
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>

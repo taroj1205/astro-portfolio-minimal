@@ -36,7 +36,7 @@ function generateTocHTML(
 ) {
   if (headings.length === 0) return ''
 
-  let html = '<nav class="toc"><ul>'
+  let html = '<nav class="toc" aria-label="Table of contents"><ul>'
   let currentLevel = headings[0].level
 
   for (const heading of headings) {
