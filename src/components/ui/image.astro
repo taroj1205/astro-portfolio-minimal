@@ -1,6 +1,12 @@
 ---
-import { Image as AstroImage } from 'astro:assets'
+import { Picture } from 'astro:assets'
+import fs from 'node:fs'
+import { getPixels } from '@unpic/pixels'
+import { blurhashToImageCssString } from '@unpic/placeholder'
 import type { ImageMetadata } from 'astro'
+import { encode } from 'blurhash'
+
+const blurhashCache = new Map<string, string>()
 
 interface Props {
   src: ImageMetadata
@@ -11,6 +17,7 @@ interface Props {
   loading?: 'lazy' | 'eager'
   decoding?: 'async' | 'auto' | 'sync'
   fetchpriority?: 'high' | 'low' | 'auto'
+  formats: string[]
 }
 
 const {
@@ -22,24 +29,45 @@ const {
   loading = 'lazy',
   decoding = 'async',
   fetchpriority,
+  formats = ['webp', 'avif'],
   ...rest
 } = Astro.props as Props
 
+async function resolveBlurhashStyle(image: ImageMetadata): Promise<string> {
+  if (import.meta.env.DEV) {
+    return ''
+  }
+  const fsPath = (image as ImageMetadata & { fsPath?: string }).fsPath
+  if (!fsPath) {
+    return ''
+  }
+
+  const cached = blurhashCache.get(fsPath)
+  if (cached) {
+    return cached
+  }
+
+  try {
+    const fileData = await fs.readFile(fsPath)
+    const { width, height, data } = await getPixels(fileData)
+    const pixelData =
+      data instanceof Uint8ClampedArray ? data : Uint8ClampedArray.from(data)
+    const blurhash = encode(pixelData, width, height, 4, 4)
+    const css = blurhashToImageCssString(blurhash)
+    blurhashCache.set(fsPath, css)
+    return css
+  } catch {
+    return ''
+  }
+}
+
 const computedFetchPriority =
   fetchpriority ?? (loading === 'eager' ? 'high' : 'auto')
-const resolvedImageUrl = Astro.site
-  ? new URL(src.src, Astro.site).toString()
-  : src.src
-const placeholderUrl = `https://unpic.pics/placeholder/?url=${encodeURIComponent(
-  resolvedImageUrl
-)}`
-const placeholderStyle = `background-image: url("${placeholderUrl}"); background-size: cover; background-position: center; background-repeat: no-repeat;`
-const combinedStyle = styleProp
-  ? `${placeholderStyle} ${styleProp}`
-  : placeholderStyle
+const placeholderStyle = await resolveBlurhashStyle(src)
+const combinedStyle = [placeholderStyle, styleProp].filter(Boolean).join(' ')
 ---
 
-<AstroImage
+<Picture
   src={src}
   alt={alt}
   class={className}
@@ -48,5 +76,6 @@ const combinedStyle = styleProp
   loading={loading}
   decoding={decoding}
   fetchpriority={computedFetchPriority}
+  formats={formats}
   {...rest}
 />
