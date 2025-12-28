@@ -105,15 +105,3 @@ main {
   color: var(--text-secondary);
   line-height: 1.6;
 }
-
-.blog__card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  height: 100%;
-  width: 100%;
-
-  &:focus {
-    outline: none;
-  }
-}

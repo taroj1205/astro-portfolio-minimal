@@ -10,7 +10,7 @@
     "astro": "astro",
     "lint": "oxlint --type-aware",
     "lint:fix": "oxlint --type-aware --fix",
-    "spell": "cspell \"**/*.{ts,tsx,js,jsx,astro,md,mdx,json,yml,yaml}\" --gitignore --cache",
+    "spell": "cspell \"**/*.{ts,tsx,js,jsx,astro,md,mdx,json,yml,yaml}\" --gitignore --cache --no-progress",
     "format": "prettier . --check --cache",
     "format:fix": "prettier . --write --cache --list-different",
     "commitlint": "commitlint --edit",
