@@ -311,8 +311,8 @@ h3 {
 }
 
 :where([data-astro-image]) {
-  object-fit: var(--fit);
-  object-position: var(--pos);
+  object-fit: var(--fit, cover);
+  object-position: var(--pos, center);
 }
 :where([data-astro-image='full-width']) {
   width: 100%;
