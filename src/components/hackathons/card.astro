@@ -29,8 +29,5 @@ const { title, event, date, placement, description, images } =
 
   {description && <p class="hackathon-card__description">{description}</p>}
 
-  <div class="hackathon-card__images">
-    <Image src={images.certificate} alt={`${event} certificate`} />
-    <Image src={images.award} alt={`Holding the ${event} award`} />
-  </div>
+  <Image src={images.certificate} alt={`${event} certificate`} />
 </article>

@@ -1,9 +1,9 @@
 ---
-import { hackathons } from '../../lib/hackathons.astro'
-import HackathonCard from './card.astro'
-import './hackathons.css'
+import { hackathons } from "../../lib/hackathons.astro";
+import HackathonCard from "./card.astro";
+import "./hackathons.css";
 
-const { class: className, ...props } = Astro.props
+const { class: className, ...props } = Astro.props;
 ---
 
 <section class:list={['hackathons', className]} {...props}>
