@@ -35,7 +35,8 @@
     "sesa",
     "Hazumi",
     "oxlint",
-    "oxlintrc"
+    "oxlintrc",
+    "elif"
   ],
   "flagWords": [],
   "ignorePaths": [
@@ -53,6 +54,5 @@
     "yarn.lock",
     "bun.lock"
   ],
-  "allowCompoundWords": true,
-  "dictionaries": ["typescript", "node", "html", "css", "bash", "npm"]
+  "allowCompoundWords": true
 }

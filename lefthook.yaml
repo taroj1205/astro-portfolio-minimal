@@ -20,15 +20,7 @@ pre-commit:
     cspell:
       priority: 3
       run: |
-        bun lefthook run cspell
-
-cspell:
-  commands:
-    base:
-      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,astro,json,yaml,yml,md,mdx}'
-      run: |
-        bun run cspell {staged_files}
-      stage_fixed: true
+        bun cspell --gitignore {staged_files} .git/COMMIT_EDITMSG --no-must-find-files --no-progress --no-summary
 
 commit-msg:
   commands:

@@ -31,7 +31,8 @@
         "/^eslint/",
         "/^@eslint/",
         "/^@typescript-eslint/",
-        "/^oxfmt/",
+        "/^oxc/",
+        "/^oxlint/",
         "/^commitlint/",
         "/^cspell/"
       ]
