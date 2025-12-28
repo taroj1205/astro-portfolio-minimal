@@ -3,6 +3,7 @@ pre-commit:
   exclude:
     - public/**
     - dist/**
+    - bun.lock
   commands:
     quality:
       glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
@@ -11,19 +12,21 @@ pre-commit:
       stage_fixed: true
     cspell:
       run: |
-        bun cspell --gitignore {staged_files} .git/COMMIT_EDITMSG --no-must-find-files --no-progress --no-summary
+        bun cspell --gitignore {staged_files} .git/COMMIT_EDITMSG --no-must-find-files --no-progress --no-summary --cache
 
 quality:
   piped: true
   commands:
     oxlint:
       priority: 1
+      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
       run: |
-        bunx oxlint --type-aware {staged_files} --fix
+        bun run lint {staged_files} --fix
       stage_fixed: true
 
     prettier:
       priority: 2
+      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
       run: |
         bun run prettier {staged_files} --write --list-different
       stage_fixed: true

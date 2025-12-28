@@ -36,7 +36,9 @@
     "Hazumi",
     "oxlint",
     "oxlintrc",
-    "elif"
+    "elif",
+    "tsgolint",
+    "lucide"
   ],
   "flagWords": [],
   "ignorePaths": [
