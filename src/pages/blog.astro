@@ -2,8 +2,8 @@
 import Header from '../components/header.astro'
 import Layout from '../layouts/layout.astro'
 import '../styles/blog.css'
-import { Image } from 'astro:assets'
 import { getCollection } from 'astro:content'
+import Image from '~/components/ui/image.astro'
 
 const posts = await getCollection('blog')
 posts.sort(

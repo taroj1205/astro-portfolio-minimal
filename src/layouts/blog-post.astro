@@ -3,8 +3,8 @@ import Header from '../components/header.astro'
 import ArrowRightIcon from '../icons/arrow-right-icon.astro'
 import Layout from './layout.astro'
 import '../styles/blog-post.css'
-import { Image } from 'astro:assets'
 import type { ImageMetadata } from 'astro'
+import Image from '~/components/ui/image.astro'
 
 interface Props {
   frontmatter: {
