@@ -45,10 +45,11 @@ post-merge:
       run: bun install
 
 post-checkout:
+  parallel: true
   commands:
     branch-validation:
       run: |
-        node scripts/validate-branch-name.js
+        bun run validate-branch
     bun:
       files: git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD
       glob: '{package.json,bun.lock}'

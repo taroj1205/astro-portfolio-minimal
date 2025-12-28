@@ -5,20 +5,20 @@ header {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  a {
+    display: flex;
+    flex-direction: row;
+    gap: 0.2rem;
+  }
+
+  p {
+    padding-block: 0.4rem;
+  }
 }
 
 a {
   align-items: center;
-}
-
-header a {
-  display: flex;
-  flex-direction: row;
-  gap: 0.2rem;
-}
-
-header p,
-a {
   padding-block: 0.4rem;
 }
 
