@@ -52,13 +52,13 @@ jobs:
       - name: Install dependencies
         run: bun ci --production --ignore-scripts
 
-      # - name: Cache astro
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: node_modules/.astro
-      #     key: ${{ runner.os }}-bun-build-${{ hashFiles('**/bun.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-bun-
+      - name: Cache astro
+        uses: actions/cache@v3
+        with:
+          path: node_modules/.astro
+          key: ${{ runner.os }}-bun-build-${{ hashFiles('**/bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
 
       - name: Run build
         run: bun run build
