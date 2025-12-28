@@ -26,12 +26,12 @@ main {
     border-color 0.2s ease,
     box-shadow 0.2s ease;
   position: relative;
-}
 
-.blog__card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent-primary);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
 }
 
 .blog__cover {
@@ -59,23 +59,23 @@ main {
 .blog__title-link {
   color: var(--text-primary);
   text-decoration: none;
-}
 
-.blog__title-link:hover {
-  text-decoration: underline;
-}
+  &:hover {
+    text-decoration: underline;
+  }
 
-.blog__title-link::before {
-  content: '';
-  cursor: inherit;
-  display: block;
-  height: 100%;
-  left: 0px;
-  position: absolute;
-  top: 0px;
-  width: 100%;
-  z-index: 0;
-  border-radius: var(--card-radius);
+  &::before {
+    content: '';
+    cursor: inherit;
+    display: block;
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: 0;
+    border-radius: var(--card-radius);
+  }
 }
 
 .blog__meta {
@@ -104,16 +104,4 @@ main {
   margin: 0;
   color: var(--text-secondary);
   line-height: 1.6;
-}
-
-.blog__card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-
-.blog__card-link:focus {
-  outline: none;
 }

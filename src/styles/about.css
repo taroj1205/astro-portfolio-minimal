@@ -4,26 +4,30 @@ main {
   place-self: center;
   margin-top: 3.5rem;
   gap: 2rem;
-}
 
-section {
-  display: grid;
-  gap: 1.5rem;
-}
+  section {
+    display: grid;
+    gap: 1.5rem;
+  }
 
-h3 {
-  margin-top: 2rem;
-}
+  h3 {
+    margin-top: 2rem;
+  }
 
-p {
-  line-height: 1.8;
-}
+  p {
+    line-height: 1.8;
+  }
 
-ul {
-  list-style-type: disc;
-  margin: 0 0 1rem 1.5rem;
-}
+  ul {
+    list-style-type: disc;
+    margin: 0 0 0 1.5rem;
+  }
 
-li {
-  margin-bottom: 0.5rem;
+  li:not(:last-of-type) {
+    margin-bottom: 0.5rem;
+  }
+
+  li > ul {
+    margin-top: 0.5rem;
+  }
 }

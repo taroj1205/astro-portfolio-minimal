@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
-  "language": "en",
+  "language": "en-GB",
   "files": ["**/*.{ts,js,astro,html,css,json,yml,yaml,md}"],
   "words": [
     "astro",
@@ -38,7 +38,10 @@
     "oxlintrc",
     "elif",
     "tsgolint",
-    "lucide"
+    "lucide",
+    "EDITMSG",
+    "vars",
+    "Cebu"
   ],
   "flagWords": [],
   "ignorePaths": [
