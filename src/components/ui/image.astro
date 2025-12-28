@@ -15,6 +15,7 @@ interface Props {
   sizesPreset?: SizesPreset
   widths?: number[]
   class?: string
+  style?: string
   loading?: 'lazy' | 'eager'
   decoding?: 'async' | 'auto' | 'sync'
   fetchpriority?: 'high' | 'low' | 'auto'
@@ -27,6 +28,7 @@ const {
   sizesPreset = 'content',
   widths,
   class: className,
+  style: styleProp,
   loading = 'lazy',
   decoding = 'async',
   fetchpriority,
@@ -42,6 +44,14 @@ const computedSizes =
   sizes ?? buildSizes(sizesPreset, Math.min(1200, intrinsicWidth))
 const computedFetchPriority =
   fetchpriority ?? (loading === 'eager' ? 'high' : 'auto')
+const resolvedImageUrl = Astro.site ? new URL(src.src, Astro.site).toString() : src.src
+const placeholderUrl = `https://unpic.pics/placeholder/?url=${encodeURIComponent(
+  resolvedImageUrl
+)}`
+const placeholderStyle = `background-image: url("${placeholderUrl}"); background-size: cover; background-position: center; background-repeat: no-repeat;`
+const combinedStyle = styleProp
+  ? `${placeholderStyle} ${styleProp}`
+  : placeholderStyle
 ---
 
 <AstroImage
@@ -50,6 +60,7 @@ const computedFetchPriority =
   widths={computedWidths}
   sizes={computedSizes}
   class={className}
+  style={combinedStyle}
   loading={loading}
   decoding={decoding}
   fetchpriority={computedFetchPriority}
