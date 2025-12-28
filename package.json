@@ -1,20 +1,20 @@
 {
   "name": "astro-portfolio-minimal",
-  "type": "module",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "dev": "astro dev --port 3000",
     "build": "astro build",
     "preview": "astro preview --port 3000",
     "start": "astro preview --port 3000",
     "astro": "astro",
-    "lint": "eslint . --max-warnings=0 --cache --no-warn-ignored",
-    "lint:fix": "eslint . --fix",
+    "lint": "bunx oxlint --type-aware",
+    "lint:fix": "bunx oxlint --type-aware --fix",
     "spell": "cspell \"**/*.{ts,tsx,js,jsx,astro,md,mdx,json,yml,yaml}\"",
     "format": "prettier . --check --cache",
     "format:fix": "prettier . --write --cache --list-different",
     "commitlint": "commitlint --edit",
-    "validate-branch": "scripts/validate-branch-name.js",
+    "validate-branch": "src/scripts/validate-branch-name.js",
     "prepare": "lefthook install"
   },
   "dependencies": {
@@ -22,37 +22,19 @@
     "astro": "5.16.6",
     "sharp": "0.34.5"
   },
-  "engines": {
-    "node": ">=22.16.0",
-    "bun": ">=1.0.0"
-  },
   "devDependencies": {
     "@commitlint/cli": "20.2.0",
     "@commitlint/config-conventional": "20.2.0",
-    "@cspell/dict-bash": "4.2.2",
-    "@cspell/dict-css": "4.0.19",
-    "@cspell/dict-html": "4.0.14",
-    "@cspell/dict-node": "5.0.8",
-    "@cspell/dict-npm": "5.2.27",
-    "@cspell/dict-typescript": "3.2.3",
-    "@cspell/eslint-plugin": "9.4.0",
-    "@eslint/compat": "2.0.0",
-    "@eslint/js": "9.39.2",
-    "@typescript-eslint/eslint-plugin": "8.50.1",
-    "@typescript-eslint/parser": "8.50.1",
-    "@typescript-eslint/utils": "8.50.1",
     "cspell": "9.4.0",
-    "eslint": "9.39.2",
-    "eslint-config-prettier": "10.1.8",
-    "eslint-import-resolver-typescript": "4.4.4",
-    "eslint-plugin-astro": "1.5.0",
-    "eslint-plugin-import": "2.32.0",
-    "eslint-plugin-jsx-a11y": "6.10.2",
     "lefthook": "2.0.13",
+    "oxc": "1.0.1",
+    "oxlint": "1.35.0",
     "prettier": "3.7.4",
-    "prettier-eslint": "16.4.2",
-    "prettier-plugin-astro": "0.14.1",
-    "typescript-eslint": "8.50.1"
+    "prettier-plugin-astro": "0.14.1"
+  },
+  "engines": {
+    "bun": ">=1.0.0",
+    "node": ">=22.16.0"
   },
   "trustedDependencies": [
     "sharp"

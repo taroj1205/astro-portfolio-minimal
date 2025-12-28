@@ -1,10 +1,15 @@
 pre-commit:
   piped: true
+  exclude:
+    - public/**
+    - dist/**
   commands:
-    eslint:
+    oxlint:
       priority: 1
+      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
       run: |
-        bun lefthook run eslint
+        bunx oxlint --type-aware {staged_files} --fix
+
     prettier:
       priority: 2
       glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
@@ -16,17 +21,6 @@ pre-commit:
       priority: 3
       run: |
         bun lefthook run cspell
-
-eslint:
-  commands:
-    base:
-      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,astro}'
-      exclude:
-        - public/**
-        - dist/**
-      run: |
-        bun run eslint {staged_files} --max-warnings=0 --fix --cache --no-warn-ignored
-      stage_fixed: true
 
 cspell:
   commands:
