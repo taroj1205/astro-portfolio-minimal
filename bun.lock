@@ -1,5 +1,6 @@
 {
   "lockfileVersion": 1,
+  "configVersion": 0,
   "workspaces": {
     "": {
       "name": "astro-portfolio-minimal",
@@ -8,6 +9,7 @@
         "@unpic/pixels": "1.3.0",
         "@unpic/placeholder": "0.1.0",
         "astro": "5.16.6",
+        "blurhash": "2.0.5",
         "sharp": "0.34.5",
       },
       "devDependencies": {
