@@ -55,7 +55,7 @@ a {
   width: auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px) and (pointer: coarse) {
   .wallet {
     display: flex;
     gap: 1rem;
