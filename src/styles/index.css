@@ -37,6 +37,31 @@ a {
   color: #0e76a8;
 }
 
+.wallet {
+  display: none;
+}
+
+.wallet-link {
+  display: none;
+}
+
+.wallet a {
+  display: flex;
+  align-items: center;
+}
+
+.wallet-icon {
+  height: 1.8rem;
+  width: auto;
+}
+
+@media (max-width: 768px) and (pointer: coarse) {
+  .wallet {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
 main {
   display: flex;
   flex-direction: column;
