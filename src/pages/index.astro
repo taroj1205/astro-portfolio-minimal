@@ -2,11 +2,14 @@
 import Experiences from '../components/experiences/index.astro'
 import Hackathons from '../components/hackathons/index.astro'
 import ArrowRight from '../icons/arrow-right-icon.astro'
+import AppleWalletIcon from '../icons/apple-wallet-icon.astro'
 import GithubIcon from '../icons/github-icon.astro'
+import GoogleWalletIcon from '../icons/google-wallet-icon.astro'
 import LeafIcon from '../icons/leaf-icon.astro'
 import LinkedinIcon from '../icons/linkedin-icon.astro'
 import XIcon from '../icons/x-icon.astro'
 import Layout from '../layouts/layout.astro'
+import { WALLET } from '../lib/wallet.astro'
 import '../styles/index.css'
 
 const socials = [
@@ -67,6 +70,22 @@ const socials = [
           <a href={url} target="_blank" rel="noopener noreferrer">
             <span class="sr-only">{name}</span>
             <Icon />
+          </a>
+        ))
+      }
+    </section>
+    <section class="wallet">
+      <h2 class="sr-only">Wallet links</h2>
+      {
+        WALLET.map(({ name, url, icon }) => (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={`wallet-link wallet-link--${name.toLowerCase()}`}
+          >
+            <span class="sr-only">{name}</span>
+            <img src={icon} alt={name} class="wallet-icon" />
           </a>
         ))
       }

@@ -37,6 +37,45 @@ a {
   color: #0e76a8;
 }
 
+.wallet {
+  display: none;
+}
+
+.wallet-link {
+  display: none;
+}
+
+.wallet a {
+  display: flex;
+  align-items: center;
+}
+
+.wallet-icon {
+  height: 1.8rem;
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  .wallet {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .wallet-link--google {
+    display: flex;
+  }
+
+  @supports (-webkit-touch-callout: none) {
+    .wallet-link--google {
+      display: none;
+    }
+
+    .wallet-link--apple {
+      display: flex;
+    }
+  }
+}
+
 main {
   display: flex;
   flex-direction: column;
