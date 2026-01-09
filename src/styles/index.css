@@ -60,20 +60,6 @@ a {
     display: flex;
     gap: 1rem;
   }
-
-  .wallet-link--google {
-    display: flex;
-  }
-
-  @supports (-webkit-touch-callout: none) {
-    .wallet-link--google {
-      display: none;
-    }
-
-    .wallet-link--apple {
-      display: flex;
-    }
-  }
 }
 
 main {
