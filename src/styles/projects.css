@@ -1,6 +1,6 @@
 .projects {
   display: grid;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .projects__description {
@@ -10,8 +10,8 @@
 
 .projects__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -24,6 +24,6 @@
 main {
   display: flex;
   flex-direction: column;
-  margin-top: 3.5rem;
+  margin-top: 2rem;
   gap: 2rem;
 }
