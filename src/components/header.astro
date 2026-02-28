@@ -2,26 +2,48 @@
 import LeafIcon from '../icons/leaf-icon.astro'
 
 const { isBlog } = Astro.props
+
+const currentPath = Astro.url.pathname
+
+const navLinks = [
+  { label: 'About', href: '/about' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Blog', href: '/blog' },
+]
 ---
 
 <header>
-  {
-    isBlog ? (
-      <h2>
-        <a href="/">
-          <span style="view-transition-name: name;">taroj1205</span>
-          <LeafIcon style="view-transition-name: leaf;" />
-        </a>
-      </h2>
-    ) : (
-      <h1>
-        <a href="/">
-          <span style="view-transition-name: name;">taroj1205</span>
-          <LeafIcon style="view-transition-name: leaf;" />
-        </a>
-      </h1>
-    )
-  }
+  <div class="header__inner">
+    {
+      isBlog ? (
+        <h2>
+          <a href="/">
+            <span style="view-transition-name: name;">taroj1205</span>
+            <LeafIcon style="view-transition-name: leaf;" />
+          </a>
+        </h2>
+      ) : (
+        <h1>
+          <a href="/">
+            <span style="view-transition-name: name;">taroj1205</span>
+            <LeafIcon style="view-transition-name: leaf;" />
+          </a>
+        </h1>
+      )
+    }
+    <nav class="header__nav" aria-label="Main navigation">
+      {
+        navLinks.map(({ label, href }) => (
+          <a
+            href={href}
+            class:list={['nav-link', { 'nav-link--active': currentPath.startsWith(href) }]}
+          >
+            {label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
 </header>
 
 <style>
@@ -30,6 +52,14 @@ const { isBlog } = Astro.props
     place-self: flex-start;
     max-width: 1200px;
     padding: 1.2rem 1.5rem;
+    width: 100%;
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
   }
 
   header a {
@@ -40,5 +70,42 @@ const { isBlog } = Astro.props
 
   header a svg {
     place-self: flex-start;
+  }
+
+  .header__nav {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm, 8px);
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-subtle);
+  }
+
+  .nav-link--active {
+    color: var(--text-primary);
+    background-color: var(--bg-subtle);
+  }
+
+  @media (max-width: 640px) {
+    .header__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .nav-link {
+      padding: 0.35rem 0.6rem;
+    }
   }
 </style>

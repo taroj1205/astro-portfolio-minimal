@@ -1,81 +1,104 @@
 ---
-// BackgroundCircles.astro - Decorative background circles with parallax effect
 interface Props {
   primaryColor?: string
-  secondaryColor?: string
-  enableParallax?: boolean
 }
 
 const { primaryColor = '#8B5CF6' } = Astro.props
 ---
 
-<div class="background-circles">
-  <div class="circle circle-1"></div>
-  <div class="circle circle-2"></div>
+<div class="background-ambient">
+  <div class="ambient-orb ambient-orb--1"></div>
+  <div class="ambient-orb ambient-orb--2"></div>
+  <div class="ambient-orb ambient-orb--3"></div>
 </div>
 
 <style define:vars={{ primaryColor }} is:global>
-  .background-circles {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 130%;
+  .background-ambient {
+    position: fixed;
+    inset: 0;
     z-index: -1;
     pointer-events: none;
+    overflow: hidden;
   }
 
-  .circle {
+  .ambient-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.15;
-    transition: all 0.5s ease-out;
-    animation: pulse 8s ease-in-out infinite;
+    filter: blur(100px);
+    opacity: 0.12;
+    animation: drift 20s ease-in-out infinite;
+    will-change: transform;
   }
 
-  .circle-1 {
-    top: 5rem;
-    left: 2.5rem;
-    width: 18rem;
-    height: 18rem;
-    background-color: var(--primaryColor);
+  .ambient-orb--1 {
+    top: -5%;
+    left: -5%;
+    width: 40vw;
+    height: 40vw;
+    max-width: 500px;
+    max-height: 500px;
+    background: var(--primaryColor);
   }
 
-  .circle-2 {
-    bottom: 5rem;
-    right: 2.5rem;
-    width: 20rem;
-    height: 20rem;
-    background-color: var(--accent-primary);
-    animation-delay: -4s;
+  .ambient-orb--2 {
+    bottom: -10%;
+    right: -5%;
+    width: 35vw;
+    height: 35vw;
+    max-width: 450px;
+    max-height: 450px;
+    background: var(--accent, #0d9488);
+    animation-delay: -7s;
   }
 
-  @keyframes pulse {
+  .ambient-orb--3 {
+    top: 40%;
+    left: 50%;
+    width: 25vw;
+    height: 25vw;
+    max-width: 350px;
+    max-height: 350px;
+    background: var(--primaryColor);
+    opacity: 0.06;
+    animation-delay: -14s;
+    animation-duration: 25s;
+  }
+
+  @keyframes drift {
     0%,
     100% {
-      transform: scale(1);
-      opacity: 0.15;
+      transform: translate(0, 0) scale(1);
+    }
+    25% {
+      transform: translate(3%, 5%) scale(1.05);
     }
     50% {
-      transform: scale(1.1);
-      opacity: 0.2;
+      transform: translate(-2%, 3%) scale(0.95);
+    }
+    75% {
+      transform: translate(4%, -2%) scale(1.02);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ambient-orb {
+      animation: none;
     }
   }
 
   @media (max-width: 768px) {
-    .circle-1 {
-      width: 14rem;
-      height: 14rem;
-      top: 3rem;
-      left: 1rem;
+    .ambient-orb--1 {
+      width: 60vw;
+      height: 60vw;
     }
 
-    .circle-2 {
-      width: 16rem;
-      height: 16rem;
-      bottom: 3rem;
-      right: 1rem;
+    .ambient-orb--2 {
+      width: 50vw;
+      height: 50vw;
+    }
+
+    .ambient-orb--3 {
+      display: none;
     }
   }
 </style>
