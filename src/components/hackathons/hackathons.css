@@ -1,17 +1,17 @@
 .hackathons {
   display: grid;
-  gap: 2rem;
+  gap: var(--space-8);
 }
 
 .hackathons__description {
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   line-height: 1.6;
 }
 
 .hackathons__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  gap: var(--space-6);
   list-style: none;
   padding: 0;
   margin: 0;
