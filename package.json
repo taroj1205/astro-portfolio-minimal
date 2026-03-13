@@ -18,11 +18,11 @@
     "prepare": "lefthook install"
   },
   "dependencies": {
-    "@astrojs/mdx": "4.3.13",
+    "@astrojs/mdx": "5.0.0",
     "@unpic/placeholder": "0.1.0",
     "@unpic/pixels": "1.3.0",
     "blurhash": "2.0.5",
-    "astro": "5.16.6",
+    "astro": "6.0.4",
     "sharp": "0.34.5"
   },
   "devDependencies": {
