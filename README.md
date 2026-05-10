@@ -13,9 +13,10 @@ This is a minimal portfolio template built with Astro. It includes a simple land
 ### Getting Started
 
 1. Clone the repository
-2. Install the dependencies with `bun install`
-3. Start the development server with `bun run dev`
-4. Open the website in your browser at <http://localhost:3000>
+2. Use Node.js `24.15.0` or newer
+3. Install the dependencies with `bun install`
+4. Start the development server with `bun run dev`
+5. Open the website in your browser at <http://localhost:3000>
 
 ### Customizing
 
@@ -28,5 +29,3 @@ You can also customize the styles by modifying the `src/styles/global.css` file.
 You can deploy the website to a hosting platform like Netlify or Vercel. You can also deploy it to a static site generator like GitHub Pages.
 
 ### Credits
-
-Thanks to <a href="https://catnose.me">catnose.me</a> for giving me this idea.
