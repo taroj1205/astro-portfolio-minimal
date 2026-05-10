@@ -1,19 +1,23 @@
 pre-commit:
   parallel: true
-  exclude:
-    - public/**
-    - dist/**
-    - bun.lock
   commands:
     branch-validation:
       run: |
         bun run validate-branch
     quality:
+      exclude:
+        - public/**
+        - dist/**
+        - bun.lock
       glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
       run: |
         bun lefthook run quality
       stage_fixed: true
     cspell:
+      exclude:
+        - public/**
+        - dist/**
+        - bun.lock
       run: |
         bun cspell --gitignore {staged_files} .git/COMMIT_EDITMSG --no-must-find-files --no-progress --cache
 
