@@ -33,7 +33,6 @@ const CONVENTIONAL_TYPES = [
   'revert',
   'style',
   'test',
-  'renovate',
 ]
 
 const PROTECTED_BRANCHES = [
