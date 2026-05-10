@@ -8,6 +8,7 @@
     "preview": "astro preview --port 3000",
     "start": "astro preview --port 3000",
     "astro": "astro",
+    "clean": "bun run scripts/clean.ts",
     "lint": "oxlint --type-aware",
     "lint:fix": "oxlint --type-aware --fix",
     "spell": "cspell \"**/*.{ts,tsx,js,jsx,astro,md,mdx,json,yml,yaml}\" --gitignore --cache --no-progress",
