@@ -4,10 +4,10 @@ updates:
   - package-ecosystem: 'bun'
     directory: '/'
     schedule:
-      interval: 'weekly'
-      day: 'saturday'
+      interval: 'daily'
       time: '05:00'
       timezone: 'Pacific/Auckland'
+    rebase-strategy: 'auto'
     labels:
       - 'dependencies'
     assignees:
@@ -49,10 +49,10 @@ updates:
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
-      interval: 'weekly'
-      day: 'saturday'
+      interval: 'daily'
       time: '05:00'
       timezone: 'Pacific/Auckland'
+    rebase-strategy: 'auto'
     labels:
       - 'dependencies'
       - 'github-actions'
