@@ -4,7 +4,8 @@ updates:
   - package-ecosystem: 'bun'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'weekly'
+      day: 'saturday'
       time: '05:00'
       timezone: 'Pacific/Auckland'
     rebase-strategy: 'auto'
@@ -49,7 +50,8 @@ updates:
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'weekly'
+      day: 'saturday'
       time: '05:00'
       timezone: 'Pacific/Auckland'
     rebase-strategy: 'auto'
