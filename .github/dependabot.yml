@@ -1,0 +1,67 @@
+version: 2
+
+updates:
+  - package-ecosystem: 'bun'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'saturday'
+      time: '05:00'
+      timezone: 'Pacific/Auckland'
+    labels:
+      - 'dependencies'
+    assignees:
+      - 'taroj1205'
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+    groups:
+      major-dependencies:
+        update-types:
+          - 'major'
+      dev-tooling:
+        patterns:
+          - 'eslint*'
+          - '@eslint*'
+          - '@typescript-eslint*'
+          - 'oxc*'
+          - 'oxlint*'
+          - 'commitlint*'
+          - 'cspell*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      minor-and-patch-dependencies:
+        patterns:
+          - '*'
+        exclude-patterns:
+          - 'eslint*'
+          - '@eslint*'
+          - '@typescript-eslint*'
+          - 'oxc*'
+          - 'oxlint*'
+          - 'commitlint*'
+          - 'cspell*'
+        update-types:
+          - 'minor'
+          - 'patch'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'saturday'
+      time: '05:00'
+      timezone: 'Pacific/Auckland'
+    labels:
+      - 'dependencies'
+      - 'github-actions'
+    assignees:
+      - 'taroj1205'
+    commit-message:
+      prefix: 'chore'
+      include: 'scope'
+    groups:
+      github-actions:
+        patterns:
+          - '*'
