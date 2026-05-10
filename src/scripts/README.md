@@ -64,8 +64,7 @@ The following branches skip validation:
 
 Branch names are validated automatically on:
 
-- **Post-checkout** - When switching branches
-- **Pre-push** - Before pushing to remote
+- **Pre-commit** - Before creating a commit
 
 ## Manual Validation
 
@@ -87,8 +86,8 @@ git checkout -b chore/update-dependencies
 git checkout -b docs/api-documentation
 
 # Invalid branch names (will be rejected)
-git checkout -b feat-user-auth        # ❌ Use / not -
-git checkout -b 123-feat/header       # ❌ Can't start with number
-git checkout -b feature/header        # ❌ Use 'feat' not 'feature'
-git checkout -b feat/Header            # ❌ Scope must be lowercase
+git commit -m "feat: add auth"        # ❌ Fails on branch feat-user-auth
+git commit -m "feat: add header"      # ❌ Fails on branch 123-feat/header
+git commit -m "feat: add header"      # ❌ Fails on branch feature/header
+git commit -m "feat: add header"      # ❌ Fails on branch feat/Header
 ```

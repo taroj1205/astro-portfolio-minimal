@@ -5,6 +5,9 @@ pre-commit:
     - dist/**
     - bun.lock
   commands:
+    branch-validation:
+      run: |
+        bun run validate-branch
     quality:
       glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
       run: |
@@ -19,7 +22,7 @@ quality:
   commands:
     oxlint:
       priority: 1
-      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,md,mdx,yaml,yml,json,html,css,astro}'
+      glob: '*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,d.ts,astro}'
       run: |
         bun run lint {staged_files} --fix
       stage_fixed: true
@@ -47,16 +50,7 @@ post-merge:
 post-checkout:
   parallel: true
   commands:
-    branch-validation:
-      run: |
-        bun run validate-branch
     bun:
       files: git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD
       glob: '{package.json,bun.lock}'
       run: bun install
-
-pre-push:
-  commands:
-    branch-validation:
-      run: |
-        bun run validate-branch
