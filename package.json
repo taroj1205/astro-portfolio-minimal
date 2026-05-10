@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev --port 3000",
-    "build": "node ./node_modules/astro/astro.js build",
+    "build": "astro build",
     "preview": "astro preview --port 3000",
     "start": "astro preview --port 3000",
     "astro": "astro",
