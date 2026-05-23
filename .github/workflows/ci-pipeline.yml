@@ -11,33 +11,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # check_changes:
-  #   name: Check Changes
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: read
-  #   outputs:
-  #     changed: ${{ steps.filter.outputs.changed }}
-  #   steps:
-  #     - uses: actions/checkout@v6
-
-  #     - name: Filter Changed Files
-  #       id: filter
-  #       uses: taroj1205/check-changes@v1
-  #       with:
-  #         include: '**/*'
-  #         exclude: |
-  #           .gitignore
-  #           .gitattributes
-  #           .vscode/**/*
-  #         summary: true
-
-  #     - name: Debug Changed Files
-  #       run: |
-  #         echo "Changed File Count: ${{ steps.filter.outputs.changes_count }}"
-  #         echo "Changed: ${{ steps.filter.outputs.changed }}"
-  #         echo "Changed Files: ${{ steps.filter.outputs.changed_files }}"
-
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -86,7 +59,7 @@ jobs:
         run: bun run format
 
   lint:
-    name: Lint check
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -113,26 +86,17 @@ jobs:
         with:
           config: cspell.json
 
-  # verify:
-  #   name: Verify
-  #   needs: [build, lint, format, spell_check]
-  #   runs-on: ubuntu-latest
-  #   if: always()
-  #   outputs:
-  #     success: ${{ steps.set-result.outputs.success }}
-  #   steps:
-  #     - name: Set Result
-  #       id: set-result
-  #       run: |
-  #         # Check if changes exist but no jobs ran, or if any job failed or was cancelled
-  #         if [[ "${{ needs.check_changes.outputs.changed }}" != "true" ]]; then
-  #           echo "success=true" >> $GITHUB_OUTPUT
-  #           echo "No relevant changes detected - pipeline passed"
-  #         elif [[ "${{ contains(needs.*.result, 'failure') }}" == "true" || "${{ contains(needs.*.result, 'cancelled') }}" == "true" ]]; then
-  #           echo "success=false" >> $GITHUB_OUTPUT
-  #           echo "Pipeline failed - some jobs failed or were cancelled"
-  #           exit 1
-  #         else
-  #           echo "success=true" >> $GITHUB_OUTPUT
-  #           echo "All jobs completed successfully"
-  #         fi
+  verify:
+    name: Verify
+    needs: [build, format, lint, spell_check]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Verify Results
+        run: |
+          if [[ "${{ contains(needs.*.result, 'failure') }}" == "true" || "${{ contains(needs.*.result, 'cancelled') }}" == "true" ]]; then
+            echo "CI failed - one or more required jobs failed or were cancelled"
+            exit 1
+          fi
+
+          echo "CI passed"
