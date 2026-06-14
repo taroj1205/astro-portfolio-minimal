@@ -1,13 +1,13 @@
 .experiences__container {
   margin: 0 auto;
   display: grid;
-  gap: 2rem;
+  gap: var(--space-8);
 }
 
 .experiences__header {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--space-4);
 }
 
 .experiences__description {
@@ -17,7 +17,7 @@
 .experiences__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 1.5rem;
+  gap: var(--space-6);
   list-style: none;
   padding: 0;
   margin: 0;
@@ -28,55 +28,55 @@
 }
 
 .experiences__card {
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-  background-color: rgba(var(--base-bg), 0.35);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transform var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
+  background-color: var(--color-bg-card);
+  box-shadow: var(--shadow-sm);
 
   &:hover {
     transform: translateY(-4px);
-    border-color: var(--accent-primary);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
   }
 }
 
 .experiences__card-content {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--space-3);
 }
 
 .experiences__card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: var(--space-4);
 }
 
 .experiences__card-title {
-  font-size: 1.25rem;
+  font-size: var(--text-xl);
   font-weight: bolder;
-  color: var(--text-primary);
+  color: var(--color-text);
 }
 
 .experiences__card-icon {
   width: 24px;
   height: 24px;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
 }
 
 .experiences__card-company {
   a {
     font-weight: bolder;
-    color: var(--text-primary);
+    color: var(--color-text);
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: var(--space-1);
 
     svg {
       height: 1rem;
@@ -87,37 +87,37 @@
 
 .experiences__card-tags {
   display: flex;
-  gap: 0.75rem;
+  gap: var(--space-3);
   align-items: center;
   flex-wrap: wrap;
 }
 
 .experiences__card-tag {
-  font-size: 0.875rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  border: 1px solid var(--background-tertiary);
-  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-bg-muted);
+  color: var(--color-text-secondary);
 }
 
 .experiences__card-tag--primary {
-  border-color: var(--accent-primary);
-  background-color: rgba(16, 185, 129, 0.1);
-  color: var(--accent-primary);
+  border-color: var(--color-accent);
+  background-color: var(--color-accent-subtle);
+  color: var(--color-accent);
 }
 
 .experiences__card-date {
-  font-size: 0.875rem;
-  color: var(--text-tertiary);
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
 }
 
 .experiences__card-location {
-  font-size: 0.875rem;
-  color: var(--text-tertiary);
+  font-size: var(--text-sm);
+  color: var(--color-text-tertiary);
 }
 
 .experiences__card-description {
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   line-height: 1.5;
   font-size: 0.95rem;
 }
@@ -125,7 +125,7 @@
 .experiences__nav-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: var(--space-1);
 }
 
 @media (max-width: 768px) {

@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css'
-import BgCircles from './bg-circles.astro'
 
 const { title = 'Portfolio', description = "taroj1205's portfolio" } =
   Astro.props
@@ -13,18 +12,46 @@ const { title = 'Portfolio', description = "taroj1205's portfolio" } =
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.ico" type="image/ico" />
-    <title>taroj1205 - {title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>taroj1205 — {title}</title>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
-    <BgCircles />
+    <div class="grain" aria-hidden="true"></div>
     <slot />
     <footer>
       <p>
-        © 2025 <a href="https://x.com/taroj1205" style="text-decoration: none;"
+        © {new Date().getFullYear()}
+        <a href="https://x.com/taroj1205" style="text-decoration: none;"
           >taroj1205</a
         >
       </p>
     </footer>
   </body>
 </html>
+
+<style is:global>
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+    mix-blend-mode: multiply;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .grain {
+      mix-blend-mode: soft-light;
+      opacity: 0.05;
+    }
+  }
+</style>
