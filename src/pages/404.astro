@@ -61,7 +61,8 @@ import Layout from '../layouts/layout.astro'
       font-size: 8rem;
       font-weight: 700;
       line-height: 1;
-      background: linear-gradient(to right, var(--accent-primary), #3b82f6);
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin: 0;
@@ -69,18 +70,20 @@ import Layout from '../layouts/layout.astro'
 
     .not-found__emoji {
       font-size: 4rem;
-      animation: float 6s ease-in-out infinite;
+      animation: float 6s var(--ease-in-out) infinite;
     }
 
     .not-found__message {
       font-size: 1.5rem;
       font-weight: 600;
+      letter-spacing: -0.02em;
       color: var(--text-primary);
       margin: 0;
     }
 
     .not-found__description {
-      color: var(--text-secondary);
+      color: var(--text-tertiary);
+      font-size: 0.95rem;
       margin: 0;
     }
 
@@ -90,24 +93,30 @@ import Layout from '../layouts/layout.astro'
       gap: 0.5rem;
       padding: 0.75rem 1.5rem;
       border-radius: 9999px;
-      background-color: var(--accent-primary);
+      background-color: var(--accent);
       color: white;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition:
+        transform 0.2s var(--ease-out),
+        background-color 0.2s var(--ease-out),
+        border-color 0.2s var(--ease-out),
+        color 0.2s var(--ease-out),
+        box-shadow 0.2s var(--ease-out);
       margin-top: 1rem;
       border: 2px solid transparent;
+      font-weight: 500;
     }
 
     .not-found__button:hover {
       transform: translateY(-2px);
       background-color: transparent;
-      border-color: var(--accent-primary);
-      color: var(--accent-primary);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: var(--shadow-md);
     }
 
     .not-found__button svg {
-      transition: transform 0.2s ease;
+      transition: transform 0.2s var(--ease-out);
     }
 
     .not-found__button:hover svg {
@@ -121,6 +130,16 @@ import Layout from '../layouts/layout.astro'
       }
       50% {
         transform: translateY(-20px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .not-found__emoji {
+        animation: none;
+      }
+
+      .not-found__button:hover {
+        transform: none;
       }
     }
 

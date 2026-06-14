@@ -13,6 +13,13 @@ const { title = 'Portfolio', description = "taroj1205's portfolio" } =
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.ico" type="image/ico" />
+    <link
+      rel="preload"
+      href="/fonts/InterVariable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <title>taroj1205 - {title}</title>
   </head>
   <body>
@@ -21,7 +28,8 @@ const { title = 'Portfolio', description = "taroj1205's portfolio" } =
     <slot />
     <footer>
       <p>
-        © 2025 <a href="https://x.com/taroj1205" style="text-decoration: none;"
+        &copy; {new Date().getFullYear()}
+        <a href="https://x.com/taroj1205" style="text-decoration: none;"
           >taroj1205</a
         >
       </p>
