@@ -29,52 +29,68 @@ const socials = [
     icon: LinkedinIcon,
   },
 ]
+
+const navLinks = [
+  { label: 'About', href: '/about' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Blog', href: '/blog' },
+]
 ---
 
 <Layout>
   <header>
-    <h1>
-      <a href="/">
-        <span style="view-transition-name: name;">taroj1205</span>
-        <LeafIcon style="view-transition-name: leaf;" />
-      </a>
-    </h1>
-    <section>
+    <div class="header__top fade-up fade-up-1">
+      <h1>
+        <a href="/">
+          <span style="view-transition-name: name;">taroj1205</span>
+          <LeafIcon style="view-transition-name: leaf;" />
+        </a>
+      </h1>
+      <nav class="header__nav" aria-label="Main navigation">
+        {
+          navLinks.map(({ label, href }) => (
+            <a href={href} class="nav-link">
+              {label}
+            </a>
+          ))
+        }
+      </nav>
+    </div>
+    <section class="fade-up fade-up-2">
       <h2 class="sr-only">Introduction</h2>
-      <p>
-        I'm a developer based in New Zealand, and a student at University of
-        Auckland.
-      </p>
-      <p>I study Computer Science and IT Management.</p>
-      <p>
-        Currently: open-source contributor, building frontend with occasional
-        backend.
+      <p class="intro__lead">
+        Developer based in New Zealand, studying Computer Science & IT
+        Management at University of Auckland.
       </p>
       <p>
-        Focus: OSS contributions and frontend, with occasional backend work.
+        Open-source contributor, building frontend with occasional backend.
       </p>
-      <p>
-        Stack: TypeScript, Next.js, TanStack Router/Start, TanStack Query,
-        Astro.
+      <p class="intro__stack">
+        TypeScript, Next.js, TanStack Router/Start, TanStack Query, Astro.
       </p>
-      <a href="/about"
+      <a href="/about" class="read-more"
         >Read more <ArrowRight /><span class="sr-only"
           >about me in more depth!</span
         ></a
       >
     </section>
-    <section class="socials">
+    <section class="socials fade-up fade-up-3">
       <h2 class="sr-only">Social links</h2>
       {
         socials.map(({ name, url, icon: Icon }) => (
-          <a href={url} target="_blank" rel="noopener noreferrer">
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+          >
             <span class="sr-only">{name}</span>
             <Icon />
           </a>
         ))
       }
     </section>
-    <section class="wallet">
+    <section class="wallet fade-up fade-up-3">
       <h2 class="sr-only">Wallet links</h2>
       {
         WALLET.map(({ name, url, icon }) => (
