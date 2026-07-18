@@ -33,29 +33,21 @@ const socials = [
 
 <Layout>
   <header>
-    <h1>
+    <h1 class="animate-in animate-in-1">
       <a href="/">
         <span style="view-transition-name: name;">taroj1205</span>
         <LeafIcon style="view-transition-name: leaf;" />
       </a>
     </h1>
-    <section>
+    <p class="intro animate-in animate-in-2">
+      Developer, student, open-source contributor.
+    </p>
+    <section class="animate-in animate-in-3">
       <h2 class="sr-only">Introduction</h2>
       <p>
-        I'm a developer based in New Zealand, and a student at University of
-        Auckland.
-      </p>
-      <p>I study Computer Science and IT Management.</p>
-      <p>
-        Currently: open-source contributor, building frontend with occasional
-        backend.
-      </p>
-      <p>
-        Focus: OSS contributions and frontend, with occasional backend work.
-      </p>
-      <p>
-        Stack: TypeScript, Next.js, TanStack Router/Start, TanStack Query,
-        Astro.
+        Based in New Zealand, studying Computer Science &amp; IT Management at
+        the University of Auckland. Building frontend with TypeScript, Next.js,
+        and Astro.
       </p>
       <a href="/about"
         >Read more <ArrowRight /><span class="sr-only"
@@ -63,7 +55,7 @@ const socials = [
         ></a
       >
     </section>
-    <section class="socials">
+    <section class="socials animate-in animate-in-4">
       <h2 class="sr-only">Social links</h2>
       {
         socials.map(({ name, url, icon: Icon }) => (
@@ -74,7 +66,7 @@ const socials = [
         ))
       }
     </section>
-    <section class="wallet">
+    <section class="wallet animate-in animate-in-4">
       <h2 class="sr-only">Wallet links</h2>
       {
         WALLET.map(({ name, url, icon }) => (
@@ -92,8 +84,14 @@ const socials = [
     </section>
   </header>
   <main id="main-content">
-    <Experiences />
+    <div class="animate-in animate-in-5">
+      <Experiences />
+    </div>
 
-    <Hackathons />
+    <hr class="rule" />
+
+    <div class="animate-in animate-in-6">
+      <Hackathons />
+    </div>
   </main>
 </Layout>

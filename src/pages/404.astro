@@ -2,38 +2,15 @@
 import Layout from '../layouts/layout.astro'
 ---
 
-<Layout title="404 - Page Not Found">
+<Layout title="404 — Page Not Found">
   <main class="not-found" id="main-content">
-    <div class="not-found__container">
-      <div class="not-found__content">
-        <h1 class="not-found__title">404</h1>
-        <div class="not-found__emoji">🚀</div>
-        <p class="not-found__message">
-          Oops! Looks like this page got lost in space
-        </p>
-        <p class="not-found__description">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <a href="/" class="not-found__button">
-          Return Home
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </a>
-      </div>
+    <div class="not-found__container animate-in animate-in-1">
+      <p class="not-found__code">404</p>
+      <h1 class="not-found__title">Page not found</h1>
+      <p class="not-found__description">
+        The page you're looking for doesn't exist or has been moved.
+      </p>
+      <a href="/" class="not-found__link"> &larr; Return home </a>
     </div>
   </main>
 
@@ -42,99 +19,66 @@ import Layout from '../layouts/layout.astro'
       display: flex;
       place-items: center;
       flex-grow: 1;
-      padding: 2rem;
+      padding: var(--space-8);
     }
 
     .not-found__container {
-      max-width: 600px;
+      max-width: 480px;
       text-align: center;
-    }
-
-    .not-found__content {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
+      gap: var(--space-6);
     }
 
-    .not-found__title {
-      font-size: 8rem;
-      font-weight: 700;
+    .not-found__code {
+      font-family: var(--font-display);
+      font-size: var(--text-display);
+      font-weight: 300;
       line-height: 1;
-      background: linear-gradient(to right, var(--accent-primary), #3b82f6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--color-border);
       margin: 0;
     }
 
-    .not-found__emoji {
-      font-size: 4rem;
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .not-found__message {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text-primary);
+    .not-found__title {
+      font-family: var(--font-display) !important;
+      font-size: var(--text-3xl) !important;
+      font-weight: 400;
+      color: var(--color-text);
       margin: 0;
     }
 
     .not-found__description {
-      color: var(--text-secondary);
+      color: var(--color-text-secondary);
       margin: 0;
+      line-height: 1.6;
     }
 
-    .not-found__button {
+    .not-found__link {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: 9999px;
-      background-color: var(--accent-primary);
-      color: white;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      margin-top: 1rem;
-      border: 2px solid transparent;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-6);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      color: var(--color-text-secondary);
+      text-decoration: none !important;
+      font-size: var(--text-sm);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition:
+        color var(--duration-normal) var(--ease-out),
+        border-color var(--duration-normal) var(--ease-out);
     }
 
-    .not-found__button:hover {
-      transform: translateY(-2px);
-      background-color: transparent;
-      border-color: var(--accent-primary);
-      color: var(--accent-primary);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .not-found__button svg {
-      transition: transform 0.2s ease;
-    }
-
-    .not-found__button:hover svg {
-      transform: translateX(4px);
-    }
-
-    @keyframes float {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-20px);
-      }
+    .not-found__link:hover {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
     }
 
     @media (max-width: 640px) {
-      .not-found__title {
+      .not-found__code {
         font-size: 6rem;
-      }
-
-      .not-found__emoji {
-        font-size: 3rem;
-      }
-
-      .not-found__message {
-        font-size: 1.25rem;
       }
     }
   </style>

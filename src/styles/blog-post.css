@@ -1,29 +1,34 @@
 .post {
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: var(--space-8) var(--gutter);
 }
 
 .post__header {
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-8);
 }
 
 .post__title {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  line-height: 1.2;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .post__meta {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  color: var(--text-secondary);
+  gap: var(--space-4);
+  color: var(--color-text-tertiary);
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
 }
 
 .post__tags {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--space-2);
   flex-wrap: wrap;
   list-style: none;
   padding: 0;
@@ -31,41 +36,51 @@
 }
 
 .post__tag {
-  font-size: 0.75rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  background-color: var(--background-secondary);
-  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.02em;
 }
 
 .post__cover {
-  border-radius: 1rem;
-  margin-bottom: 2rem;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-8);
   height: fit-content;
 }
 
 .post__content {
-  line-height: 1.8;
+  line-height: 1.85;
+  font-size: var(--text-lg);
 
   h2 {
-    font-size: 1.8rem;
-    margin: 2rem 0 1.5rem;
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    font-weight: 500;
+    margin: var(--space-12) 0 var(--space-6);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 
   h3 {
-    font-size: 1.4rem;
-    margin: 1.5rem 0 1rem;
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 500;
+    margin: var(--space-8) 0 var(--space-4);
   }
 
   p {
-    margin: 0 0 1.5rem;
+    margin: 0 0 var(--space-6);
+    color: var(--color-text-secondary);
   }
 
   ul,
   ol {
-    margin: 1.5rem 0;
-    padding-left: 1.5rem;
+    margin: var(--space-6) 0;
+    padding-left: var(--space-6);
     list-style: disc;
+    color: var(--color-text-secondary);
   }
 
   ol {
@@ -73,43 +88,49 @@
   }
 
   li {
-    margin: 0.25rem 0;
+    margin: var(--space-1) 0;
   }
 
   em {
-    color: var(--accent-primary);
+    color: var(--color-accent);
     font-style: italic;
   }
 
   strong {
     font-weight: 600;
+    color: var(--color-text);
   }
 
   a,
   a:hover {
-    color: var(--accent-primary);
+    color: var(--color-accent);
   }
 
   blockquote {
-    border-left: 4px solid var(--text-secondary);
-    margin: 1.5rem 0;
-    padding-left: 1rem;
-    color: var(--text-secondary);
+    border-left: 3px solid var(--color-accent);
+    margin: var(--space-8) 0;
+    padding-left: var(--space-6);
+    color: var(--color-text-secondary);
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-style: italic;
+    line-height: 1.6;
   }
 
   code {
-    background: var(--background-secondary);
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.25rem;
-    font-size: 0.9em;
+    background: var(--color-bg-subtle);
+    padding: 0.15rem 0.4rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85em;
   }
 
   pre {
-    background: var(--background-secondary);
-    padding: 1rem;
-    border-radius: 0.5rem;
+    background: var(--color-bg-subtle);
+    padding: var(--space-6);
+    border-radius: var(--radius-md);
     overflow-x: auto;
-    margin: 1.5rem 0;
+    margin: var(--space-6) 0;
+    border: 1px solid var(--color-border);
 
     code {
       background: none;
@@ -124,23 +145,23 @@
 
 .back-link {
   place-self: center;
-  margin-top: 2rem;
+  margin-top: var(--space-8);
 }
 
 .back-link__button {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  color: var(--text-secondary);
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  color: var(--color-text-secondary);
   text-decoration: none;
-  border-radius: 0.5rem;
-  transition: all 0.2s ease;
-  font-size: 0.9rem;
+  border-radius: var(--radius-md);
+  transition: all var(--duration-fast) var(--ease-out);
+  font-size: var(--text-sm);
 
   &:hover {
-    color: var(--accent-primary);
-    background-color: var(--background-secondary);
+    color: var(--color-accent);
+    background-color: var(--color-accent-subtle);
   }
 
   svg {
