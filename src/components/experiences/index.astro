@@ -14,7 +14,7 @@ const experiencesArray = [
     type: 'Contract',
     startDate: 'November 2025',
     endDate: 'Present',
-    location: 'Remote',
+    location: 'Tokyo, Japan · Remote',
     description:
       'Developing and maintaining websites and web applications for Hazumi Inc, a company that provides web applications.',
     link: 'https://hazumi.co.jp/',
@@ -22,14 +22,25 @@ const experiencesArray = [
   },
   {
     title: 'Teacher',
-    company: 'YAGO - classmall Kids',
+    company: 'YAGO',
     type: 'Contract',
     startDate: 'July 2024',
-    endDate: 'Present',
+    endDate: 'December 2025',
     location: 'Remote',
     description:
-      'Teaching programming on Minecraft Education remotely on Zoom for classmall Kids.',
+      'Taught programming on Minecraft Education remotely on Zoom for classmall Kids.',
     link: 'https://kids.classmall.jp/',
+    icon: BriefcaseIcon,
+  },
+  {
+    title: 'Temporary Staff',
+    company: 'Crie Anabuki Inc.',
+    type: 'Contract',
+    startDate: 'December 2025',
+    endDate: 'February 2026',
+    location: 'Ehime, Japan · On-site',
+    description: 'Worked as a dispatched employee through Crie Anabuki.',
+    link: 'https://www.crie.co.jp/',
     icon: BriefcaseIcon,
   },
   {
@@ -58,11 +69,11 @@ const experiencesArray = [
   },
   {
     title: 'Web Developer',
-    company: 'Web Development and Consulting Club',
+    company: 'WDCC - Web Development & Consulting Club',
     type: 'Part-time',
     startDate: 'April 2025',
-    endDate: 'November 2025',
-    location: 'University of Auckland, New Zealand',
+    endDate: 'October 2025',
+    location: 'University of Auckland · Remote',
     description:
       'Developed and maintained website for University of Auckland Badminton Club.',
     link: 'https://wdcc.co.nz/',
@@ -74,7 +85,7 @@ const experiencesArray = [
     type: 'Part-time',
     startDate: 'January 2024',
     endDate: 'February 2024',
-    location: 'North Shore, Auckland, New Zealand',
+    location: 'Auckland, New Zealand · On-site',
     description: 'Worked as a teacher aid for international students.',
     link: 'https://westlake.school.nz/',
     icon: GraduationCapIcon,
@@ -91,7 +102,7 @@ const { class: className, ...props } = Astro.props
         <span style="view-transition-name: title;">Experiences </span>
       </h2>
       <p class={'experiences__description'}>
-        I am part of the Yamada UI maintainer team, and I have been teaching
+        I am part of the Yamada UI maintainer team, and I have taught
         programming.
       </p>
       <a
@@ -104,13 +115,16 @@ const { class: className, ...props } = Astro.props
       {
         experiencesArray
           .sort((a, b) => {
+            const endDate = (date: string) =>
+              new Date(date === 'Present' ? '9999-12-31' : date).getTime()
+
             if (a.endDate === b.endDate) {
               return (
                 new Date(b.startDate).getTime() -
                 new Date(a.startDate).getTime()
               )
             }
-            return new Date(b.endDate).getTime() - new Date(a.endDate).getTime()
+            return endDate(b.endDate) - endDate(a.endDate)
           })
           .map(
             ({
