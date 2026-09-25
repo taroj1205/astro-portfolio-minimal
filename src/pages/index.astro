@@ -16,7 +16,7 @@ const marquee = [
   'Hackathon award winner',
   'TypeScript · Next.js · Astro',
   'Auckland ↔ Tokyo',
-  'Self-taught since 2020',
+  'Building since 2022',
 ]
 
 const photos: Record<string, ImageMetadata> = {
@@ -35,11 +35,6 @@ const photos: Record<string, ImageMetadata> = {
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <div class="hero-kicker">
-          <span class="dot" aria-hidden="true"></span>
-          Open to thoughtful collaborations
-        </div>
-
         <h1 class="hero-title">
           <span class="line"><span>Hi, I'm</span></span>
           <span class="line"><span><em>Shintaro</em>.</span></span>
@@ -62,28 +57,12 @@ const photos: Record<string, ImageMetadata> = {
         </p>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#impact" data-magnetic>
-            See my impact
-            <svg
-              class="btn-arrow"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M5 12h14M13 6l6 6-6 6"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </svg>
+          <a class="text-link" href="#impact">
+            Open source work
+            <span aria-hidden="true">↓</span>
           </a>
-          <a
-            class="btn btn-ghost"
-            href="mailto:taroj1205@gmail.com"
-            data-magnetic
-          >
-            Let's talk
+          <a class="text-link" href="mailto:taroj1205@gmail.com">
+            taroj1205@gmail.com
           </a>
         </div>
 
@@ -142,7 +121,7 @@ const photos: Record<string, ImageMetadata> = {
           <small>hackathon wins</small>
         </div>
         <div class="float-chip chip-c">
-          Since 2020
+          Since 2022
           <small>self-taught builder</small>
         </div>
       </div>
@@ -417,50 +396,13 @@ const photos: Record<string, ImageMetadata> = {
           </h2>
         </div>
         <p>
-          I like projects with a clear human reason to exist — a club that
-          needed a home online, a sibling who wanted a better reading list, a
-          classroom that learned to code through play.
+          Side projects with a clear human reason to exist — a sibling who
+          wanted a better reading list, desktop tools for everyday friction, and
+          experiments in native performance.
         </p>
       </div>
 
       <div class="work-grid">
-        <a
-          class="work-card featured"
-          href="https://uoabadminton.co.nz"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-reveal
-        >
-          <div class="work-deco" aria-hidden="true"></div>
-          <div class="tag-row">
-            <span class="tag">Full stack</span>
-            <span class="tag warm">Live product</span>
-            <span class="tag">Team project</span>
-          </div>
-          <h3>UoA Badminton Club</h3>
-          <p>
-            The official website for the University of Auckland Badminton Club —
-            built with the WDCC team. I was the top human contributor with 166
-            pull requests across the club's digital home.
-          </p>
-          <div class="footer">
-            <div class="metric">
-              166 PRs
-              <small>as lead web developer</small>
-            </div>
-            <span class="go" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M7 17L17 7M9 7h8v8"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"></path>
-              </svg>
-            </span>
-          </div>
-        </a>
-
         <a
           class="work-card"
           href="https://github.com/taroj1205/nextjs-note-rss-minytheminer"
@@ -542,7 +484,7 @@ const photos: Record<string, ImageMetadata> = {
           <div class="eyebrow warm">The short story</div>
           <h2>Self-taught.<br />Three countries.<br />Still curious.</h2>
           <p class="lead">
-            I started coding in 2020 and never really stopped. Along the way
+            I started building in 2022 and never really stopped. Along the way
             I've taught kids to program in Minecraft, rebuilt browser websites
             used around the world, and learned that great software is mostly
             about people.
@@ -556,9 +498,9 @@ const photos: Record<string, ImageMetadata> = {
 
         <div class="story-points">
           <div class="story-point" data-reveal style="--delay: 0ms">
-            <div class="year">2020</div>
+            <div class="year">2022</div>
             <div>
-              <h3>Started building</h3>
+              <h3>Started building properly</h3>
               <p>
                 Typing games, board games, small web apps — teaching myself by
                 shipping things that felt real.
@@ -689,34 +631,16 @@ const photos: Record<string, ImageMetadata> = {
           together, or just say kia ora — I'd love to hear from you.
         </p>
         <div class="contact-actions">
-          <a
-            class="btn btn-primary"
-            href="mailto:taroj1205@gmail.com"
-            data-magnetic
-          >
-            Email me
-            <svg
-              class="btn-arrow"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M5 12h14M13 6l6 6-6 6"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
-            </svg>
+          <a class="text-link" href="mailto:taroj1205@gmail.com">
+            taroj1205@gmail.com
           </a>
           <a
-            class="btn btn-ghost"
+            class="text-link"
             href="https://github.com/sponsors/taroj1205"
             target="_blank"
             rel="noopener noreferrer"
-            data-magnetic
           >
-            Sponsor on GitHub
+            GitHub Sponsors
           </a>
         </div>
         <div class="social-row">
@@ -728,7 +652,7 @@ const photos: Record<string, ImageMetadata> = {
           <a
             href="https://x.com/taroj1205"
             target="_blank"
-            rel="noopener noreferrer">X / Twitter</a
+            rel="noopener noreferrer">X</a
           >
           <a
             href="https://www.linkedin.com/in/taroj/"
@@ -740,7 +664,7 @@ const photos: Record<string, ImageMetadata> = {
             target="_blank"
             rel="noopener noreferrer">Zenn</a
           >
-          <a href="/about">More about me</a>
+          <a href="/about">About</a>
         </div>
       </div>
     </div>

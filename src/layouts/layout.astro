@@ -29,29 +29,10 @@ const nav = [
     <a class="skip-link" href="#main-content">Skip to content</a>
 
     <nav class="site-nav" data-nav>
-      <a class="nav-brand" href="/">
-        <span class="nav-mark" aria-hidden="true">S</span>
-        <span>Shintaro</span>
-      </a>
+      <a class="nav-brand" href="/"> Shintaro Jokagi </a>
       <div class="nav-links">
         {nav.map(item => <a href={item.href}>{item.label}</a>)}
-        <a class="nav-cta" href="mailto:taroj1205@gmail.com">
-          Say hello
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M5 12h14M13 6l6 6-6 6"
-              stroke="currentColor"
-              stroke-width="2.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"></path>
-          </svg>
-        </a>
+        <a class="nav-email" href="mailto:taroj1205@gmail.com">Email</a>
       </div>
       <button
         class="nav-toggle"
