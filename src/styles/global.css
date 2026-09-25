@@ -1065,16 +1065,12 @@ section {
 
 .impact-points li::before {
   content: '';
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  margin-top: 0.55rem;
+  width: 12px;
+  height: 1.5px;
+  margin-top: 0.72rem;
   flex: 0 0 auto;
-  background: var(--cobalt);
-}
-
-.impact-card:nth-child(2) .impact-points li::before {
-  background: var(--tangerine);
+  background: var(--muted);
+  opacity: 0.7;
 }
 
 .impact-link {
