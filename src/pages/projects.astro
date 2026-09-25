@@ -24,7 +24,7 @@ import { projects } from '../lib/projects.astro'
         {
           projects.map((project, i) => (
             <a
-              class={i === 0 ? 'work-card featured' : 'work-card'}
+              class="work-card"
               href={project.link || project.github}
               target="_blank"
               rel="noopener noreferrer"
