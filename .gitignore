@@ -26,6 +26,10 @@ pnpm-debug.log*
 
 # local agent context
 .context/
+.mimo/
+
+# local research dossier (contains personal contact details)
+PROFILE.md
 
 # jetbrains setting folder
 .idea/
