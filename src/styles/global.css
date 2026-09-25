@@ -77,11 +77,11 @@ body {
     ),
     var(--paper);
   min-height: 100svh;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 html {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body::before {
