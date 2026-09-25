@@ -1,14 +1,60 @@
 ---
 import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
 import Layout from '../layouts/layout.astro'
-import avatar from '../assets/photos/github-avatar.png'
+import japanOsaka from '../assets/photos/japan-osaka.jpg'
+import aucklandCbd from '../assets/photos/auckland-cbd.jpg'
+import nzSunsetFrame from '../assets/photos/nz-sunset-frame.jpg'
+import nzBeach from '../assets/photos/nz-beach.jpg'
+import nzCoast from '../assets/photos/nz-coast.jpg'
+import nzCliffs from '../assets/photos/nz-cliffs.jpg'
+
+interface Shot {
+  src: ImageMetadata
+  alt: string
+  caption: string
+  width: number
+  height: number
+}
+
+// Second set — swapped in as the story sections scroll
+const storyShots: Shot[] = [
+  {
+    src: nzSunsetFrame,
+    alt: 'Sunset framed by a pōhutukawa tree',
+    caption: 'West coast evenings',
+    width: 2304,
+    height: 4096,
+  },
+  {
+    src: nzBeach,
+    alt: 'Walking a black-sand beach on the west coast',
+    caption: 'Showing up, most days',
+    width: 1170,
+    height: 1560,
+  },
+  {
+    src: nzCoast,
+    alt: 'Black-sand beach and headlands on the west coast',
+    caption: 'The long way around',
+    width: 2304,
+    height: 4096,
+  },
+  {
+    src: nzCliffs,
+    alt: 'Clifftop view over a west-coast bay',
+    caption: 'North Head, most weekends',
+    width: 4096,
+    height: 2304,
+  },
+]
 ---
 
 <Layout
   title="About — Shintaro Jokagi"
   description="Japanese-Kiwi software engineer and open-source maintainer based in Auckland. Self-taught builder, Yamada UI maintainer, Zen Browser website architect."
 >
-  <section class="page-hero">
+  <section class="page-hero about-hero">
     <div class="wrap about-intro">
       <div class="about-intro-copy">
         <div class="eyebrow">About</div>
@@ -24,14 +70,32 @@ import avatar from '../assets/photos/github-avatar.png'
         </p>
       </div>
       <div class="about-intro-visual">
-        <div class="about-photo-stack">
-          <figure class="about-photo about-photo--side">
+        <div class="about-photo-stack" data-hero-stack>
+          <figure class="about-photo about-photo--main" data-hero-photo>
             <Image
-              src={avatar}
-              alt="Shintaro Jokagi"
-              width={460}
-              height={460}
+              src={nzSunsetFrame}
+              alt="Sunset framed by a pōhutukawa tree"
+              width={2304}
+              height={4096}
               loading="eager"
+            />
+          </figure>
+          <figure class="about-photo about-photo--side" data-hero-photo>
+            <Image
+              src={japanOsaka}
+              alt="Osaka Castle at dusk"
+              width={3072}
+              height={4096}
+              loading="lazy"
+            />
+          </figure>
+          <figure class="about-photo about-photo--cert" data-hero-photo>
+            <Image
+              src={aucklandCbd}
+              alt="Auckland CBD and Sky Tower"
+              width={2304}
+              height={4096}
+              loading="lazy"
             />
           </figure>
         </div>
@@ -42,7 +106,7 @@ import avatar from '../assets/photos/github-avatar.png'
   <section class="section-pad about-body">
     <div class="wrap about-grid">
       <article class="about-story prose">
-        <h2>The path</h2>
+        <h2 data-story-step="0">The path</h2>
         <p>
           I was born in 2005 in Tokyo. After the 2011 earthquake we moved to
           Ehime. Then a year at an Auckland intermediate, three months in Cebu
@@ -56,7 +120,7 @@ import avatar from '../assets/photos/github-avatar.png'
           engineering — and life — is just showing up every day.
         </p>
 
-        <h2>How I got into software</h2>
+        <h2 data-story-step="1">How I got into software</h2>
         <p>
           I started building in 2022 — typing games, small web apps, whatever I
           felt like shipping. Nobody taught me. By 2024 I was helping run an
@@ -69,7 +133,7 @@ import avatar from '../assets/photos/github-avatar.png'
           Yamada UI and Zen Browser in earnest.
         </p>
 
-        <h2>What I do now</h2>
+        <h2 data-story-step="2">What I do now</h2>
         <p>
           I'm a software engineer at <strong>Hazumi Inc.</strong>, building
           websites and product stuff remotely from Auckland for the Tokyo team.
@@ -83,7 +147,7 @@ import avatar from '../assets/photos/github-avatar.png'
           that helps the next reviewer. Great software is mostly about people.
         </p>
 
-        <h2>Outside of work</h2>
+        <h2 data-story-step="3">Outside of work</h2>
         <p>
           Kendama, juggling, table tennis, badminton, football, and the
           occasional very overengineered side project. I read a lot, write when
@@ -109,63 +173,94 @@ import avatar from '../assets/photos/github-avatar.png'
         </p>
       </article>
 
-      <aside class="about-aside">
-        <div class="aside-card">
-          <div class="eyebrow warm">Now</div>
-          <h3>Auckland ↔ Tokyo</h3>
-          <p>
-            Software engineer at Hazumi Inc., remote from Auckland. Finishing a
-            BSc in Computer Science + IT Management.
+      <aside class="about-aside" data-story-photos>
+        <div class="story-photo-frame" data-story-frame>
+          {
+            storyShots.map((shot, i) => (
+              <figure
+                class:list={['story-photo', { 'is-active': i === 0 }]}
+                data-story-photo={i}
+              >
+                <Image
+                  src={shot.src}
+                  alt={shot.alt}
+                  width={shot.width}
+                  height={shot.height}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                />
+              </figure>
+            ))
+          }
+          <p class="story-photo-caption" data-story-caption>
+            {storyShots[0].caption}
           </p>
-        </div>
-
-        <div class="aside-card">
-          <div class="eyebrow">Open source</div>
-          <h3>Tools other builders rely on</h3>
-          <ul class="aside-list">
-            <li>
-              <strong>Yamada UI</strong>
-              <span>Official maintainer</span>
-            </li>
-            <li>
-              <strong>Zen Browser</strong>
-              <span>Core Website Architect</span>
-            </li>
-            <li>
-              <strong>sonner</strong>
-              <span>Feature shipped in v2.0.7</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="aside-card aside-card--photo">
-          <Image
-            src={avatar}
-            alt="Shintaro Jokagi"
-            width={460}
-            height={460}
-            loading="lazy"
-          />
         </div>
       </aside>
     </div>
   </section>
 </Layout>
 
-<style>
-  .about-intro {
+<script>
+  const captions = [
+    'West coast evenings',
+    'Showing up, most days',
+    'The long way around',
+    'North Head, most weekends',
+  ]
+
+  const photos = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-story-photo]')
+  )
+  const captionEl = document.querySelector<HTMLElement>('[data-story-caption]')
+  const steps = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-story-step]')
+  )
+
+  // Sticky rail photo swap driven by story headings
+  if (photos.length && steps.length && 'IntersectionObserver' in window) {
+    let active = 0
+
+    const show = (index: number) => {
+      if (index === active) return
+      photos[active]?.classList.remove('is-active')
+      photos[index]?.classList.add('is-active')
+      if (captionEl) captionEl.textContent = captions[index] ?? ''
+      active = index
+    }
+
+    const io = new IntersectionObserver(
+      entries => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (!visible) return
+        const step = visible.target.getAttribute('data-story-step')
+        if (step != null) show(Number(step))
+      },
+      {
+        rootMargin: '-35% 0px -45% 0px',
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    )
+
+    steps.forEach(step => io.observe(step))
+  }
+</script>
+
+<style is:global>
+  .about-hero .about-intro {
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;
     gap: clamp(2rem, 5vw, 4rem);
     align-items: end;
   }
 
-  .about-intro-copy h1 {
+  .about-hero .about-intro-copy h1 {
     font-size: clamp(2.8rem, 6.5vw, 4.75rem);
     margin-bottom: 1.25rem;
   }
 
-  .about-intro-copy .accent {
+  .about-hero .about-intro-copy .accent {
     color: var(--cobalt);
   }
 
@@ -195,6 +290,10 @@ import avatar from '../assets/photos/github-avatar.png'
     transform: rotate(-2deg);
   }
 
+  .about-photo--main img {
+    object-position: center 40%;
+  }
+
   .about-photo--side {
     position: absolute;
     right: 0;
@@ -205,14 +304,22 @@ import avatar from '../assets/photos/github-avatar.png'
     z-index: 2;
   }
 
+  .about-photo--side img {
+    object-position: center 30%;
+  }
+
   .about-photo--cert {
     position: absolute;
-    right: 8%;
-    bottom: 0;
-    width: 48%;
+    right: 4%;
+    bottom: -4%;
+    width: 46%;
     aspect-ratio: 5 / 4;
     transform: rotate(-1.5deg);
     z-index: 3;
+  }
+
+  .about-photo--cert img {
+    object-position: center 40%;
   }
 
   .about-body {
@@ -231,72 +338,69 @@ import avatar from '../assets/photos/github-avatar.png'
   }
 
   .about-aside {
-    display: grid;
-    gap: 1rem;
     position: sticky;
     top: 6rem;
+    align-self: start;
   }
 
-  .aside-card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    padding: 1.35rem 1.4rem;
-  }
-
-  .aside-card h3 {
-    font-size: 1.35rem;
-    margin-bottom: 0.55rem;
-  }
-
-  .aside-card p {
-    color: var(--muted);
-    font-size: 0.98rem;
-    line-height: 1.65;
-    margin: 0;
-  }
-
-  .aside-list {
-    display: grid;
-    gap: 0.85rem;
-  }
-
-  .aside-list li {
-    display: grid;
-    gap: 0.15rem;
-    padding-top: 0.85rem;
-    border-top: 1px solid rgba(228, 220, 209, 0.8);
-  }
-
-  .aside-list li:first-child {
-    padding-top: 0.35rem;
-    border-top: 0;
-  }
-
-  .aside-list strong {
-    font-family: var(--font-display);
-    letter-spacing: -0.02em;
-  }
-
-  .aside-list span {
-    color: var(--muted);
-    font-size: 0.92rem;
-  }
-
-  .aside-card--photo {
-    padding: 0.55rem;
-    overflow: hidden;
-  }
-
-  .aside-card--photo img {
-    border-radius: 18px;
+  .story-photo-frame {
+    position: relative;
     width: 100%;
-    aspect-ratio: 16 / 11;
+    aspect-ratio: 4 / 5;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-lift);
+    background: var(--paper-deep);
+    isolation: isolate;
+  }
+
+  .story-photo {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    transform: scale(1.04);
+    transition:
+      opacity 0.55s var(--ease-out),
+      transform 0.7s var(--ease-out);
+    pointer-events: none;
+  }
+
+  .story-photo.is-active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .story-photo img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    display: block;
+  }
+
+  .story-photo-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    margin: 0;
+    padding: 2.25rem 1.15rem 1rem;
+    background: linear-gradient(
+      to top,
+      rgba(18, 16, 14, 0.55),
+      rgba(18, 16, 14, 0)
+    );
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+    pointer-events: none;
   }
 
   @media (max-width: 900px) {
-    .about-intro,
+    .about-hero .about-intro,
     .about-grid {
       grid-template-columns: 1fr;
     }
@@ -312,6 +416,22 @@ import avatar from '../assets/photos/github-avatar.png'
 
     .about-aside {
       position: static;
+      max-width: 480px;
+    }
+
+    .story-photo-frame {
+      aspect-ratio: 5 / 4;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .story-photo {
+      transition: opacity 0.2s linear;
+      transform: none;
+    }
+
+    .story-photo.is-active {
+      transform: none;
     }
   }
 </style>

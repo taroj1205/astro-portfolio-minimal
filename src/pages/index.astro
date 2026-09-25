@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets'
 import type { ImageMetadata } from 'astro'
-import avatar from '../assets/photos/github-avatar.png'
+import portrait from '../assets/photos/portrait-sakura-mask.webp'
 import partlyCert from '../assets/hackathon/partly/IMG_20250727_213900.jpg'
 import sesaCert from '../assets/hackathon/sesa-wdcc/IMG_20250803_222749.jpg'
 import Layout from '../layouts/layout.astro'
@@ -100,10 +100,10 @@ const photos: Record<string, ImageMetadata> = {
 
         <div class="hero-card">
           <Image
-            src={avatar}
-            alt="Soft abstract shapes in cream, cobalt, and tangerine"
-            width={1536}
-            height={1024}
+            src={portrait}
+            alt="Shintaro under cherry blossoms in Auckland"
+            width={1206}
+            height={2144}
             loading="eager"
           />
         </div>
