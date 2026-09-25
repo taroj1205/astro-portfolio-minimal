@@ -80,6 +80,10 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body::before {
   content: '';
   position: fixed;
@@ -722,12 +726,27 @@ section {
     width: 100%;
   }
 
+  .hero-card {
+    transform: rotate(1.25deg);
+  }
+
+  .float-chip {
+    padding: 0.7rem 0.85rem;
+    font-size: 0.82rem;
+    border-radius: 16px;
+  }
+
   .float-chip.chip-a {
-    left: -2%;
+    left: 0;
   }
 
   .float-chip.chip-b {
-    right: -2%;
+    right: 0;
+  }
+
+  .float-chip.chip-c {
+    left: 6%;
+    bottom: -2%;
   }
 }
 
