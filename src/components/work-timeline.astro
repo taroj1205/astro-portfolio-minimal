@@ -1,0 +1,251 @@
+---
+interface Role {
+  org: string
+  role: string
+  start: string
+  end?: string
+  paid: boolean
+}
+
+const roles: Role[] = [
+  {
+    org: 'Westlake Boys High School',
+    role: 'Teacher aide for international students',
+    start: '2024-01',
+    end: '2024-02',
+    paid: true,
+  },
+  { org: 'Yamada UI', role: 'Maintainer', start: '2024-02', paid: false },
+  {
+    org: 'YAGO',
+    role: 'Teaching kids to code in Minecraft, over Zoom',
+    start: '2024-07',
+    end: '2025-12',
+    paid: true,
+  },
+  {
+    org: 'Zen Browser',
+    role: 'Website contributor',
+    start: '2024-10',
+    paid: false,
+  },
+  {
+    org: 'WDCC',
+    role: 'Web developer in the uni web development club',
+    start: '2025-04',
+    end: '2025-10',
+    paid: true,
+  },
+  {
+    org: 'Hazumi',
+    role: 'Software engineer, remote for a Tokyo team',
+    start: '2025-11',
+    paid: true,
+  },
+  {
+    org: 'Crie Anabuki',
+    role: 'Temporary staff, on site in Ehime',
+    start: '2025-12',
+    end: '2026-02',
+    paid: true,
+  },
+]
+
+// Axis runs January 2024 to the end of September 2026 (today).
+const first = 2024
+const months = 33
+const index = (ym: string) => {
+  const [y, m] = ym.split('-').map(Number)
+  return (y - first) * 12 + m - 1
+}
+const monthNames = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ')
+const format = (ym: string) => {
+  const [y, m] = ym.split('-').map(Number)
+  return `${monthNames[m - 1]} ${y}`
+}
+const rows = roles.map(r => {
+  const from = index(r.start)
+  const to = r.end ? index(r.end) + 1 : months
+  return {
+    ...r,
+    left: (from / months) * 100,
+    width: ((to - from) / months) * 100,
+    dates: `${format(r.start)} to ${r.end ? format(r.end) : 'now'}`,
+  }
+})
+const years = [2024, 2025, 2026].map(y => ({
+  y,
+  left: (index(`${y}-01`) / months) * 100,
+}))
+---
+
+<div class="timeline">
+  <p class="legend" aria-hidden="true">
+    <span><span class="key paid"></span>Work</span>
+    <span><span class="key volunteer"></span>Open source, volunteer</span>
+  </p>
+  <div class="axis" aria-hidden="true">
+    {years.map(year => <span style={`left: ${year.left}%`}>{year.y}</span>)}
+    <span class="now" style="left: 100%">Now</span>
+  </div>
+  <ul>
+    {
+      rows.map(row => (
+        <li>
+          <div class="label">
+            <h3>{row.org}</h3>
+            <p>{row.role}</p>
+          </div>
+          <div class="track">
+            {years.map(year => (
+              <span class="tick" style={`left: ${year.left}%`} />
+            ))}
+            <span
+              class:list={['bar', row.paid ? 'paid' : 'volunteer']}
+              style={`left: ${row.left}%; width: ${row.width}%`}
+            />
+            <span
+              class="dates"
+              style={row.left > 55 ? 'right: 0' : `left: ${row.left}%`}
+            >
+              {row.dates}
+              <span class="visually-hidden">
+                {row.paid ? '(work)' : '(open source, volunteer)'}
+              </span>
+            </span>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .timeline {
+    --label: 17rem;
+  }
+
+  .legend,
+  .legend > span {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .legend {
+    column-gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--stone);
+    font-size: 0.9375rem;
+  }
+
+  .key {
+    width: 1.5rem;
+    height: 0.625rem;
+    border-radius: 3px;
+  }
+
+  .paid {
+    background: var(--chart-a);
+  }
+
+  .volunteer {
+    background: var(--chart-b);
+  }
+
+  .axis {
+    position: relative;
+    height: 1.5rem;
+    margin-left: calc(var(--label) + 1.5rem);
+    color: var(--stone);
+    font-size: 0.875rem;
+  }
+
+  .axis span {
+    position: absolute;
+    translate: -50% 0;
+  }
+
+  .axis .now {
+    translate: -100% 0;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: var(--label) 1fr;
+    column-gap: 1.5rem;
+    align-items: center;
+    padding-block: 0.9rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .label h3 {
+    font-size: 1.125rem;
+    font-stretch: 112%;
+    letter-spacing: -0.01em;
+  }
+
+  .label p {
+    color: var(--stone);
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    margin-top: 0.15rem;
+  }
+
+  .track {
+    position: relative;
+    height: 3.25rem;
+  }
+
+  .tick {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    border-left: 1px dashed var(--line);
+  }
+
+  .bar {
+    position: absolute;
+    top: 0.5rem;
+    height: 0.875rem;
+    min-width: 0.875rem;
+    border-radius: 4px;
+  }
+
+  .dates {
+    position: absolute;
+    top: 1.65rem;
+    white-space: nowrap;
+    font-size: 0.8125rem;
+    color: var(--stone);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  @media (max-width: 800px) {
+    .axis {
+      margin-left: 0;
+    }
+
+    li {
+      grid-template-columns: 1fr;
+      row-gap: 0.6rem;
+    }
+  }
+</style>

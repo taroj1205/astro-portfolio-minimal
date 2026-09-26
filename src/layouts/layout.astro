@@ -1,29 +1,53 @@
 ---
 import '../styles/global.css'
-import BgCircles from './bg-circles.astro'
 
-const { title = 'Portfolio', description = "taroj1205's portfolio" } =
-  Astro.props
+const {
+  title = 'Shintaro Jokagi',
+  description = 'Shintaro Jokagi is a computer science student at the University of Auckland who builds websites, helps look after open-source projects, and takes a lot of photos of the coast.',
+} = Astro.props
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#f2f5f5" />
+    <meta name="color-scheme" content="light only" />
     <link rel="icon" href="/favicon.ico" type="image/ico" />
-    <title>taroj1205 - {title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@75..125,200..900&display=swap"
+    />
+    <title>{title}</title>
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
-    <BgCircles />
-    <slot />
-    <footer>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header wrap">
+      <a class="site-name" href="/">Shintaro Jokagi</a>
+      <nav aria-label="Main">
+        <a href="/#work">Work</a>
+        <a href="/#photos">Photos</a>
+        <a href="mailto:taroj1205@gmail.com">Email</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer wrap">
       <p>
-        © 2026 <a href="https://x.com/taroj1205" style="text-decoration: none;"
-          >taroj1205</a
-        >
+        © {new Date().getFullYear()} Shintaro Jokagi. The photos are mine too.
+      </p>
+      <p class="footer-links">
+        <a href="https://github.com/taroj1205">GitHub</a>
+        <a href="https://www.linkedin.com/in/taroj/">LinkedIn</a>
+        <a href="https://x.com/taroj1205">X</a>
       </p>
     </footer>
   </body>

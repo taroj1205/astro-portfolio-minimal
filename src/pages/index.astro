@@ -1,99 +1,926 @@
 ---
-import Experiences from '../components/experiences/index.astro'
-import Hackathons from '../components/hackathons/index.astro'
-import ArrowRight from '../icons/arrow-right-icon.astro'
-import AppleWalletIcon from '../icons/apple-wallet-icon.astro'
-import GithubIcon from '../icons/github-icon.astro'
-import GoogleWalletIcon from '../icons/google-wallet-icon.astro'
-import LeafIcon from '../icons/leaf-icon.astro'
-import LinkedinIcon from '../icons/linkedin-icon.astro'
-import XIcon from '../icons/x-icon.astro'
+import type { ImageMetadata } from 'astro'
+import { Image, getImage } from 'astro:assets'
+import ActivityChart from '../components/activity-chart.astro'
+import JourneyMap from '../components/journey-map.astro'
+import WorkTimeline from '../components/work-timeline.astro'
 import Layout from '../layouts/layout.astro'
-import { WALLET } from '../lib/wallet.astro'
-import '../styles/index.css'
+import partlyTeam from '../assets/hackathon/partly/IMG_7138.jpeg'
+import sesaTeam from '../assets/hackathon/sesa-wdcc/20250803_210127.jpg'
+import lionRock from '../assets/photos/lion-rock.jpg'
+import lowTide from '../assets/photos/low-tide.jpg'
+import muriwai from '../assets/photos/muriwai-gannets.jpg'
+import nagoya from '../assets/photos/nagoya-castle.jpg'
+import gull from '../assets/photos/red-billed-gull.jpg'
+import selfie from '../assets/photos/sakura-selfie.webp'
+import sandstone from '../assets/photos/sandstone-cliff.jpg'
+import skyTower from '../assets/photos/sky-tower.jpg'
+import sunsetBark from '../assets/photos/sunset-bark.jpg'
+import sunsetWide from '../assets/photos/sunset-wide.jpg'
+import westCoast from '../assets/photos/west-coast-cliffs.jpg'
+import windyRock from '../assets/photos/windy-rock.jpg'
+import hazumiShot from '../assets/shots/hazumi.jpg'
+import noteShot from '../assets/shots/note.jpg'
+import reversiShot from '../assets/shots/reversi.jpg'
+import typingShot from '../assets/shots/typing.jpg'
+import yamadaShot from '../assets/shots/yamada.jpg'
+import zenShot from '../assets/shots/zen.jpg'
 
-const socials = [
+interface Photo {
+  src: ImageMetadata
+  caption: string
+}
+
+const withFull = (list: Photo[]) =>
+  Promise.all(
+    list.map(async photo => ({
+      ...photo,
+      full: (await getImage({ src: photo.src, format: 'webp' })).src,
+    }))
+  )
+
+const band = await withFull([
+  { src: gull, caption: 'A red-billed gull, with Rangitoto behind' },
+  { src: nagoya, caption: 'Nagoya Castle, just before sunset' },
+  { src: muriwai, caption: 'The gannet colony at Muriwai' },
+  { src: lionRock, caption: 'Lion Rock at Piha' },
+  { src: skyTower, caption: 'Sky Tower on a clear afternoon' },
+  { src: sunsetWide, caption: 'Last light over the harbour' },
+])
+
+const gallery = await withFull([
+  { src: westCoast, caption: 'Cliffs on the west coast' },
+  { src: lowTide, caption: 'Low tide, west coast' },
+  { src: sandstone, caption: 'Sandstone cliff and a quiet beach' },
+  { src: windyRock, caption: 'A very windy afternoon' },
+  { src: sunsetBark, caption: 'Sunset beside an old tree' },
+])
+
+const work = [
   {
-    name: 'github',
-    url: 'https://github.com/taroj1205',
-    icon: GithubIcon,
+    name: 'Zen Browser',
+    href: 'https://zen-browser.app',
+    shot: zenShot,
+    body: "A free, calm web browser built on Firefox. I've worked on its website since 2024 and I'm the second-biggest contributor to it. I redesigned the download page, made the site lighter on older laptops and phones, added a Japanese version, and set up the checks that catch things before they break.",
+    detail:
+      'About 80 changes merged. The browser has over 44,000 stars on GitHub.',
   },
   {
-    name: 'x',
-    url: 'https://x.com/taroj1205',
-    icon: XIcon,
+    name: 'Yamada UI',
+    href: 'https://yamada-ui.com',
+    shot: yamadaShot,
+    body: "A kit of ready-made pieces, like buttons, menus and pop-ups, that people use to build websites with React. I started helping in 2024 and I'm now one of its maintainers, so I review other people's changes as well as writing my own.",
+    detail: 'About 100 changes merged, including a new popover.',
   },
   {
-    name: 'linkedin',
-    url: 'https://www.linkedin.com/in/taroj/',
-    icon: LinkedinIcon,
+    name: 'Hazumi',
+    href: 'https://hazumi.co.jp',
+    shot: hazumiShot,
+    body: 'My job. Hazumi is a software company in Tokyo, and I work on their product remotely from Auckland.',
+    detail:
+      'Software engineer since November 2025, with over 700 changes shipped.',
+  },
+]
+
+const smallerWork = [
+  {
+    name: 'sonner',
+    href: 'https://github.com/emilkowalski/sonner/pull/665',
+    text: 'a popular library for pop-up notifications. I added support for more than one notification area on a page, and it shipped in version 2.0.7.',
+  },
+  {
+    name: 'opencode',
+    href: 'https://github.com/anomalyco/opencode',
+    text: 'an open-source coding assistant. I fixed a layout bug and updated the Japanese translation.',
+  },
+  {
+    name: 'Helmor',
+    href: 'https://github.com/dohooo/helmor',
+    text: 'a desktop app for running coding agents side by side. A few bug fixes and a new sidebar option.',
+  },
+]
+
+const sideProjects = [
+  {
+    name: 'A reading list for my brother',
+    href: 'https://nextjs-note-rss.vercel.app/',
+    shot: noteShot,
+    text: 'My younger brother reads a lot on note.com, so I made him a simple page that puts the articles he likes in one list.',
+  },
+  {
+    name: 'Typing game',
+    href: 'https://typing-game-nextjs.vercel.app/',
+    shot: typingShot,
+    text: 'A typing game for practising English words. One of the first things I ever built.',
+  },
+  {
+    name: 'Reversi',
+    href: 'https://nextjs-reversi.vercel.app/',
+    shot: reversiShot,
+    text: 'The board game, also called Othello, that you can play in the browser.',
   },
 ]
 ---
 
 <Layout>
-  <header>
-    <h1>
-      <a href="/">
-        <span style="view-transition-name: name;">taroj1205</span>
-        <LeafIcon style="view-transition-name: leaf;" />
-      </a>
-    </h1>
-    <section>
-      <h2 class="sr-only">Introduction</h2>
-      <p>
-        I'm a developer based in New Zealand, and a student at University of
-        Auckland.
-      </p>
-      <p>I study Computer Science and IT Management.</p>
-      <p>
-        Currently: open-source contributor, building frontend with occasional
-        backend.
-      </p>
-      <p>
-        Focus: OSS contributions and frontend, with occasional backend work.
-      </p>
-      <p>
-        Stack: TypeScript, Next.js, TanStack Router/Start, TanStack Query,
-        Astro.
-      </p>
-      <a href="/about"
-        >Read more <ArrowRight /><span class="sr-only"
-          >about me in more depth!</span
-        ></a
-      >
-    </section>
-    <section class="socials">
-      <h2 class="sr-only">Social links</h2>
-      {
-        socials.map(({ name, url, icon: Icon }) => (
-          <a href={url} target="_blank" rel="noopener noreferrer">
-            <span class="sr-only">{name}</span>
-            <Icon />
-          </a>
-        ))
-      }
-    </section>
-    <section class="wallet">
-      <h2 class="sr-only">Wallet links</h2>
-      {
-        WALLET.map(({ name, url, icon }) => (
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class={`wallet-link wallet-link--${name.toLowerCase()}`}
-          >
-            <span class="sr-only">{name}</span>
-            <img src={icon} alt={name} class="wallet-icon" />
-          </a>
-        ))
-      }
-    </section>
-  </header>
-  <main id="main-content">
-    <Experiences />
+  <section class="hero wrap">
+    <h1>Kia ora, I'm Shintaro.</h1>
+    <p class="hero-intro">
+      I study computer science at the University of Auckland, build software for
+      a company in Tokyo, and help look after a couple of open-source projects.
+      When I'm away from a screen, I'm usually out taking photos, like these.
+    </p>
+  </section>
 
-    <Hackathons />
-  </main>
+  <div class="band" aria-label="Some photos I've taken">
+    {
+      band.map((photo, i) => (
+        <figure style={`--i: ${i}`}>
+          <button
+            type="button"
+            data-full={photo.full}
+            data-caption={photo.caption}
+          >
+            <Image
+              src={photo.src}
+              alt={photo.caption}
+              height={880}
+              loading={i < 3 ? 'eager' : 'lazy'}
+            />
+          </button>
+          <figcaption>{photo.caption}</figcaption>
+        </figure>
+      ))
+    }
+  </div>
+
+  <section class="section about wrap" id="about">
+    <figure class="about-photo">
+      <Image
+        src={selfie}
+        alt="Me under a cherry blossom tree"
+        width={640}
+        loading="lazy"
+      />
+    </figure>
+    <div class="about-text">
+      <h2>A bit about me</h2>
+      <p>
+        I was born in Tokyo in 2005. After the 2011 earthquake my family moved
+        to Ehime, and since then I've lived in Auckland, spent a year at school
+        in the Philippines, and came back to New Zealand for good in 2019.
+      </p>
+      <p>
+        I taught myself to code in 2022 by making small games, and I still
+        mostly build things because someone I know needs them. Outside of
+        screens it's kendama, juggling, table tennis, badminton and football,
+        even after three knee injuries.
+      </p>
+      <dl class="facts">
+        <div>
+          <dt>Studying</dt>
+          <dd>Computer Science and IT Management, University of Auckland</dd>
+        </div>
+        <div>
+          <dt>Working</dt>
+          <dd>Software engineer at Hazumi, remote from Auckland</dd>
+        </div>
+        <div>
+          <dt>Before that</dt>
+          <dd>Teaching kids to code in Minecraft over Zoom, 2024 to 2025</dd>
+        </div>
+        <div>
+          <dt>Speaks</dt>
+          <dd>English and Japanese</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section wrap" id="journey">
+    <div class="section-head">
+      <h2>Where I've lived</h2>
+      <p>Japan and New Zealand, with a detour to the Philippines for school.</p>
+    </div>
+    <JourneyMap />
+  </section>
+
+  <section class="section wrap" id="work">
+    <div class="section-head">
+      <h2>Things I've worked on</h2>
+      <p>
+        Most of my coding happens in the open, on GitHub, where I've had over
+        3,000 changes merged across work, open source and my own projects. These
+        are the ones I'm proudest of.
+      </p>
+    </div>
+
+    <ActivityChart />
+
+    <ul class="work-list">
+      {
+        work.map(item => (
+          <li>
+            <div class="work-name">
+              <h3>{item.name}</h3>
+              <a href={item.href}>{new URL(item.href).host}</a>
+            </div>
+            <div class="work-body">
+              <p>{item.body}</p>
+              <p class="detail">{item.detail}</p>
+            </div>
+            <a class="shot" href={item.href} tabindex="-1">
+              <span class="shot-bar" aria-hidden="true">
+                {new URL(item.href).host}
+              </span>
+              <Image
+                src={item.shot}
+                alt={`The ${item.name} website`}
+                width={1100}
+                loading="lazy"
+              />
+            </a>
+          </li>
+        ))
+      }
+      <li class="fixes">
+        <div class="work-name">
+          <h3>Small fixes in big projects</h3>
+        </div>
+        <ul class="work-body smaller">
+          {
+            smallerWork.map(item => (
+              <li>
+                <a href={item.href}>{item.name}</a>, {item.text}
+              </li>
+            ))
+          }
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section wrap" id="jobs">
+    <div class="section-head">
+      <h2>Jobs and volunteering</h2>
+      <p>
+        Everything since 2024, including the times I was juggling a few things
+        at once alongside uni.
+      </p>
+    </div>
+    <WorkTimeline />
+  </section>
+
+  <section class="section wrap" id="projects">
+    <div class="section-head">
+      <h2>Things I made for myself, or for family</h2>
+    </div>
+    <ul class="projects">
+      {
+        sideProjects.map(project => (
+          <li>
+            <a class="shot" href={project.href} tabindex="-1">
+              <span class="shot-bar" aria-hidden="true">
+                {new URL(project.href).host}
+              </span>
+              <Image
+                src={project.shot}
+                alt={`Screenshot of ${project.name}`}
+                width={800}
+                loading="lazy"
+              />
+            </a>
+            <h3>
+              <a href={project.href}>{project.name}</a>
+            </h3>
+            <p>{project.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="also">
+      Also: a <a href="https://github.com/taroj1205/tauri-clipboard-manager"
+        >clipboard manager for Windows</a
+      > that can search through everything you've copied, including images.
+    </p>
+  </section>
+
+  <section class="section wrap" id="hackathons">
+    <div class="section-head">
+      <h2>Two hackathons, two awards</h2>
+      <p>
+        Both were weekend hackathons run by WDCC, the web development club at
+        uni.
+      </p>
+    </div>
+    <div class="awards">
+      <figure>
+        <Image
+          src={partlyTeam}
+          alt="Our team on stage holding the Most Production Ready certificate"
+          width={1200}
+          loading="lazy"
+        />
+        <figcaption>
+          <h3>Most production ready</h3>
+          <p class="event">Partly × WDCC, July 2025</p>
+          <p>
+            Four of us built a search tool for Partly, a car parts company. The
+            award went to the project closest to something you could actually
+            launch.
+          </p>
+        </figcaption>
+      </figure>
+      <figure>
+        <Image
+          src={sesaTeam}
+          alt="All the winning teams in front of the Most Overengineered slide"
+          width={1200}
+          loading="lazy"
+        />
+        <figcaption>
+          <h3>Most overengineered</h3>
+          <p class="event">SESA × WDCC, August 2025</p>
+          <p>
+            Our team, the Exception Handlers, made Nostalgia: an app for looking
+            back on old memories through RSS feeds. We may have gone a little
+            overboard.
+          </p>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section wrap" id="photos">
+    <div class="section-head">
+      <h2>More photos</h2>
+      <p>Mostly around Auckland. Tap one to see it bigger.</p>
+    </div>
+    <div class="gallery">
+      {
+        gallery.map(photo => (
+          <figure class:list={{ wide: photo.src.width > photo.src.height }}>
+            <button
+              type="button"
+              data-full={photo.full}
+              data-caption={photo.caption}
+            >
+              <Image
+                src={photo.src}
+                alt={photo.caption}
+                width={900}
+                loading="lazy"
+              />
+            </button>
+          </figure>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section contact wrap" id="contact">
+    <h2>Say hi</h2>
+    <p>
+      Email is the easiest way to reach me, whether it's about a project, uni,
+      or just to chat.
+    </p>
+    <a class="email" href="mailto:taroj1205@gmail.com">taroj1205@gmail.com</a>
+  </section>
+
+  <dialog class="lightbox" aria-label="Photo">
+    <form method="dialog">
+      <button class="lightbox-close">Close</button>
+    </form>
+    <img alt="" />
+    <p class="lightbox-caption"></p>
+  </dialog>
 </Layout>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('.lightbox')
+  const img = dialog?.querySelector('img')
+  const caption = dialog?.querySelector('.lightbox-caption')
+
+  document
+    .querySelectorAll<HTMLButtonElement>('button[data-full]')
+    .forEach(button => {
+      button.addEventListener('click', () => {
+        if (!dialog || !img || !caption) return
+        img.src = button.dataset.full ?? ''
+        img.alt = button.dataset.caption ?? ''
+        caption.textContent = button.dataset.caption ?? ''
+        dialog.showModal()
+      })
+    })
+
+  // Clicking the dark area around the photo closes it.
+  dialog?.addEventListener('click', event => {
+    if (event.target === dialog) dialog.close()
+  })
+</script>
+
+<style>
+  .hero {
+    padding-block: clamp(2.5rem, 6vw, 5rem) clamp(2rem, 3.5vw, 2.75rem);
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 10.5vw, 9.5rem);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.92;
+    animation: rise 0.9s var(--ease-out) both;
+  }
+
+  .hero-intro {
+    max-width: 34rem;
+    margin-top: clamp(1.25rem, 2.2vw, 2rem);
+    margin-left: auto;
+    font-size: clamp(1.125rem, 1.6vw, 1.3rem);
+    color: var(--stone);
+    animation: rise 0.9s 0.12s var(--ease-out) both;
+  }
+
+  /* The one bold moment: a strip of my own photos, edge to edge. */
+  .band {
+    display: flex;
+    gap: clamp(0.5rem, 1vw, 0.875rem);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+    padding-bottom: 0.5rem;
+  }
+
+  .band::-webkit-scrollbar {
+    display: none;
+  }
+
+  .band figure {
+    flex: none;
+    width: min-content;
+    margin: 0;
+    scroll-snap-align: start;
+    animation: rise 1s calc(0.25s + var(--i) * 0.07s) var(--ease-out) both;
+  }
+
+  .band img {
+    height: clamp(18rem, 50vh, 30rem);
+    width: auto;
+    max-width: none;
+  }
+
+  .band figcaption {
+    margin-top: 0.6rem;
+    font-size: 0.875rem;
+    color: var(--stone);
+  }
+
+  button[data-full] {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+
+  button[data-full] img {
+    transition: scale 0.6s var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    button[data-full]:hover img {
+      scale: 1.03;
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      translate: 0 1.5rem;
+    }
+  }
+
+  /* Sections */
+  .section {
+    padding-top: clamp(5rem, 12vw, 9rem);
+  }
+
+  .section h2 {
+    font-size: clamp(2rem, 4.6vw, 3.5rem);
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 1.5rem;
+    row-gap: 1rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .section-head h2 {
+    grid-column: 1 / span 7;
+  }
+
+  .section-head p {
+    grid-column: 8 / -1;
+    align-self: end;
+    color: var(--stone);
+  }
+
+  /* About */
+  .about {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 1.5rem;
+    align-items: start;
+  }
+
+  .about-photo {
+    grid-column: 1 / span 4;
+    margin: 0;
+  }
+
+  .about-photo img {
+    border-radius: 4px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: 50% 35%;
+  }
+
+  .about-text {
+    grid-column: 6 / -1;
+    max-width: 38rem;
+  }
+
+  .about-text h2 {
+    margin-bottom: 1.75rem;
+  }
+
+  .about-text p + p {
+    margin-top: 1rem;
+  }
+
+  .facts {
+    margin: 2.5rem 0 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .facts div {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 1rem;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .facts dt {
+    color: var(--stone);
+  }
+
+  .facts dd {
+    margin: 0;
+  }
+
+  /* Work */
+  .work-list,
+  .smaller,
+  .projects {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .work-list > li {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: 1.5rem;
+    row-gap: 1rem;
+    padding-block: clamp(1.75rem, 3.5vw, 2.75rem);
+    border-top: 1px solid var(--line);
+  }
+
+  /* Text on one side, the real site on the other, swapping each row. */
+  .work-name,
+  .work-body {
+    grid-column: 1 / span 5;
+  }
+
+  .work-body {
+    grid-row: 2;
+    align-self: start;
+  }
+
+  .work-list > li > .shot {
+    grid-column: 7 / -1;
+    grid-row: 1 / span 2;
+  }
+
+  .work-list > li:nth-child(even) > .work-name,
+  .work-list > li:nth-child(even) > .work-body {
+    grid-column: 8 / -1;
+  }
+
+  .work-list > li:nth-child(even) > .shot {
+    grid-column: 1 / span 6;
+  }
+
+  .work-list > li.fixes > .work-name {
+    grid-column: 1 / span 5;
+  }
+
+  .work-list > li.fixes > .smaller {
+    grid-column: 6 / -1;
+    grid-row: 1 / span 2;
+  }
+
+  .shot {
+    display: block;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--paper);
+    box-shadow:
+      0 1px 2px rgb(22 50 59 / 0.06),
+      0 18px 40px -20px rgb(22 50 59 / 0.28);
+    text-decoration: none;
+  }
+
+  .shot-bar {
+    display: block;
+    padding: 0.4rem 0.75rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--stone);
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
+  .shot img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .work-name h3 {
+    font-size: clamp(1.625rem, 3vw, 2.25rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .work-name a {
+    font-size: 0.9375rem;
+  }
+
+  .work-body {
+    max-width: 40rem;
+  }
+
+  .work-body .detail {
+    margin-top: 0.85rem;
+    color: var(--stone);
+    font-size: 0.9375rem;
+  }
+
+  .smaller li + li {
+    margin-top: 0.85rem;
+  }
+
+  .smaller a {
+    font-weight: 600;
+  }
+
+  /* Side projects */
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 2.5rem 1.5rem;
+  }
+
+  .projects .shot {
+    margin-bottom: 1.25rem;
+  }
+
+  .also {
+    margin-top: 2.5rem;
+    color: var(--stone);
+  }
+
+  .projects h3 {
+    font-size: 1.375rem;
+    font-stretch: 112%;
+    letter-spacing: -0.015em;
+    margin-bottom: 0.6rem;
+  }
+
+  .projects h3 a {
+    color: var(--ink);
+  }
+
+  .projects p {
+    color: var(--stone);
+    font-size: 1rem;
+  }
+
+  /* Hackathons */
+  .awards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .awards figure {
+    margin: 0;
+  }
+
+  .awards img {
+    border-radius: 4px;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+
+  .awards figcaption {
+    padding-top: 1.25rem;
+    max-width: 32rem;
+  }
+
+  .awards h3 {
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+  }
+
+  .awards .event {
+    margin: 0.35rem 0 0.85rem;
+    color: var(--tide);
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+
+  /* Gallery */
+  /* Cropped thumbnails in a tidy grid; the lightbox shows the full frame. */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.875rem;
+    grid-auto-flow: dense;
+  }
+
+  .gallery figure {
+    margin: 0;
+  }
+
+  .gallery .wide {
+    grid-column: span 2;
+  }
+
+  .gallery button,
+  .gallery img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .gallery img {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .gallery .wide img {
+    aspect-ratio: auto;
+  }
+
+  /* Contact */
+  .contact {
+    padding-bottom: clamp(5rem, 12vw, 9rem);
+  }
+
+  .contact p {
+    max-width: 30rem;
+    margin-top: 1rem;
+    color: var(--stone);
+  }
+
+  .email {
+    display: inline-block;
+    margin-top: clamp(1.5rem, 4vw, 2.5rem);
+    font-size: clamp(1.75rem, 6.2vw, 5.25rem);
+    font-stretch: 125%;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    overflow-wrap: anywhere;
+    text-decoration-thickness: 2px;
+  }
+
+  .email:hover {
+    text-decoration-thickness: 4px;
+  }
+
+  /* Lightbox */
+  .lightbox {
+    width: 100vw;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: clamp(1rem, 4vw, 3rem);
+    border: 0;
+    background: rgb(22 50 59 / 0.94);
+    color: var(--paper);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    opacity: 1;
+    transition:
+      opacity 0.3s var(--ease-out),
+      display 0.3s allow-discrete,
+      overlay 0.3s allow-discrete;
+  }
+
+  .lightbox[open] {
+    display: flex;
+  }
+
+  .lightbox img {
+    max-height: calc(100dvh - 9rem);
+    width: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    transition: scale 0.4s var(--ease-out);
+  }
+
+  @starting-style {
+    .lightbox[open] {
+      opacity: 0;
+    }
+
+    .lightbox[open] img {
+      scale: 0.96;
+    }
+  }
+
+  .lightbox:not([open]) {
+    opacity: 0;
+  }
+
+  .lightbox form {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .lightbox-close {
+    font: inherit;
+    font-size: 0.9375rem;
+    color: var(--paper);
+    background: rgb(255 255 255 / 0.12);
+    border: 0;
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+
+  .lightbox-close:focus-visible {
+    outline-color: var(--paper);
+  }
+
+  .lightbox-caption {
+    font-size: 0.9375rem;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 800px) {
+    .section-head h2,
+    .section-head p,
+    .about-photo,
+    .about-text,
+    .work-list > li > *,
+    .work-list > li:nth-child(even) > *,
+    .work-list > li.fixes > * {
+      grid-column: 1 / -1;
+      grid-row: auto;
+    }
+
+    .about-photo {
+      max-width: 22rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .awards {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .gallery {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .facts div {
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
+    }
+  }
+</style>

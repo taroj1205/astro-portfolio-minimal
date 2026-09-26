@@ -1,0 +1,212 @@
+---
+// Merged pull requests per month, from GitHub search
+// (`author:taroj1205 is:pr is:merged merged:<month>`), fetched 26 Sep 2026.
+// Starts January 2023; 2022 had none. September 2026 is month to date.
+const counts = [
+  0, 8, 10, 0, 2, 0, 82, 61, 48, 38, 37, 4, 9, 19, 17, 92, 56, 45, 32, 26, 47,
+  18, 87, 0, 10, 7, 64, 76, 72, 56, 117, 118, 46, 28, 18, 100, 64, 47, 49, 164,
+  381, 100, 242, 178, 414,
+]
+const monthNames = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ')
+const months = counts.map((count, i) => ({
+  count,
+  label: `${monthNames[i % 12]} ${2023 + Math.floor(i / 12)}`,
+}))
+const total = counts.reduce((sum, n) => sum + n, 0)
+
+const W = 1000
+const H = 280
+const pad = { top: 24, right: 8, bottom: 32, left: 36 }
+const max = 450
+const step = (W - pad.left - pad.right) / counts.length
+const barW = step - 4
+const y = (n: number) => pad.top + (H - pad.top - pad.bottom) * (1 - n / max)
+const x = (i: number) => pad.left + i * step + 2
+const base = y(0)
+
+// Rounded top, square bottom sitting on the baseline.
+const bar = (i: number, n: number) => {
+  const top = y(n)
+  const r = Math.min(4, (base - top) / 2, barW / 2)
+  const left = x(i)
+  const right = left + barW
+  return `M${left},${base}V${top + r}Q${left},${top} ${left + r},${top}H${right - r}Q${right},${top} ${right},${top + r}V${base}Z`
+}
+
+const notes = [
+  { i: 13, text: 'Started helping on Yamada UI' },
+  { i: 34, text: 'Started at Hazumi' },
+]
+---
+
+<figure class="activity">
+  <svg
+    viewBox={`0 0 ${W} ${H}`}
+    role="img"
+    aria-label={`Bar chart of changes merged each month. ${total.toLocaleString('en-NZ')} in total, rising from a handful a month in early 2023 to 414 in September 2026.`}
+  >
+    {
+      [100, 200, 300, 400].map(n => (
+        <g class="grid">
+          <line x1={pad.left} x2={W - pad.right} y1={y(n)} y2={y(n)} />
+          <text x={pad.left - 8} y={y(n) + 4} text-anchor="end">
+            {n}
+          </text>
+        </g>
+      ))
+    }
+    {
+      notes.map(note => (
+        <g class="note">
+          <line
+            x1={x(note.i) + barW / 2}
+            x2={x(note.i) + barW / 2}
+            y1={pad.top + 30}
+            y2={base}
+          />
+          <text x={x(note.i) + barW / 2 - 6} y={pad.top + 26} text-anchor="end">
+            {note.text}
+          </text>
+        </g>
+      ))
+    }
+    {
+      months.map((m, i) =>
+        m.count > 0 ? (
+          <path class="bar" d={bar(i, m.count)}>
+            <title>
+              {m.label}: {m.count} merged
+            </title>
+          </path>
+        ) : null
+      )
+    }
+    <line class="baseline" x1={pad.left} x2={W - pad.right} y1={base} y2={base}
+    ></line>
+    {
+      [2023, 2024, 2025, 2026].map((year, k) => (
+        <text class="year" x={x(k * 12)} y={H - 8}>
+          {year}
+        </text>
+      ))
+    }
+    <text
+      class="peak"
+      x={x(counts.length - 1) + barW}
+      y={y(414) - 8}
+      text-anchor="end">414 so far this month</text
+    >
+  </svg>
+  <figcaption>
+    Changes of mine merged on GitHub each month, January 2023 to September 2026.
+    About three quarters of this year's are from my job at Hazumi.
+  </figcaption>
+  <details>
+    <summary>See the numbers</summary>
+    <table>
+      <thead>
+        <tr><th scope="col">Month</th><th scope="col">Merged</th></tr>
+      </thead>
+      <tbody>
+        {
+          months.map(m => (
+            <tr>
+              <td>{m.label}</td>
+              <td>{m.count}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </details>
+</figure>
+
+<style>
+  .activity {
+    margin: 0 0 clamp(2.5rem, 5vw, 4rem);
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    font-size: 13px;
+  }
+
+  .grid line {
+    stroke: var(--line);
+  }
+
+  .grid text,
+  .year {
+    fill: var(--stone);
+  }
+
+  .baseline {
+    stroke: var(--stone);
+  }
+
+  .bar {
+    fill: var(--chart-a);
+    transition: fill 0.15s;
+  }
+
+  .bar:hover {
+    fill: var(--ink);
+  }
+
+  .note line {
+    stroke: var(--ink);
+    stroke-dasharray: 2 3;
+  }
+
+  .note text,
+  .peak {
+    fill: var(--ink);
+    font-weight: 600;
+  }
+
+  figcaption {
+    margin-top: 1rem;
+    max-width: 40rem;
+    color: var(--stone);
+    font-size: 0.9375rem;
+  }
+
+  details {
+    margin-top: 0.75rem;
+    font-size: 0.9375rem;
+  }
+
+  summary {
+    cursor: pointer;
+    color: var(--tide);
+  }
+
+  table {
+    margin-top: 0.75rem;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 0.2rem 1.5rem 0.2rem 0;
+    text-align: left;
+  }
+
+  td + td {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 640px) {
+    svg {
+      font-size: 30px;
+    }
+
+    .note text {
+      display: none;
+    }
+  }
+</style>
