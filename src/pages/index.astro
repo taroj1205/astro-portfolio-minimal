@@ -13,8 +13,6 @@ import selfie from '../assets/photos/sakura-selfie.webp'
 import sandstone from '../assets/photos/sandstone-cliff.jpg'
 import skyTower from '../assets/photos/sky-tower.jpg'
 import sunsetBark from '../assets/photos/sunset-bark.jpg'
-import sunsetFlare from '../assets/photos/sunset-flare.jpg'
-import sunsetHarbour from '../assets/photos/sunset-harbour.jpg'
 import sunsetWide from '../assets/photos/sunset-wide.jpg'
 import westCoast from '../assets/photos/west-coast-cliffs.jpg'
 import windyRock from '../assets/photos/windy-rock.jpg'
@@ -45,10 +43,8 @@ const gallery = await withFull([
   { src: westCoast, caption: 'Cliffs on the west coast' },
   { src: lowTide, caption: 'Low tide, west coast' },
   { src: sandstone, caption: 'Sandstone cliff and a quiet beach' },
-  { src: sunsetFlare, caption: 'Sunset through the trees' },
   { src: windyRock, caption: 'A very windy afternoon' },
-  { src: sunsetBark, caption: 'Same sunset, closer to the tree' },
-  { src: sunsetHarbour, caption: 'The sun dropping behind the city' },
+  { src: sunsetBark, caption: 'Sunset beside an old tree' },
 ])
 
 const work = [
@@ -644,7 +640,7 @@ const sideProjects = [
   /* Cropped thumbnails in a tidy grid; the lightbox shows the full frame. */
   .gallery {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 0.875rem;
   }
 
