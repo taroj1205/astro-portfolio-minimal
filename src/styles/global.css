@@ -354,9 +354,7 @@ section {
 /* ---------- Type utilities ---------- */
 
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
+  display: inline-block;
   font-size: 0.82rem;
   font-weight: 650;
   letter-spacing: 0.08em;
@@ -365,21 +363,8 @@ section {
   margin-bottom: 1.15rem;
 }
 
-.eyebrow::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: currentColor;
-  box-shadow: 0 0 0 4px rgba(43, 76, 255, 0.15);
-}
-
 .eyebrow.warm {
   color: var(--tangerine);
-}
-
-.eyebrow.warm::before {
-  box-shadow: 0 0 0 4px rgba(255, 122, 69, 0.18);
 }
 
 .display {
