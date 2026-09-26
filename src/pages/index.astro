@@ -1,6 +1,9 @@
 ---
 import type { ImageMetadata } from 'astro'
 import { Image, getImage } from 'astro:assets'
+import ActivityChart from '../components/activity-chart.astro'
+import JourneyMap from '../components/journey-map.astro'
+import WorkTimeline from '../components/work-timeline.astro'
 import Layout from '../layouts/layout.astro'
 import partlyTeam from '../assets/hackathon/partly/IMG_7138.jpeg'
 import sesaTeam from '../assets/hackathon/sesa-wdcc/20250803_210127.jpg'
@@ -16,6 +19,12 @@ import sunsetBark from '../assets/photos/sunset-bark.jpg'
 import sunsetWide from '../assets/photos/sunset-wide.jpg'
 import westCoast from '../assets/photos/west-coast-cliffs.jpg'
 import windyRock from '../assets/photos/windy-rock.jpg'
+import hazumiShot from '../assets/shots/hazumi.jpg'
+import noteShot from '../assets/shots/note.jpg'
+import reversiShot from '../assets/shots/reversi.jpg'
+import typingShot from '../assets/shots/typing.jpg'
+import yamadaShot from '../assets/shots/yamada.jpg'
+import zenShot from '../assets/shots/zen.jpg'
 
 interface Photo {
   src: ImageMetadata
@@ -51,7 +60,7 @@ const work = [
   {
     name: 'Zen Browser',
     href: 'https://zen-browser.app',
-    link: 'zen-browser.app',
+    shot: zenShot,
     body: "A free, calm web browser built on Firefox. I've worked on its website since 2024 and I'm the second-biggest contributor to it. I redesigned the download page, made the site lighter on older laptops and phones, added a Japanese version, and set up the checks that catch things before they break.",
     detail:
       'About 80 changes merged. The browser has over 44,000 stars on GitHub.',
@@ -59,14 +68,14 @@ const work = [
   {
     name: 'Yamada UI',
     href: 'https://yamada-ui.com',
-    link: 'yamada-ui.com',
+    shot: yamadaShot,
     body: "A kit of ready-made pieces, like buttons, menus and pop-ups, that people use to build websites with React. I started helping in 2024 and I'm now one of its maintainers, so I review other people's changes as well as writing my own.",
     detail: 'About 100 changes merged, including a new popover.',
   },
   {
     name: 'Hazumi',
     href: 'https://hazumi.co.jp',
-    link: 'hazumi.co.jp',
+    shot: hazumiShot,
     body: 'My job. Hazumi is a software company in Tokyo, and I work on their product remotely from Auckland.',
     detail:
       'Software engineer since November 2025, with over 700 changes shipped.',
@@ -93,24 +102,22 @@ const smallerWork = [
 
 const sideProjects = [
   {
-    name: 'Spur',
-    href: 'https://github.com/taroj1205/spur',
-    text: "A launcher and clipboard history for the Mac, written in Swift. It's what I'm tinkering with right now.",
-  },
-  {
     name: 'A reading list for my brother',
     href: 'https://nextjs-note-rss.vercel.app/',
+    shot: noteShot,
     text: 'My younger brother reads a lot on note.com, so I made him a simple page that puts the articles he likes in one list.',
-  },
-  {
-    name: 'Clipboard manager',
-    href: 'https://github.com/taroj1205/tauri-clipboard-manager',
-    text: 'An earlier clipboard app that can also search through images you copied.',
   },
   {
     name: 'Typing game',
     href: 'https://typing-game-nextjs.vercel.app/',
+    shot: typingShot,
     text: 'A typing game for practising English words. One of the first things I ever built.',
+  },
+  {
+    name: 'Reversi',
+    href: 'https://nextjs-reversi.vercel.app/',
+    shot: reversiShot,
+    text: 'The board game, also called Othello, that you can play in the browser.',
   },
 ]
 ---
@@ -190,6 +197,14 @@ const sideProjects = [
     </div>
   </section>
 
+  <section class="section wrap" id="journey">
+    <div class="section-head">
+      <h2>Where I've lived</h2>
+      <p>Japan and New Zealand, with a detour to the Philippines for school.</p>
+    </div>
+    <JourneyMap />
+  </section>
+
   <section class="section wrap" id="work">
     <div class="section-head">
       <h2>Things I've worked on</h2>
@@ -200,22 +215,35 @@ const sideProjects = [
       </p>
     </div>
 
+    <ActivityChart />
+
     <ul class="work-list">
       {
         work.map(item => (
           <li>
             <div class="work-name">
               <h3>{item.name}</h3>
-              <a href={item.href}>{item.link}</a>
+              <a href={item.href}>{new URL(item.href).host}</a>
             </div>
             <div class="work-body">
               <p>{item.body}</p>
               <p class="detail">{item.detail}</p>
             </div>
+            <a class="shot" href={item.href} tabindex="-1">
+              <span class="shot-bar" aria-hidden="true">
+                {new URL(item.href).host}
+              </span>
+              <Image
+                src={item.shot}
+                alt={`The ${item.name} website`}
+                width={1100}
+                loading="lazy"
+              />
+            </a>
           </li>
         ))
       }
-      <li>
+      <li class="fixes">
         <div class="work-name">
           <h3>Small fixes in big projects</h3>
         </div>
@@ -232,6 +260,17 @@ const sideProjects = [
     </ul>
   </section>
 
+  <section class="section wrap" id="jobs">
+    <div class="section-head">
+      <h2>Jobs and volunteering</h2>
+      <p>
+        Everything since 2024, including the times I was juggling a few things
+        at once alongside uni.
+      </p>
+    </div>
+    <WorkTimeline />
+  </section>
+
   <section class="section wrap" id="projects">
     <div class="section-head">
       <h2>Things I made for myself, or for family</h2>
@@ -240,6 +279,17 @@ const sideProjects = [
       {
         sideProjects.map(project => (
           <li>
+            <a class="shot" href={project.href} tabindex="-1">
+              <span class="shot-bar" aria-hidden="true">
+                {new URL(project.href).host}
+              </span>
+              <Image
+                src={project.shot}
+                alt={`Screenshot of ${project.name}`}
+                width={800}
+                loading="lazy"
+              />
+            </a>
             <h3>
               <a href={project.href}>{project.name}</a>
             </h3>
@@ -248,6 +298,11 @@ const sideProjects = [
         ))
       }
     </ul>
+    <p class="also">
+      Also: a <a href="https://github.com/taroj1205/tauri-clipboard-manager"
+        >clipboard manager for Windows</a
+      > that can search through everything you've copied, including images.
+    </p>
   </section>
 
   <section class="section wrap" id="hackathons">
@@ -542,14 +597,73 @@ const sideProjects = [
   .work-list > li {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto 1fr;
     column-gap: 1.5rem;
     row-gap: 1rem;
     padding-block: clamp(1.75rem, 3.5vw, 2.75rem);
     border-top: 1px solid var(--line);
   }
 
-  .work-name {
+  /* Text on one side, the real site on the other, swapping each row. */
+  .work-name,
+  .work-body {
     grid-column: 1 / span 5;
+  }
+
+  .work-body {
+    grid-row: 2;
+    align-self: start;
+  }
+
+  .work-list > li > .shot {
+    grid-column: 7 / -1;
+    grid-row: 1 / span 2;
+  }
+
+  .work-list > li:nth-child(even) > .work-name,
+  .work-list > li:nth-child(even) > .work-body {
+    grid-column: 8 / -1;
+  }
+
+  .work-list > li:nth-child(even) > .shot {
+    grid-column: 1 / span 6;
+  }
+
+  .work-list > li.fixes > .work-name {
+    grid-column: 1 / span 5;
+  }
+
+  .work-list > li.fixes > .smaller {
+    grid-column: 6 / -1;
+    grid-row: 1 / span 2;
+  }
+
+  .shot {
+    display: block;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--paper);
+    box-shadow:
+      0 1px 2px rgb(22 50 59 / 0.06),
+      0 18px 40px -20px rgb(22 50 59 / 0.28);
+    text-decoration: none;
+  }
+
+  .shot-bar {
+    display: block;
+    padding: 0.4rem 0.75rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--stone);
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
+  .shot img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top;
   }
 
   .work-name h3 {
@@ -562,7 +676,6 @@ const sideProjects = [
   }
 
   .work-body {
-    grid-column: 6 / -1;
     max-width: 40rem;
   }
 
@@ -583,8 +696,17 @@ const sideProjects = [
   /* Side projects */
   .projects {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
     gap: 2.5rem 1.5rem;
+  }
+
+  .projects .shot {
+    margin-bottom: 1.25rem;
+  }
+
+  .also {
+    margin-top: 2.5rem;
+    color: var(--stone);
   }
 
   .projects h3 {
@@ -642,6 +764,7 @@ const sideProjects = [
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.875rem;
+    grid-auto-flow: dense;
   }
 
   .gallery figure {
@@ -774,9 +897,11 @@ const sideProjects = [
     .section-head p,
     .about-photo,
     .about-text,
-    .work-name,
-    .work-body {
+    .work-list > li > *,
+    .work-list > li:nth-child(even) > *,
+    .work-list > li.fixes > * {
       grid-column: 1 / -1;
+      grid-row: auto;
     }
 
     .about-photo {

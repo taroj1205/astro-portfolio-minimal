@@ -17,8 +17,12 @@ Colours come from the photos. Light only, no dark mode.
 | `ink`   | `#16323B` | text (harbour slate)                |
 | `stone` | `#56676C` | secondary text                      |
 | `tide`  | `#1C7178` | links (sea glass)                   |
-| `sun`   | `#EE8A1E` | link hover and text selection only  |
+| `sun`   | `#EE8A1E` | link hover, selection, map route    |
 | `line`  | `#D3DCDD` | row dividers                        |
+
+Charts use two extra colours that pass a colour-blind separation check on
+`sky`: `chart-a` `#00909E` for work and monthly activity, `chart-b` `#C26F10`
+for open source.
 
 ## Type
 
@@ -30,7 +34,10 @@ weights; body text uses the normal width at 18px / 1.6.
 - Left aligned, 12-column grid, max width 75rem.
 - Section heading on the left, short intro on the right.
 - Work is a list of rows, not cards.
-- Motion: one load sequence in the hero, plus the photo lightbox opening.
+- Real visuals instead of decoration: screenshots of the sites, a map of
+  where Shintaro has lived, a monthly activity chart, and a jobs timeline.
+- Motion: one load sequence in the hero, the map route drawing as it scrolls
+  into view, and the photo lightbox opening.
 
 ## Writing
 

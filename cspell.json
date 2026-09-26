@@ -58,7 +58,9 @@
     "sakura",
     "Rangitoto",
     "Piha",
-    "Helmor"
+    "Helmor",
+    "equirectangular",
+    "nums"
   ],
   "flagWords": [],
   "ignorePaths": [

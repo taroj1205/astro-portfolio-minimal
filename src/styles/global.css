@@ -9,6 +9,10 @@
   --sun: #ee8a1e;
   --line: #d3dcdd;
 
+  /* Chart series, checked for colour-blind separation on --sky. */
+  --chart-a: #00909e;
+  --chart-b: #c26f10;
+
   --font: 'Mona Sans', ui-sans-serif, system-ui, sans-serif;
   --wrap: 75rem;
   --gutter: clamp(1.25rem, 4vw, 3rem);
