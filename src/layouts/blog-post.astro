@@ -1,5 +1,4 @@
 ---
-import ArrowRightIcon from '../icons/arrow-right-icon.astro'
 import Layout from './layout.astro'
 import type { ImageMetadata } from 'astro'
 import Image from '~/components/ui/image.astro'
@@ -8,8 +7,6 @@ interface Props {
   frontmatter: {
     title: string
     date: string
-    tags?: string[]
-    categories?: string[]
     coverImage?: ImageMetadata
     excerpt?: string
   }
@@ -19,53 +16,30 @@ const { frontmatter } = Astro.props
 ---
 
 <Layout title={frontmatter.title} description={frontmatter.excerpt}>
-  <section class="page-hero">
-    <div class="wrap">
-      <a
-        href="/blog"
-        class="btn btn-ghost"
-        style="padding: 0.55rem 0.9rem; font-size: 0.9rem; margin-bottom: 1.5rem"
-      >
-        <ArrowRightIcon
-          style="transform: rotate(180deg); width: 14px; height: 14px"
-        />
-        All posts
-      </a>
-      <h1>
-        <span style={`view-transition-name: blog-title-${Astro.params.slug}`}>
-          {frontmatter.title}
-        </span>
-      </h1>
-      <p class="lead">
-        {
-          new Date(frontmatter.date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })
-        }
-      </p>
+  <article class="page wrap">
+    <a href="/blog">All posts</a>
+    <h1 style="margin-top: 1.5rem">{frontmatter.title}</h1>
+    <p class="intro">
+      {
+        new Date(frontmatter.date).toLocaleDateString('en-NZ', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })
+      }
+    </p>
+    <div class="prose" style="margin-top: 2.5rem">
+      {
+        frontmatter.coverImage && (
+          <Image
+            src={frontmatter.coverImage}
+            alt=""
+            width={1200}
+            loading="eager"
+          />
+        )
+      }
+      <slot />
     </div>
-  </section>
-
-  <section class="section-pad" style="padding-top: 0.5rem">
-    <div class="wrap">
-      <article class="page-card prose" id="main-content">
-        {
-          frontmatter.coverImage && (
-            <div style="border-radius: 20px; overflow: hidden; margin-bottom: 2rem">
-              <Image
-                src={frontmatter.coverImage}
-                alt={frontmatter.title}
-                width={1200}
-                height={675}
-                loading="eager"
-              />
-            </div>
-          )
-        }
-        <slot />
-      </article>
-    </div>
-  </section>
+  </article>
 </Layout>

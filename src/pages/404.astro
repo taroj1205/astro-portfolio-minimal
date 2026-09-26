@@ -2,23 +2,13 @@
 import Layout from '../layouts/layout.astro'
 ---
 
-<Layout title="404 — Shintaro Jokagi">
-  <section
-    class="page-hero"
-    style="min-height: 70svh; display: grid; align-items: center"
-  >
-    <div class="wrap" style="text-align: center">
-      <div class="eyebrow" style="justify-content: center">Lost in space</div>
-      <h1 style="font-size: clamp(4rem, 14vw, 8rem); margin-bottom: 1rem">
-        404
-      </h1>
-      <p class="lead" style="margin-inline: auto; margin-bottom: 2rem">
-        This page wandered off. Let's get you back to something useful.
-      </p>
-      <a class="text-link" href="/">
-        Back home
-        <span aria-hidden="true">→</span>
-      </a>
-    </div>
+<Layout title="Page not found · Shintaro Jokagi">
+  <section class="page wrap">
+    <h1>This page doesn't exist.</h1>
+    <p class="intro">
+      It may have moved when I redesigned the site. <a href="/"
+        >Go to the home page</a
+      >.
+    </p>
   </section>
 </Layout>

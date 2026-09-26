@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
 import Layout from '../layouts/layout.astro'
-import Image from '~/components/ui/image.astro'
 
 const posts = await getCollection('blog')
 posts.sort(
@@ -10,73 +9,59 @@ posts.sort(
 ---
 
 <Layout
-  title="Blog — Shintaro Jokagi"
-  description="Writing by Shintaro Jokagi — notes on open source, browsers, and building."
+  title="Blog · Shintaro Jokagi"
+  description="Occasional writing by Shintaro Jokagi."
 >
-  <section class="page-hero">
-    <div class="wrap">
-      <div class="eyebrow">Blog</div>
-      <h1>Notes & essays.</h1>
-      <p class="lead">
-        Occasional writing on building things and the tools around them.
-      </p>
-    </div>
-  </section>
-
-  <section class="section-pad" style="padding-top: 1.5rem">
-    <div class="wrap">
-      <div class="work-grid">
-        {
-          posts.map((post, i) => (
+  <section class="page wrap">
+    <h1>Blog</h1>
+    <p class="intro">Occasional writing, not very often.</p>
+    <ul class="posts">
+      {
+        posts.map(post => (
+          <li>
             <a
-              class="work-card"
               href={`/blog/${post.filePath?.split('/').pop()?.split('.').shift()}`}
-              data-reveal
-              style={`--delay: ${Math.min(i * 80, 240)}ms`}
             >
-              {post.data.coverImage && (
-                <div style="border-radius: 18px; overflow: hidden; margin-bottom: 1.15rem; aspect-ratio: 16/10;">
-                  <Image
-                    src={post.data.coverImage}
-                    alt={post.data.title}
-                    width={800}
-                    height={500}
-                    loading="lazy"
-                  />
-                </div>
-              )}
-              <div class="tag-row">
-                <span class="tag">
-                  {new Date(post.data.date).toLocaleDateString('en-NZ', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                  })}
-                </span>
-              </div>
-              <h3>{post.data.title}</h3>
-              {post.data.description && <p>{post.data.description}</p>}
-              <div class="footer">
-                <div class="metric">
-                  Read
-                  <small>blog post</small>
-                </div>
-                <span class="go" aria-hidden="true">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M7 17L17 7M9 7h8v8"
-                      stroke="currentColor"
-                      stroke-width="2.2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </span>
-              </div>
+              {post.data.title}
             </a>
-          ))
-        }
-      </div>
-    </div>
+            <time datetime={post.data.date}>
+              {new Date(post.data.date).toLocaleDateString('en-NZ', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </time>
+          </li>
+        ))
+      }
+    </ul>
   </section>
 </Layout>
+
+<style>
+  .posts {
+    list-style: none;
+    margin: 3rem 0 0;
+    padding: 0;
+    max-width: 44rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .posts li {
+    display: grid;
+    gap: 0.35rem;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .posts a {
+    font-size: 1.3rem;
+    font-weight: 650;
+    color: var(--ink);
+  }
+
+  .posts time {
+    color: var(--stone);
+    font-size: 0.9375rem;
+  }
+</style>

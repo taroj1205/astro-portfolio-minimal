@@ -8,7 +8,7 @@ This is a minimal portfolio template built with Astro. It includes a simple land
 - About page with more details about me
 - Projects page with a list of projects
 - Easy to customize with your own content and style
-- Respects the user's color scheme preference
+- Light theme only
 
 ### Getting Started
 
