@@ -3,7 +3,9 @@ import { Image } from 'astro:assets'
 import type { ImageMetadata } from 'astro'
 import portrait from '../assets/photos/portrait-sakura-mask.webp'
 import partlyCert from '../assets/hackathon/partly/IMG_20250727_213900.jpg'
+import partlyTeam from '../assets/hackathon/partly/IMG_7138.jpeg'
 import sesaCert from '../assets/hackathon/sesa-wdcc/IMG_20250803_222749.jpg'
+import sesaTeam from '../assets/hackathon/sesa-wdcc/20250803_210127.jpg'
 import Layout from '../layouts/layout.astro'
 
 const marquee = [
@@ -19,7 +21,9 @@ const marquee = [
 
 const photos: Record<string, ImageMetadata> = {
   partlyCert,
+  partlyTeam,
   sesaCert,
+  sesaTeam,
 }
 ---
 
@@ -559,43 +563,67 @@ const photos: Record<string, ImageMetadata> = {
 
       <div class="awards-grid">
         <article class="award-card" data-reveal>
-          <div class="award-photos award-photos--single">
-            <figure>
+          <div class="award-polaroid">
+            <figure class="award-photo award-photo--main">
+              <Image
+                src={photos.partlyTeam}
+                alt="Team 3 holding the Partly × WDCC award"
+                width={1200}
+                height={800}
+                loading="lazy"
+              />
+            </figure>
+            <figure class="award-photo award-photo--cert">
               <Image
                 src={photos.partlyCert}
                 alt="Partly × WDCC certificate for Most Production Ready"
-                width={1200}
-                height={900}
+                width={640}
+                height={454}
                 loading="lazy"
               />
             </figure>
           </div>
-          <div class="prize">Most production ready</div>
-          <h3>Partly × WDCC</h3>
-          <p>
-            July 2025. Recognized for building something that felt ready for the
-            real world, not just the demo stage.
-          </p>
+          <div class="award-body">
+            <div class="prize">Most production ready</div>
+            <h3>Partly × WDCC</h3>
+            <p class="award-meta">July 2025 · Team 3</p>
+            <p>
+              Recognized for building something that felt ready for the real
+              world, not just the demo stage.
+            </p>
+          </div>
         </article>
 
         <article class="award-card" data-reveal style="--delay: 100ms">
-          <div class="award-photos award-photos--single">
-            <figure>
+          <div class="award-polaroid">
+            <figure class="award-photo award-photo--main">
               <Image
-                src={photos.sesaCert}
-                alt="SESA × WDCC certificate for Most Overengineered"
+                src={photos.sesaTeam}
+                alt="Exception Handlers holding Most Overengineered certificates"
                 width={1200}
                 height={900}
                 loading="lazy"
               />
             </figure>
+            <figure class="award-photo award-photo--cert">
+              <Image
+                src={photos.sesaCert}
+                alt="SESA × WDCC certificate for Most Overengineered"
+                width={640}
+                height={480}
+                loading="lazy"
+              />
+            </figure>
           </div>
-          <div class="prize">Most overengineered</div>
-          <h3>SESA × WDCC</h3>
-          <p>
-            August 2025. At New Zealand's largest tertiary hackathon, a 48-hour
-            sprint at GridAKL that earned the most delightfully overbuilt award.
-          </p>
+          <div class="award-body">
+            <div class="prize">Most overengineered</div>
+            <h3>SESA × WDCC</h3>
+            <p class="award-meta">August 2025 · GridAKL</p>
+            <p>
+              New Zealand's largest tertiary hackathon. A 48-hour sprint that
+              earned the most delightfully overbuilt award.
+            </p>
+          </div>
         </article>
       </div>
     </div>
