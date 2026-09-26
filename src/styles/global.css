@@ -1,6 +1,6 @@
 /* =========================================================
    Shintaro Jokagi / Portfolio Design System
-   Warm paper · cobalt · editorial soft
+   Soft paper · quiet cobalt · handmade calm
    ========================================================= */
 
 @font-face {
@@ -28,23 +28,23 @@
 }
 
 :root {
-  --paper: #f5f1ea;
-  --paper-deep: #ebe4d8;
-  --surface: #ffffff;
-  --ink: #12100e;
-  --muted: #6b655e;
-  --faint: #9b948c;
-  --cobalt: #2b4cff;
-  --cobalt-deep: #1e36c9;
-  --cobalt-soft: #e6ecff;
-  --tangerine: #ff7a45;
-  --tangerine-soft: #ffede4;
-  --line: #e4dcd1;
-  --shadow-soft: 0 18px 50px rgba(18, 16, 14, 0.08);
-  --shadow-lift: 0 28px 70px rgba(18, 16, 14, 0.12);
-  --radius-lg: 28px;
-  --radius-md: 18px;
-  --radius-sm: 12px;
+  --paper: #f7f4ef;
+  --paper-deep: #efe9e0;
+  --surface: #fffdfb;
+  --ink: #17140f;
+  --muted: #6d675f;
+  --faint: #a39c93;
+  --cobalt: #2f52e8;
+  --cobalt-deep: #2340c4;
+  --cobalt-soft: #e8edff;
+  --tangerine: #f07a4a;
+  --tangerine-soft: #ffeee6;
+  --line: rgba(23, 20, 15, 0.08);
+  --shadow-soft: 0 12px 32px rgba(23, 20, 15, 0.06);
+  --shadow-lift: 0 22px 48px rgba(23, 20, 15, 0.1);
+  --radius-lg: 32px;
+  --radius-md: 22px;
+  --radius-sm: 14px;
   --font-display: 'Bricolage', 'InterVar', system-ui, sans-serif;
   --font-body: 'InterVar', system-ui, sans-serif;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -64,18 +64,7 @@ body {
   font-size: 1.0625rem;
   line-height: 1.65;
   color: var(--ink);
-  background:
-    radial-gradient(
-      1200px 600px at 10% -10%,
-      rgba(43, 76, 255, 0.07),
-      transparent 55%
-    ),
-    radial-gradient(
-      900px 500px at 95% 15%,
-      rgba(255, 122, 69, 0.08),
-      transparent 50%
-    ),
-    var(--paper);
+  background: var(--paper);
   min-height: 100svh;
   overflow-x: clip;
 }
@@ -90,7 +79,7 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.035;
+  opacity: 0.022;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
 }
@@ -99,11 +88,11 @@ body::before {
   position: fixed;
   top: 0;
   left: 0;
-  height: 3px;
+  height: 2px;
   width: 100%;
   transform-origin: 0 50%;
   transform: scaleX(0);
-  background: linear-gradient(90deg, var(--cobalt), var(--tangerine));
+  background: var(--cobalt);
   z-index: 200;
   pointer-events: none;
 }
@@ -200,15 +189,12 @@ h6 {
   gap: 1.5rem;
   padding: 1.35rem clamp(1.25rem, 4vw, 2.75rem);
   background: transparent;
-  transition:
-    background 0.35s ease,
-    backdrop-filter 0.35s ease;
+  transition: background 0.35s ease;
 }
 
 .site-nav.is-scrolled {
-  background: rgba(245, 241, 234, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(247, 244, 239, 0.94);
+  border-bottom: 1px solid var(--line);
 }
 
 .nav-brand {
@@ -384,11 +370,7 @@ section {
 }
 
 .tint {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.55),
-    rgba(255, 255, 255, 0)
-  );
+  background: rgba(255, 255, 255, 0.4);
 }
 
 /* ---------- Buttons ---------- */
@@ -622,13 +604,11 @@ section {
 .float-chip {
   position: absolute;
   z-index: 2;
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 16px;
   padding: 0.85rem 1rem;
   box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   font-size: 0.88rem;
   font-weight: 600;
   animation: floaty 5.5s ease-in-out infinite;
@@ -775,11 +755,11 @@ section {
 }
 
 .marquee-item .sep {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 999px;
-  background: var(--tangerine);
-  opacity: 0.85;
+  background: var(--faint);
+  opacity: 0.7;
 }
 
 .marquee-item strong {
@@ -808,17 +788,15 @@ section {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   padding: 1.6rem 1.45rem;
-  box-shadow: 0 10px 30px rgba(18, 16, 14, 0.04);
+  box-shadow: 0 8px 24px rgba(23, 20, 15, 0.03);
   transition:
     transform 0.4s var(--ease-out),
-    box-shadow 0.4s ease,
-    border-color 0.3s ease;
+    box-shadow 0.4s ease;
 }
 
 .stat-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-soft);
-  border-color: rgba(43, 76, 255, 0.22);
 }
 
 .stat-card:nth-child(2) .stat-value {
@@ -826,7 +804,7 @@ section {
 }
 
 .stat-card:nth-child(3) .stat-value {
-  color: var(--tangerine);
+  color: var(--ink);
 }
 
 .stat-value {
@@ -887,12 +865,7 @@ section {
 /* ---------- Impact / OSS ---------- */
 
 .impact {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.55) 0%,
-    rgba(230, 236, 255, 0.35) 50%,
-    rgba(255, 255, 255, 0.2) 100%
-  );
+  background: transparent;
 }
 
 .impact-grid {
@@ -930,64 +903,45 @@ section {
 }
 
 .impact-visual {
-  border-radius: 24px;
+  border-radius: 28px;
   min-height: 240px;
   position: relative;
   overflow: hidden;
   display: grid;
   place-items: center;
   padding: 1.5rem;
+  border: 1px solid var(--line);
 }
 
 .impact-visual.yamada {
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(43, 76, 255, 0.18),
-      transparent 45%
-    ),
-    linear-gradient(145deg, #eef2ff, #dfe7ff);
+  background: var(--cobalt-soft);
 }
 
 .impact-visual.zen {
-  background:
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(255, 122, 69, 0.2),
-      transparent 40%
-    ),
-    linear-gradient(145deg, #fff1ea, #ffe4d6);
+  background: var(--tangerine-soft);
 }
 
 .impact-visual.sonner {
-  background:
-    radial-gradient(
-      circle at 30% 80%,
-      rgba(34, 197, 94, 0.18),
-      transparent 40%
-    ),
-    linear-gradient(145deg, #eefbf3, #d9f5e6);
+  background: var(--paper-deep);
 }
 
 .impact-visual.shadcn {
-  background:
-    radial-gradient(circle at 70% 70%, rgba(18, 16, 14, 0.1), transparent 45%),
-    linear-gradient(145deg, #f3efe8, #e8e0d2);
+  background: var(--paper-deep);
 }
 
 .impact-badge {
   width: min(100%, 280px);
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 18px 40px rgba(18, 16, 14, 0.1);
-  padding: 1.25rem;
-  transform: rotate(-2deg);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
+  padding: 1.35rem 1.45rem;
+  transform: none;
 }
 
 .impact-badge .brand {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.55rem;
   letter-spacing: -0.03em;
   margin-bottom: 0.35rem;
 }
@@ -995,31 +949,7 @@ section {
 .impact-badge .role {
   color: var(--muted);
   font-size: 0.92rem;
-  margin-bottom: 1rem;
-}
-
-.impact-badge .mini-stat {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.impact-badge .mini-stat div {
-  flex: 1;
-  background: rgba(18, 16, 14, 0.04);
-  border-radius: 12px;
-  padding: 0.65rem 0.75rem;
-}
-
-.impact-badge .mini-stat strong {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  letter-spacing: -0.03em;
-}
-
-.impact-badge .mini-stat span {
-  font-size: 0.75rem;
-  color: var(--muted);
+  margin-bottom: 0;
 }
 
 .impact-body h3 {
@@ -1101,16 +1031,15 @@ section {
   display: flex;
   flex-direction: column;
   min-height: 300px;
-  border-radius: 28px;
+  border-radius: var(--radius-lg);
   padding: 1.55rem;
   background: var(--surface);
   border: 1px solid var(--line);
-  box-shadow: 0 12px 32px rgba(18, 16, 14, 0.04);
+  box-shadow: 0 8px 24px rgba(23, 20, 15, 0.03);
   overflow: hidden;
   transition:
     transform 0.45s var(--ease-out),
-    box-shadow 0.45s ease,
-    border-color 0.3s ease;
+    box-shadow 0.45s ease;
 }
 
 .work-card-media {
@@ -1133,29 +1062,8 @@ section {
 }
 
 .work-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lift);
-  border-color: rgba(43, 76, 255, 0.2);
-}
-
-.work-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  opacity: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(43, 76, 255, 0.06),
-    transparent 45%,
-    rgba(255, 122, 69, 0.06)
-  );
-  transition: opacity 0.4s ease;
-}
-
-.work-card:hover::after {
-  opacity: 1;
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
 }
 
 .work-card .tag-row {
@@ -1274,17 +1182,8 @@ section {
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(
-      700px 360px at 15% 20%,
-      rgba(43, 76, 255, 0.28),
-      transparent 55%
-    ),
-    radial-gradient(
-      600px 320px at 85% 80%,
-      rgba(255, 122, 69, 0.18),
-      transparent 50%
-    );
+  background: var(--cobalt-soft);
+  opacity: 0.35;
   pointer-events: none;
 }
 
@@ -1382,17 +1281,17 @@ section {
 .award-card {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 32px;
+  border-radius: var(--radius-lg);
   padding: 1.25rem;
-  box-shadow: 0 16px 40px rgba(18, 16, 14, 0.05);
+  box-shadow: 0 10px 28px rgba(23, 20, 15, 0.04);
   transition:
     transform 0.45s var(--ease-out),
     box-shadow 0.45s ease;
 }
 
 .award-card:hover {
-  transform: translateY(-6px) rotate(0deg);
-  box-shadow: var(--shadow-lift);
+  transform: translateY(-3px) rotate(0deg);
+  box-shadow: var(--shadow-soft);
 }
 
 .award-card:nth-child(1) {
@@ -1433,12 +1332,9 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
-  background: var(--tangerine-soft);
-  color: #c24b1d;
+  color: var(--muted);
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: 650;
   letter-spacing: 0.02em;
   text-transform: uppercase;
   margin-bottom: 0.85rem;
@@ -1474,22 +1370,11 @@ section {
 .contact-panel {
   position: relative;
   overflow: hidden;
-  border-radius: 40px;
+  border-radius: var(--radius-lg);
   padding: clamp(2.25rem, 6vw, 4.5rem);
-  background:
-    radial-gradient(
-      700px 320px at 15% 20%,
-      rgba(43, 76, 255, 0.14),
-      transparent 55%
-    ),
-    radial-gradient(
-      500px 280px at 90% 80%,
-      rgba(255, 122, 69, 0.16),
-      transparent 50%
-    ),
-    var(--surface);
+  background: var(--cobalt-soft);
   border: 1px solid var(--line);
-  box-shadow: var(--shadow-soft);
+  box-shadow: none;
   text-align: center;
 }
 
