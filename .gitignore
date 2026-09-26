@@ -26,9 +26,23 @@ pnpm-debug.log*
 
 # local agent context
 .context/
+.mimo/
+
+# local research dossier (contains personal contact details)
+PROFILE.md
+
+# generated concept art (not used in production site)
+src/assets/gen/
+
+# accidental CLI flags / scratch
+--*
+.DS_Store
 
 # jetbrains setting folder
 .idea/
 
 .eslintcache
 .cspellcache
+
+# visual QA captures
+screenshots/

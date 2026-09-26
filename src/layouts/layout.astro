@@ -1,30 +1,188 @@
 ---
 import '../styles/global.css'
-import BgCircles from './bg-circles.astro'
 
-const { title = 'Portfolio', description = "taroj1205's portfolio" } =
-  Astro.props
+const {
+  title = 'Shintaro Jokagi',
+  description = 'Shintaro Jokagi, software engineer, open-source maintainer, and builder based in Auckland.',
+} = Astro.props
+
+const nav = [
+  { href: '/#impact', label: 'Impact' },
+  { href: '/#work', label: 'Work' },
+  { href: '/#story', label: 'Story' },
+  { href: '/about', label: 'About' },
+]
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#f5f1ea" />
     <link rel="icon" href="/favicon.ico" type="image/ico" />
-    <title>taroj1205 - {title}</title>
+    <title>{title}</title>
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
-    <BgCircles />
+    <div class="progress" data-progress aria-hidden="true"></div>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <nav class="site-nav" data-nav>
+      <a class="nav-brand" href="/"> Shintaro Jokagi </a>
+      <div class="nav-links">
+        {nav.map(item => <a href={item.href}>{item.label}</a>)}
+        <a class="nav-email" href="mailto:taroj1205@gmail.com">Email</a>
+      </div>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Open menu"
+        data-nav-toggle
+      >
+        <span></span>
+      </button>
+    </nav>
+
     <slot />
-    <footer>
-      <p>
-        © 2026 <a href="https://x.com/taroj1205" style="text-decoration: none;"
-          >taroj1205</a
-        >
-      </p>
+
+    <footer class="site-footer">
+      <div class="wrap inner">
+        <p>
+          © {new Date().getFullYear()} Shintaro Jokagi · Built with care in Auckland
+        </p>
+        <p>
+          <a
+            href="https://github.com/taroj1205"
+            target="_blank"
+            rel="noopener noreferrer">GitHub</a
+          >
+          ·
+          <a
+            href="https://x.com/taroj1205"
+            target="_blank"
+            rel="noopener noreferrer">X</a
+          >
+          ·
+          <a href="mailto:taroj1205@gmail.com">Email</a>
+        </p>
+      </div>
     </footer>
+
+    <script>
+      const nav = document.querySelector('[data-nav]')
+      const toggle = document.querySelector('[data-nav-toggle]')
+      const progress = document.querySelector('[data-progress]')
+
+      const onScroll = () => {
+        if (nav) nav.classList.toggle('is-scrolled', window.scrollY > 12)
+        if (progress) {
+          const max = document.documentElement.scrollHeight - window.innerHeight
+          const ratio = max > 0 ? window.scrollY / max : 0
+          progress.setAttribute(
+            'style',
+            `transform: scaleX(${Math.min(1, Math.max(0, ratio))})`
+          )
+        }
+      }
+
+      onScroll()
+      window.addEventListener('scroll', onScroll, { passive: true })
+
+      toggle?.addEventListener('click', () => {
+        nav?.classList.toggle('is-open')
+      })
+
+      // Reveal on scroll
+      const reduce = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches
+      const nodes = document.querySelectorAll('[data-reveal]')
+
+      if (reduce) {
+        nodes.forEach(el => el.classList.add('is-visible'))
+      } else if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible')
+                io.unobserve(entry.target)
+              }
+            })
+          },
+          { threshold: 0.14, rootMargin: '0px 0px -8% 0px' }
+        )
+        nodes.forEach(el => io.observe(el))
+      } else {
+        nodes.forEach(el => el.classList.add('is-visible'))
+      }
+
+      // Count-up stats
+      const counters = document.querySelectorAll('[data-count]')
+      const animateCount = (el: Element) => {
+        const target = Number(el.getAttribute('data-count') || 0)
+        const suffix = el.getAttribute('data-suffix') || ''
+        const duration = 1400
+        const start = performance.now()
+
+        const tick = (now: number) => {
+          const t = Math.min(1, (now - start) / duration)
+          const eased = 1 - Math.pow(1 - t, 3)
+          const value = Math.round(target * eased)
+          el.textContent = `${value.toLocaleString()}${suffix}`
+          if (t < 1) requestAnimationFrame(tick)
+        }
+
+        requestAnimationFrame(tick)
+      }
+
+      if ('IntersectionObserver' in window) {
+        const countIo = new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                animateCount(entry.target)
+                countIo.unobserve(entry.target)
+              }
+            })
+          },
+          { threshold: 0.4 }
+        )
+        counters.forEach(el => countIo.observe(el))
+      } else {
+        counters.forEach(animateCount)
+      }
+
+      // Role rotator
+      const rotator = document.querySelector('[data-rotator]')
+      if (rotator && !reduce) {
+        const words = Array.from(rotator.querySelectorAll('span'))
+        let i = 0
+        words[0]?.classList.add('is-active')
+        setInterval(() => {
+          words[i]?.classList.remove('is-active')
+          i = (i + 1) % words.length
+          words[i]?.classList.add('is-active')
+        }, 2400)
+      }
+
+      // Magnetic buttons
+      if (!reduce) {
+        document
+          .querySelectorAll<HTMLElement>('[data-magnetic]')
+          .forEach(btn => {
+            btn.addEventListener('mousemove', e => {
+              const rect = btn.getBoundingClientRect()
+              const x = e.clientX - rect.left - rect.width / 2
+              const y = e.clientY - rect.top - rect.height / 2
+              btn.style.transform = `translate(${x * 0.12}px, ${y * 0.18}px)`
+            })
+            btn.addEventListener('mouseleave', () => {
+              btn.style.transform = ''
+            })
+          })
+      }
+    </script>
   </body>
 </html>
